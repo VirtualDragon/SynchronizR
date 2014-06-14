@@ -221,7 +221,7 @@ public class BackupGui extends javax.swing.JPanel {
 			try {
 				Main.getProperties().set(PropertyEnum.FROM.toString(), fileChooser.getSelectedFile().getPath());
 			} catch (IOException ex) {}
-			gui.prefUpdate();
+			prefUpdate();
 		}
     }//GEN-LAST:event_backupFromTextFieldMousePressed
 
@@ -238,7 +238,7 @@ public class BackupGui extends javax.swing.JPanel {
 		try {
 			Main.getProperties().set(PropertyEnum.ADVANCED_ENABLED.toString(), advancedCheckBox.isSelected());
 		} catch (IOException ex) {}
-		gui.prefUpdate();
+		prefUpdate();
     }//GEN-LAST:event_advancedCheckBoxActionPerformed
 
     private void backupToTextFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backupToTextFieldMousePressed
@@ -248,7 +248,7 @@ public class BackupGui extends javax.swing.JPanel {
 			try {
 				Main.getProperties().set(PropertyEnum.TO.toString(), fileChooser.getSelectedFile().getPath());
 			} catch (IOException ex) {}
-			gui.prefUpdate();
+			prefUpdate();
 		}
     }//GEN-LAST:event_backupToTextFieldMousePressed
 

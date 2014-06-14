@@ -98,7 +98,7 @@ public class Main {
 					@Override
 					public void run() {
 						try {
-							Updater updater = new Updater(new URL("http://mamo-dev.com/programs/backupr/versions.xml"), 201406140902L);
+							Updater updater = new Updater(new URL("http://mamo-dev.com/programs/backupr/versions.xml"), 201406140908L);
 							updater.checkForUpdates();
 							JProgressBar statusProgressBar = ((Gui) window.getContentPane()).getStatusProgressBar();
 							statusProgressBar.setIndeterminate(false);

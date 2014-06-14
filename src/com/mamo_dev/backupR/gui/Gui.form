@@ -76,7 +76,7 @@
         </Component>
         <Container class="javax.swing.JTabbedPane" name="tabbedPanel">
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_LayoutCodePost" type="java.lang.String" value="tabbedPanel.addTab(&quot;Backup&quot;, backupGui);&#xa;tabbedPanel.addTab(&quot;Restore&quot;, restoreGui);"/>
+            <AuxValue name="JavaCodeGenerator_LayoutCodePost" type="java.lang.String" value="tabbedPanel.addTab(&quot;Backup&quot;, backupGui);"/>
           </AuxValues>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
