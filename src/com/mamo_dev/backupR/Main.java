@@ -18,9 +18,10 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 public class Main {
-	
-	public static final String VERSION = "1.0";
-	
+
+	public static final String VERSION = "1.1";
+	public static final long releaseDate = 201406150949L;
+
 	private static Properties properties;
 
 	public static void main(String[] args) throws IOException {
@@ -93,17 +94,20 @@ public class Main {
 					public void componentHidden(ComponentEvent e) {
 					}
 				});
-
-				new Thread(new Runnable() {
-					@Override
-					public void run() {
-						try {
-							Updater updater = new Updater(new URL("http://mamo-dev.com/programs/backupr/versions.xml"), 201406140908L);
-							updater.checkForUpdates();
-							JProgressBar statusProgressBar = ((Gui) window.getContentPane()).getStatusProgressBar();
-							statusProgressBar.setIndeterminate(false);
-							if (updater.areUpdatesAvaiable()) {
-								if (JOptionPane.showConfirmDialog(window, "An update has been found.\nWould you like to update?", "BackupR", JOptionPane.YES_NO_OPTION) == 0) {
+				
+				if (getProperties().getBoolean(PropertyEnum.AUTOMATIC_UPDATE_CHECK.toString())) {
+					new Thread(new Runnable() {
+						@Override
+						public void run() {
+							try {
+								Updater updater = new Updater(new URL("http://mamo-dev.com/programs/backupr/versions.xml"), releaseDate);
+								JProgressBar statusProgressBar = ((Gui) window.getContentPane()).getStatusProgressBar();
+								statusProgressBar.setEnabled(true);
+								statusProgressBar.setIndeterminate(true);
+								updater.checkForUpdates();
+								statusProgressBar.setIndeterminate(false);
+								statusProgressBar.setEnabled(false);
+								if (updater.areUpdatesAvaiable() && (getProperties().getBoolean(PropertyEnum.AUTOMATIC_UPDATE_INSTALLATION.toString()) || JOptionPane.showConfirmDialog(window, "An update has been found.\nWould you like to update?", "BackupR", JOptionPane.YES_NO_OPTION) == 0)) {
 									statusProgressBar.setIndeterminate(true);
 									updater.update();
 									statusProgressBar.setIndeterminate(false);
@@ -116,12 +120,12 @@ public class Main {
 									Runtime.getRuntime().exec(new String[]{jrePath, "-jar", new File(Main.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getPath()});
 									System.exit(0);
 								}
+							} catch (MalformedURLException ex) {
+							} catch (IOException ex) {
 							}
-						} catch (MalformedURLException ex) {
-						} catch (IOException ex) {
 						}
-					}
-				}).start();
+					}).start();
+				}
 			}
 		});
 	}

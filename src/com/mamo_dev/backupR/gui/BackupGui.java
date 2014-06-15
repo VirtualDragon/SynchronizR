@@ -24,7 +24,7 @@ public class BackupGui extends javax.swing.JPanel {
 		prefUpdate();
 	}
 
-	public void prefUpdate() {
+	private void prefUpdate() {
 		backupFromTextField.setText(Main.getProperties().getString(PropertyEnum.FROM.toString()));
 		backupToTextField.setText(Main.getProperties().getString(PropertyEnum.TO.toString()));
 		advancedCheckBox.setSelected(Main.getProperties().getBoolean(PropertyEnum.ADVANCED_ENABLED.toString()));
@@ -90,7 +90,6 @@ public class BackupGui extends javax.swing.JPanel {
             }
         });
 
-        copyOnlyNewerFilesCheckBox.setSelected(true);
         copyOnlyNewerFilesCheckBox.setText("Copy only newer files");
         copyOnlyNewerFilesCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,7 +97,6 @@ public class BackupGui extends javax.swing.JPanel {
             }
         });
 
-        overrideCheckBox.setSelected(true);
         overrideCheckBox.setText("Override if necessary");
         overrideCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,7 +104,6 @@ public class BackupGui extends javax.swing.JPanel {
             }
         });
 
-        mirrorCopyCheckBox.setSelected(true);
         mirrorCopyCheckBox.setText("Mirror copy");
         mirrorCopyCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,9 +118,8 @@ public class BackupGui extends javax.swing.JPanel {
             .addGroup(advancedSectionPanelLayout.createSequentialGroup()
                 .addGroup(advancedSectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(copyOnlyNewerFilesCheckBox)
-                    .addGroup(advancedSectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(overrideCheckBox)
-                        .addComponent(mirrorCopyCheckBox)))
+                    .addComponent(overrideCheckBox)
+                    .addComponent(mirrorCopyCheckBox))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         advancedSectionPanelLayout.setVerticalGroup(
@@ -163,28 +159,23 @@ public class BackupGui extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(statusScrollPaneContainer)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(statusScrollPaneContainer)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(backupFromLabel)
-                                    .addComponent(backupToLabel))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(backupToTextField)
-                                    .addComponent(backupFromTextField)))))
+                            .addComponent(backupFromLabel)
+                            .addComponent(backupToLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(backupToTextField)
+                            .addComponent(backupFromTextField)))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addComponent(advancedSectionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(advancedCheckBox)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                        .addGap(21, 21, 21)
+                        .addComponent(advancedSectionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(advancedCheckBox)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)

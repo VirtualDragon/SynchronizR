@@ -141,7 +141,6 @@
       <SubComponents>
         <Component class="javax.swing.JCheckBox" name="copyOnlyNewerFilesCheckBox">
           <Properties>
-            <Property name="selected" type="boolean" value="true"/>
             <Property name="text" type="java.lang.String" value="Copy only newer files"/>
           </Properties>
           <Events>
@@ -150,7 +149,6 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="overrideCheckBox">
           <Properties>
-            <Property name="selected" type="boolean" value="true"/>
             <Property name="text" type="java.lang.String" value="Override if necessary"/>
           </Properties>
           <Events>
@@ -159,7 +157,6 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="mirrorCopyCheckBox">
           <Properties>
-            <Property name="selected" type="boolean" value="true"/>
             <Property name="text" type="java.lang.String" value="Mirror copy"/>
           </Properties>
           <Events>

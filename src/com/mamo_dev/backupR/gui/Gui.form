@@ -69,14 +69,13 @@
         <Component class="javax.swing.JProgressBar" name="statusProgressBar">
           <Properties>
             <Property name="enabled" type="boolean" value="false"/>
-            <Property name="indeterminate" type="boolean" value="true"/>
             <Property name="string" type="java.lang.String" value=""/>
             <Property name="stringPainted" type="boolean" value="true"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JTabbedPane" name="tabbedPanel">
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_LayoutCodePost" type="java.lang.String" value="tabbedPanel.addTab(&quot;Backup&quot;, backupGui);"/>
+            <AuxValue name="JavaCodeGenerator_LayoutCodePost" type="java.lang.String" value="tabbedPanel.addTab(&quot;Backup&quot;, new BackupGui(this));&#xa;tabbedPanel.addTab(&quot;Settings&quot;, new SettingsGui());"/>
           </AuxValues>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>

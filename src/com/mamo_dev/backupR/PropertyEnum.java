@@ -15,7 +15,9 @@ public enum PropertyEnum {
 	WINDOW_HEIGHT("window.height", 480),
 	WINDOW_X("window.x", (GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getWidth() - (Integer) WINDOW_WIDTH.defaultValue()) / 2),
 	WINDOW_Y("window.y", (GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getHeight() - (Integer) WINDOW_HEIGHT.defaultValue()) / 2),
-	WINDOW_MAXIMIZED("window.maximized", false);
+	WINDOW_MAXIMIZED("window.maximized", false),
+	AUTOMATIC_UPDATE_CHECK("automaticUpdateCheck", true),
+	AUTOMATIC_UPDATE_INSTALLATION("automaticUpdateInstallation", false);
 
 	private final String keyName;
 	private final Object defaultValue;

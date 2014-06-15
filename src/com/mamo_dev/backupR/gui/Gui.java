@@ -5,8 +5,6 @@ import javax.swing.JTabbedPane;
 
 public class Gui extends javax.swing.JPanel {
 
-	private BackupGui backupGui = new BackupGui(this);
-
 	public Gui() {
 		initComponents();
 	}
@@ -31,11 +29,11 @@ public class Gui extends javax.swing.JPanel {
         titleLabel.setText("<html><body><p style=\"font-size: 1.5em;\">BackupR</p></body></html>");
 
         statusProgressBar.setEnabled(false);
-        statusProgressBar.setIndeterminate(true);
         statusProgressBar.setString("");
         statusProgressBar.setStringPainted(true);
 
-        tabbedPanel.addTab("Backup", backupGui);
+        tabbedPanel.addTab("Backup", new BackupGui(this));
+        tabbedPanel.addTab("Settings", new SettingsGui());
 
         javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
         contentPanel.setLayout(contentPanelLayout);
