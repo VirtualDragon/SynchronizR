@@ -1,10 +1,9 @@
 package com.mamo_dev.backupR.gui;
 
+import com.mamo_dev.backupR.Lang;
 import com.mamo_dev.backupR.Main;
 import com.mamo_dev.backupR.PropertyEnum;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class SettingsGui extends javax.swing.JPanel {
 
@@ -83,6 +82,10 @@ public class SettingsGui extends javax.swing.JPanel {
                 .addComponent(confirmUpdateInstallationRadioButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        automaticUpdateCheckCheckBox.setText(Lang.get("automaticallyCheckForUpdates"));
+        automaticUpdateInstallationRadioButton.setText(Lang.get("automaticallyInstallUpdates"));
+        confirmUpdateInstallationRadioButton.setText(Lang.get("askForConfirmBeforeInstallingUpdate"));
     }// </editor-fold>//GEN-END:initComponents
 
     private void automaticUpdateCheckCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_automaticUpdateCheckCheckBoxActionPerformed

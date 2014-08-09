@@ -1,5 +1,6 @@
 package com.mamo_dev.backupR.gui;
 
+import com.mamo_dev.backupR.Lang;
 import javax.swing.JProgressBar;
 import javax.swing.JTabbedPane;
 
@@ -32,8 +33,8 @@ public class Gui extends javax.swing.JPanel {
         statusProgressBar.setString("");
         statusProgressBar.setStringPainted(true);
 
-        tabbedPanel.addTab("Backup", new BackupGui(this));
-        tabbedPanel.addTab("Settings", new SettingsGui());
+        tabbedPanel.addTab(Lang.get("backup"), new BackupGui(this));
+        tabbedPanel.addTab(Lang.get("settings"), new SettingsGui());
 
         javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
         contentPanel.setLayout(contentPanelLayout);

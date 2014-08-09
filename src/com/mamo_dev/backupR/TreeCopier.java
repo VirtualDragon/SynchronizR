@@ -81,16 +81,16 @@ public class TreeCopier {
 					if (!currentTo.exists() || options.contains(TreeCopyOption.OVERRIDE_IF_NECESSARY)) {
 						boolean log = !currentTo.exists() || !currentTo.isDirectory();
 						if (log) {
-							log("Creating directory \"" + currentTo.getPath() + "\"...", false);
+							log(Lang.get("creatingDirectoryX", currentTo.getPath()), false);
 						}
 						try {
 							Files.copy(dir, currentTo.toPath(), COPY_OPTIONS);
 							if (log) {
-								log(" - OK", true);
+								log(Lang.get("ok"), true);
 							}
 						} catch (IOException ex) {
 							if (log) {
-								log(" - FAIL", true);
+								log(Lang.get("fail"), true);
 							}
 						}
 					}
@@ -104,11 +104,11 @@ public class TreeCopier {
 								}
 							}
 							if (!contains) {
-								log("Deleting \"" + currentToChild.getPath() + "\"...", false);
+								log(Lang.get("deletingX", currentToChild.getPath()), false);
 								if (currentToChild.delete()) {
-									log(" - OK", true);
+									log(Lang.get("ok"), true);
 								} else {
-									log(" - FAIL", true);
+									log(Lang.get("fail"), true);
 								}
 							}
 						}
@@ -132,12 +132,18 @@ public class TreeCopier {
 					boolean newer = currentTo.lastModified() < file.toFile().lastModified();
 					if (!options.contains(TreeCopyOption.COPY_ONLY_NEWER_FILES) || newer) {
 						if (!alreadyExists || options.contains(TreeCopyOption.OVERRIDE_IF_NECESSARY)) {
-							log((newer && alreadyExists ? "Updating" : (alreadyExists ? "Recopying" : "Copying")) + " \"" + file.toString() + "\"...", false);
+							if (newer && alreadyExists) {
+								log(Lang.get("updatingX", file.toString()), false);
+							} else if (alreadyExists) {
+								log(Lang.get("recopyingX", file.toString()), false);
+							} else {
+								log(Lang.get("copyingX", file.toString()), false);
+							}
 							try {
 								Files.copy(file, currentTo.toPath(), COPY_OPTIONS);
-								log(" - OK", true);
+								log(Lang.get("ok"), true);
 							} catch (IOException ex) {
-								log(" - FAIL", true);
+								log(Lang.get("fail"), true);
 							}
 						}
 					}
@@ -160,7 +166,7 @@ public class TreeCopier {
 		} catch (IOException ex) {
 		}
 
-		log("DONE!", false);
+		log(Lang.get("DONE!"), false);
 	}
 
 	public long getFiles() {

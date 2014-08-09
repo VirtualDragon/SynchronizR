@@ -1,6 +1,7 @@
 package com.mamo_dev.backupR.gui;
 
 import com.mamo_dev.backupR.FileUtils;
+import com.mamo_dev.backupR.Lang;
 import com.mamo_dev.backupR.Main;
 import com.mamo_dev.backupR.PropertyEnum;
 import com.mamo_dev.backupR.TreeCopier;
@@ -132,6 +133,10 @@ public class BackupGui extends javax.swing.JPanel {
                 .addComponent(mirrorCopyCheckBox))
         );
 
+        copyOnlyNewerFilesCheckBox.setText(Lang.get("copyOnlyNewerFiles"));
+        overrideCheckBox.setText(Lang.get("overrideIfNecessary"));
+        mirrorCopyCheckBox.setText(Lang.get("mirrorCopy"));
+
         advancedSectionPanel.setVisible(false);
 
         backItUpButton.setText("Back it up!");
@@ -203,6 +208,11 @@ public class BackupGui extends javax.swing.JPanel {
                 .addComponent(statusScrollPaneContainer)
                 .addContainerGap())
         );
+
+        backupFromLabel.setText(Lang.get("backupFrom"));
+        backupToLabel.setText(Lang.get("backupTo"));
+        advancedCheckBox.setText(Lang.get("advanced"));
+        backItUpButton.setText(Lang.get("backItUp"));
     }// </editor-fold>//GEN-END:initComponents
 
     private void backupFromTextFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backupFromTextFieldMousePressed
