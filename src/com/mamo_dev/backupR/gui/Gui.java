@@ -12,7 +12,7 @@ public class Gui extends javax.swing.JPanel {
 	public JTabbedPane getTabbedPane() {
 		return tabbedPanel;
 	}
-	
+
 	public JProgressBar getStatusProgressBar() {
 		return statusProgressBar;
 	}
@@ -73,7 +73,6 @@ public class Gui extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel contentPanel;

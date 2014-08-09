@@ -10,7 +10,7 @@ public class Properties {
 
 	private final java.util.Properties properties = new java.util.Properties();
 	private final File propertiesFile;
-	
+
 	private boolean autoSave;
 
 	private Map<String, Object> defaultValues;
@@ -111,11 +111,11 @@ public class Properties {
 			}
 		}
 	}
-	
+
 	public boolean isAutoSaveEnabled() {
 		return autoSave;
 	}
-	
+
 	public void setAutoSaveEnabled(boolean autoSaveEnabled) {
 		autoSave = autoSaveEnabled;
 	}

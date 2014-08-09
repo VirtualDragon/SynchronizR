@@ -62,7 +62,7 @@ public class Updater {
 		if (xml == null) {
 			return;
 		}
-		
+
 		NodeList versions = xml.getElementsByTagName("version");
 		long lastestTime = 0L;
 		Element lastest = null;

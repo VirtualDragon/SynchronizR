@@ -211,7 +211,8 @@ public class BackupGui extends javax.swing.JPanel {
 		if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
 			try {
 				Main.getProperties().set(PropertyEnum.FROM.toString(), fileChooser.getSelectedFile().getPath());
-			} catch (IOException ex) {}
+			} catch (IOException ex) {
+			}
 			prefUpdate();
 		}
     }//GEN-LAST:event_backupFromTextFieldMousePressed
@@ -228,7 +229,8 @@ public class BackupGui extends javax.swing.JPanel {
 		advancedSectionPanel.setVisible(advancedCheckBox.isSelected());
 		try {
 			Main.getProperties().set(PropertyEnum.ADVANCED_ENABLED.toString(), advancedCheckBox.isSelected());
-		} catch (IOException ex) {}
+		} catch (IOException ex) {
+		}
 		prefUpdate();
     }//GEN-LAST:event_advancedCheckBoxActionPerformed
 
@@ -238,7 +240,8 @@ public class BackupGui extends javax.swing.JPanel {
 		if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
 			try {
 				Main.getProperties().set(PropertyEnum.TO.toString(), fileChooser.getSelectedFile().getPath());
-			} catch (IOException ex) {}
+			} catch (IOException ex) {
+			}
 			prefUpdate();
 		}
     }//GEN-LAST:event_backupToTextFieldMousePressed
@@ -340,21 +343,23 @@ public class BackupGui extends javax.swing.JPanel {
     private void copyOnlyNewerFilesCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyOnlyNewerFilesCheckBoxActionPerformed
 		try {
 			Main.getProperties().set(PropertyEnum.COPY_ONLY_NEWER_FILES.toString(), copyOnlyNewerFilesCheckBox.isSelected());
-		} catch (IOException ex) {}
+		} catch (IOException ex) {
+		}
     }//GEN-LAST:event_copyOnlyNewerFilesCheckBoxActionPerformed
 
     private void overrideCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_overrideCheckBoxActionPerformed
 		try {
 			Main.getProperties().set(PropertyEnum.OVERRIDE_IF_NECESSARY.toString(), overrideCheckBox.isSelected());
-		} catch (IOException ex) {}
+		} catch (IOException ex) {
+		}
     }//GEN-LAST:event_overrideCheckBoxActionPerformed
 
     private void mirrorCopyCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mirrorCopyCheckBoxActionPerformed
 		try {
 			Main.getProperties().set(PropertyEnum.MIRROR_PURGE.toString(), mirrorCopyCheckBox.isSelected());
-		} catch (IOException ex) {}
+		} catch (IOException ex) {
+		}
     }//GEN-LAST:event_mirrorCopyCheckBoxActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox advancedCheckBox;

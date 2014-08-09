@@ -8,6 +8,7 @@ import java.awt.event.ComponentListener;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.HashMap;
 import javax.imageio.ImageIO;
@@ -19,13 +20,13 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 public class Main {
 
-	public static final String VERSION = "1.1";
-	public static final long releaseDate = 201406150949L;
+	public static final String VERSION = "1.1.1";
+	public static final long releaseDate = 201408092116L;
 
 	private static Properties properties;
 
-	public static void main(String[] args) throws IOException {
-		properties = new Properties(new File(new File(Main.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParentFile(), "settings.properties"));
+	public static void main(String[] args) throws IOException, URISyntaxException {
+		properties = new Properties(new File(new File(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile(), "settings.properties"));
 
 		HashMap<String, Object> defaultValues = new HashMap<>();
 		for (PropertyEnum preference : PropertyEnum.values()) {
@@ -94,7 +95,7 @@ public class Main {
 					public void componentHidden(ComponentEvent e) {
 					}
 				});
-				
+
 				if (getProperties().getBoolean(PropertyEnum.AUTOMATIC_UPDATE_CHECK.toString())) {
 					new Thread(new Runnable() {
 						@Override

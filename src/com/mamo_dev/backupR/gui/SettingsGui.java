@@ -102,13 +102,12 @@ public class SettingsGui extends javax.swing.JPanel {
     }//GEN-LAST:event_automaticUpdateInstallationRadioButtonActionPerformed
 
     private void confirmUpdateInstallationRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmUpdateInstallationRadioButtonActionPerformed
-        try {
+		try {
 			Main.getProperties().set(PropertyEnum.AUTOMATIC_UPDATE_INSTALLATION.toString(), false);
 		} catch (IOException ex) {
 		}
 		prefUpdate();
     }//GEN-LAST:event_confirmUpdateInstallationRadioButtonActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox automaticUpdateCheckCheckBox;
