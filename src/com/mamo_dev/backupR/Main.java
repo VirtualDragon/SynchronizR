@@ -11,21 +11,27 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Locale;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JProgressBar;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 public class Main {
 
-	public static final String VERSION = "1.2";
-	public static final long releaseDate = 201408092228L;
+	public static final String VERSION = "1.3";
+	public static final long releaseDate = 201408092327L;
 
 	private static Properties properties;
 
 	public static void main(String[] args) throws IOException, URISyntaxException {
+		for (String arg : args) {
+			if (arg.toLowerCase().startsWith("locale=")) {
+				Lang.changeLocale(new Locale(arg.substring("locale=".length())));
+			}
+		}
+
 		properties = new Properties(new File(new File(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile(), "settings.properties"));
 
 		HashMap<String, Object> defaultValues = new HashMap<>();
@@ -49,7 +55,10 @@ public class Main {
 				} catch (IOException ex) {
 				}
 				window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				window.setContentPane(new Gui());
+				final Gui gui = new Gui();
+				gui.setEverythingEnabled(false);
+				gui.getProgressBar().setIndeterminate(true);
+				window.setContentPane(gui);
 				window.pack();
 				window.setMinimumSize(window.getSize());
 				window.setSize(properties.getInt(PropertyEnum.WINDOW_WIDTH.toString()), properties.getInt(PropertyEnum.WINDOW_HEIGHT.toString()));
@@ -101,17 +110,14 @@ public class Main {
 						@Override
 						public void run() {
 							try {
-								Updater updater = new Updater(new URL("http://mamo-dev.com/programs/backupr/versions.xml"), releaseDate);
-								JProgressBar statusProgressBar = ((Gui) window.getContentPane()).getStatusProgressBar();
-								statusProgressBar.setEnabled(true);
-								statusProgressBar.setIndeterminate(true);
+								Updater updater = new Updater(new URL("https://sites.google.com/site/mamoswebsite/backupr/versions.xml"), releaseDate);
 								updater.checkForUpdates();
-								statusProgressBar.setIndeterminate(false);
-								statusProgressBar.setEnabled(false);
+								gui.getProgressBar().setIndeterminate(false);
 								if (updater.areUpdatesAvaiable() && (getProperties().getBoolean(PropertyEnum.AUTOMATIC_UPDATE_INSTALLATION.toString()) || JOptionPane.showConfirmDialog(window, "An update has been found.\nWould you like to update?", "BackupR", JOptionPane.YES_NO_OPTION) == 0)) {
-									statusProgressBar.setIndeterminate(true);
+									System.out.println("B");
+									gui.getProgressBar().setIndeterminate(true);
 									updater.update();
-									statusProgressBar.setIndeterminate(false);
+									gui.getProgressBar().setIndeterminate(false);
 									String jrePath = System.getProperty("java.home") + File.separator + "bin" + File.separator;
 									if (System.getProperty("os.name").toLowerCase().contains("windows")) {
 										jrePath += "java.exe";
@@ -121,11 +127,15 @@ public class Main {
 									Runtime.getRuntime().exec(new String[]{jrePath, "-jar", new File(Main.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getPath()});
 									System.exit(0);
 								}
+								gui.setEverythingEnabled(true);
 							} catch (MalformedURLException ex) {
 							} catch (IOException ex) {
 							}
 						}
 					}).start();
+				} else {
+					gui.setEverythingEnabled(true);
+					gui.getProgressBar().setIndeterminate(false);
 				}
 			}
 		});

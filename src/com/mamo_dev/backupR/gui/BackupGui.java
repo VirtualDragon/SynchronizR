@@ -273,19 +273,9 @@ public class BackupGui extends javax.swing.JPanel {
 				new Thread(new Runnable() {
 					@Override
 					public void run() {
-						gui.getTabbedPane().setEnabled(false);
+						gui.setEverythingEnabled(false);
 						BackupGui.this.statusTextArea.setText(null);
-						BackupGui.this.backupFromLabel.setEnabled(false);
-						BackupGui.this.backupFromTextField.setEnabled(false);
-						BackupGui.this.advancedCheckBox.setEnabled(false);
-						BackupGui.this.backupToLabel.setEnabled(false);
-						BackupGui.this.backupToTextField.setEnabled(false);
-						BackupGui.this.copyOnlyNewerFilesCheckBox.setEnabled(false);
-						BackupGui.this.overrideCheckBox.setEnabled(false);
-						BackupGui.this.mirrorCopyCheckBox.setEnabled(false);
-						BackupGui.this.backItUpButton.setEnabled(false);
-						gui.getStatusProgressBar().setEnabled(true);
-						gui.getStatusProgressBar().setIndeterminate(true);
+						gui.getProgressBar().setIndeterminate(true);
 						ArrayList<TreeCopyOption> options = new ArrayList<>();
 						if (BackupGui.this.copyOnlyNewerFilesCheckBox.isSelected()) {
 							options.add(TreeCopyOption.COPY_ONLY_NEWER_FILES);
@@ -307,38 +297,27 @@ public class BackupGui extends javax.swing.JPanel {
 									}
 									BackupGui.this.statusTextArea.append(event_.getLog());
 								}
-								gui.getStatusProgressBar().setValue((int) (100D * event.getFilesProcessed() / event.getFiles()));
+								gui.getProgressBar().setValue((int) (100D * event.getFilesProcessed() / event.getFiles()));
 							}
 						});
-						gui.getStatusProgressBar().setIndeterminate(false);
-						gui.getStatusProgressBar().setValue(0);
-						gui.getStatusProgressBar().setString(null);
+						gui.getProgressBar().setIndeterminate(false);
+						gui.getProgressBar().setValue(0);
+						gui.getProgressBar().setString(null);
 						treeCopier.copyTree();
-						gui.getStatusProgressBar().setValue(100);
-						JOptionPane.showMessageDialog(BackupGui.this, "Done!", "BackupR", JOptionPane.INFORMATION_MESSAGE);
-						gui.getStatusProgressBar().setString("");
-						gui.getStatusProgressBar().setEnabled(false);
-						BackupGui.this.backupFromLabel.setEnabled(true);
-						BackupGui.this.backupFromTextField.setEnabled(true);
-						BackupGui.this.advancedCheckBox.setEnabled(true);
-						BackupGui.this.backupToLabel.setEnabled(true);
-						BackupGui.this.backupToTextField.setEnabled(true);
-						BackupGui.this.copyOnlyNewerFilesCheckBox.setEnabled(true);
-						BackupGui.this.overrideCheckBox.setEnabled(true);
-						BackupGui.this.mirrorCopyCheckBox.setEnabled(true);
-						BackupGui.this.backItUpButton.setEnabled(true);
-						gui.getTabbedPane().setEnabled(true);
+						gui.getProgressBar().setValue(100);
+						JOptionPane.showMessageDialog(BackupGui.this, Lang.get("done2"), null, JOptionPane.INFORMATION_MESSAGE);
+						gui.getProgressBar().setValue(0);
+						gui.getProgressBar().setString("");
+						gui.setEverythingEnabled(true);
 					}
 				}).start();
 			} else {
 				if (!advancedCheckBox.isSelected()) {
-					JOptionPane.showMessageDialog(this, "Please select a directory not contained in- and which doesn't contain \"" + backupToTextField.getText() + "\"!", null, JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(this, Lang.get("dirInceptionXErr", backupToTextField.getText()), null, JOptionPane.WARNING_MESSAGE);
 				} else {
-					JOptionPane.showMessageDialog(this, "The two directories cannot contain one each other!", null, JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(this, Lang.get("dirInceptionXErr"), null, JOptionPane.WARNING_MESSAGE);
 				}
 			}
-		} else {
-			JOptionPane.showMessageDialog(this, "Please fill out all the requested fields.", null, JOptionPane.WARNING_MESSAGE);
 		}
     }//GEN-LAST:event_backItUpButtonActionPerformed
 
