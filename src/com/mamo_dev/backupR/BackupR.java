@@ -1,6 +1,7 @@
 package com.mamo_dev.backupR;
 
 import com.mamo_dev.backupR.gui.Gui;
+import com.mamo_dev.backupR.gui.LicenseGui;
 import java.awt.EventQueue;
 import java.awt.Frame;
 import java.awt.event.ComponentEvent;
@@ -18,10 +19,10 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-public class Main {
+public class BackupR {
 
-	public static final String VERSION = "1.3";
-	public static final long releaseDate = 201408092327L;
+	public static final String VERSION = "1.4";
+	public static final long releaseDate = 201408101343L;
 
 	private static Properties properties;
 
@@ -32,7 +33,7 @@ public class Main {
 			}
 		}
 
-		properties = new Properties(new File(new File(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile(), "settings.properties"));
+		properties = new Properties(new File(new File(BackupR.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile(), "settings.properties"));
 
 		HashMap<String, Object> defaultValues = new HashMap<>();
 		for (PropertyEnum preference : PropertyEnum.values()) {
@@ -51,7 +52,7 @@ public class Main {
 
 				final JFrame window = new JFrame("BackupR v. " + VERSION);
 				try {
-					window.setIconImage(ImageIO.read(Main.class.getResource("icon.png")));
+					window.setIconImage(ImageIO.read(BackupR.class.getResource("icon.png")));
 				} catch (IOException ex) {
 				}
 				window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -63,10 +64,37 @@ public class Main {
 				window.setMinimumSize(window.getSize());
 				window.setSize(properties.getInt(PropertyEnum.WINDOW_WIDTH.toString()), properties.getInt(PropertyEnum.WINDOW_HEIGHT.toString()));
 				window.setVisible(true);
+				if (properties.getInt(PropertyEnum.WINDOW_X.toString()) == Integer.MIN_VALUE || properties.getInt(PropertyEnum.WINDOW_Y.toString()) == Integer.MIN_VALUE) {
+					window.setLocationRelativeTo(null);
+					try {
+						properties.set(PropertyEnum.WINDOW_X.toString(), (int) window.getLocationOnScreen().getX());
+						properties.set(PropertyEnum.WINDOW_Y.toString(), (int) window.getLocationOnScreen().getY());
+					} catch (IOException ex) {
+					}
+				}
 				window.setLocation(properties.getInt(PropertyEnum.WINDOW_X.toString()), properties.getInt(PropertyEnum.WINDOW_Y.toString()));
 				if (properties.getBoolean(PropertyEnum.WINDOW_MAXIMIZED.toString())) {
 					window.setExtendedState(Frame.MAXIMIZED_BOTH);
 				}
+
+				if (!getProperties().getBoolean("acceptedLicense")) {
+					gui.getProgressBar().setIndeterminate(false);
+					LicenseGui licenseGui = new LicenseGui(window, true);
+					licenseGui.setTitle("BackupR v. " + VERSION);
+					licenseGui.setSize(640, 480);
+					licenseGui.setLocationRelativeTo(null);
+					licenseGui.setVisible(true);
+					if (licenseGui.getReturnStatus() == 1) {
+						try {
+							getProperties().set(PropertyEnum.ACCEPTED_LICENSE.toString(), true);
+						} catch (IOException ex) {
+						}
+					} else {
+						System.exit(0);
+					}
+					gui.getProgressBar().setIndeterminate(true);
+				}
+
 				window.addComponentListener(new ComponentListener() {
 					@Override
 					public void componentResized(ComponentEvent e) {
@@ -113,8 +141,7 @@ public class Main {
 								Updater updater = new Updater(new URL("https://sites.google.com/site/mamoswebsite/backupr/versions.xml"), releaseDate);
 								updater.checkForUpdates();
 								gui.getProgressBar().setIndeterminate(false);
-								if (updater.areUpdatesAvaiable() && (getProperties().getBoolean(PropertyEnum.AUTOMATIC_UPDATE_INSTALLATION.toString()) || JOptionPane.showConfirmDialog(window, "An update has been found.\nWould you like to update?", "BackupR", JOptionPane.YES_NO_OPTION) == 0)) {
-									System.out.println("B");
+								if (updater.areUpdatesAvaiable() && (getProperties().getBoolean(PropertyEnum.AUTOMATIC_UPDATE_INSTALLATION.toString()) || JOptionPane.showConfirmDialog(window, "An update has been found.\nWould you like to update?", "BackupR v. " + VERSION, JOptionPane.YES_NO_OPTION) == 0)) {
 									gui.getProgressBar().setIndeterminate(true);
 									updater.update();
 									gui.getProgressBar().setIndeterminate(false);
@@ -124,7 +151,7 @@ public class Main {
 									} else {
 										jrePath += "java";
 									}
-									Runtime.getRuntime().exec(new String[]{jrePath, "-jar", new File(Main.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getPath()});
+									Runtime.getRuntime().exec(new String[]{jrePath, "-jar", new File(BackupR.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getPath()});
 									System.exit(0);
 								}
 								gui.setEverythingEnabled(true);

@@ -6,6 +6,7 @@ import java.net.URISyntaxException;
 
 public enum PropertyEnum {
 
+	ACCEPTED_LICENSE("acceptedLicense", false),
 	FROM("from", new File(System.getProperty("user.home")).getPath()),
 	TO("to", to().getPath()),
 	ADVANCED_ENABLED("advancedEnabled", false),
@@ -14,8 +15,8 @@ public enum PropertyEnum {
 	MIRROR_PURGE("mirrorPurge", true),
 	WINDOW_WIDTH("window.width", 640),
 	WINDOW_HEIGHT("window.height", 480),
-	WINDOW_X("window.x", (GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getWidth() - (Integer) WINDOW_WIDTH.defaultValue()) / 2),
-	WINDOW_Y("window.y", (GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getHeight() - (Integer) WINDOW_HEIGHT.defaultValue()) / 2),
+	WINDOW_X("window.x", Integer.MIN_VALUE),
+	WINDOW_Y("window.y", Integer.MIN_VALUE),
 	WINDOW_MAXIMIZED("window.maximized", false),
 	AUTOMATIC_UPDATE_CHECK("automaticUpdateCheck", true),
 	AUTOMATIC_UPDATE_INSTALLATION("automaticUpdateInstallation", false);

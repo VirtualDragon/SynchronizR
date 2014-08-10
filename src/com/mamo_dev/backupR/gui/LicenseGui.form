@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <Events>
+    <EventHandler event="windowClosing" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="closeDialog"/>
+  </Events>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <Component id="titleLabel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="licenseScrollPane" pref="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="acceptButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="denyButton" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="licenseLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="175" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="titleLabel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="licenseLabel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="licenseScrollPane" pref="365" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="acceptButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="denyButton" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="titleLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;body&gt;&lt;p style=&quot;font-size: 1.5em;&quot;&gt;BackupR&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="licenseLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="To use this program, you have to accept the following license."/>
+      </Properties>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="licenseScrollPane">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="licenseTextPane">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="text" type="java.lang.String" value="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut semper ligula lectus, eget convallis magna dignissim eget. Aliquam ut ligula congue, porttitor felis vitae, aliquam risus. Suspendisse risus sapien, pretium ut ligula eget, hendrerit tincidunt arcu. Sed elit nulla, eleifend quis augue sed, vestibulum placerat lorem. Maecenas molestie fringilla venenatis. Vestibulum at dolor augue. Duis convallis porttitor cursus. Cras a ipsum in lorem congue interdum. Aliquam ultricies, justo non pharetra auctor, metus nulla sollicitudin tellus, quis porta lectus velit ac lectus.&#xa;&#xa;Mauris sollicitudin eros at leo venenatis lobortis. Nulla facilisi. Nunc scelerisque leo non pretium vulputate. Donec posuere est erat, in tincidunt leo scelerisque nec. Fusce libero arcu, ornare non adipiscing ac, euismod et justo. Donec sed erat sit amet odio interdum dapibus et non nulla. Mauris fermentum posuere lectus, at semper diam vestibulum et. Nulla diam ipsum, consequat quis massa quis, tempor porta quam. Integer nulla lacus, tincidunt id tempus vulputate, convallis pharetra elit. Duis sed adipiscing nunc. Integer suscipit orci ac enim pulvinar tempus. In tempor nec lorem cursus molestie. Aenean vitae odio suscipit, interdum dui et, ultricies diam. Vestibulum non pretium augue, eget gravida ipsum. Mauris sed nisi nec urna lobortis hendrerit quis porta ante.&#xa;&#xa;Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec bibendum imperdiet congue. Nunc dapibus, leo in tincidunt consequat, felis mauris vulputate massa, vitae commodo ipsum urna sit amet justo. Quisque ac massa sit amet tortor porttitor commodo sit amet vel nibh. Integer malesuada arcu vitae rutrum congue. In sodales eros leo, et volutpat augue mattis vitae. Quisque rutrum, elit in posuere feugiat, dui dui cursus eros, quis blandit purus nisi at diam. Curabitur nec condimentum neque, eget suscipit magna. Nunc ac vehicula orci, dapibus sollicitudin velit. Curabitur posuere odio id mauris sollicitudin iaculis. Morbi pulvinar orci eu vestibulum congue. Pellentesque est nibh, luctus id justo eu, imperdiet luctus odio. Vestibulum a imperdiet purus. Phasellus elit leo, iaculis sit amet nisi at, auctor interdum leo. In at facilisis leo. Morbi accumsan cursus mauris vitae varius.&#xa;&#xa;Praesent aliquet iaculis porttitor. Maecenas id metus adipiscing neque dictum volutpat. Ut ipsum dolor, ullamcorper mollis dapibus sed, congue vel justo. Sed quis arcu diam. Donec mattis ultrices lacus sed feugiat. Nullam ornare scelerisque est. Proin rutrum elit sagittis, rhoncus neque ac, faucibus nisl. Suspendisse euismod odio vel velit pretium ullamcorper. Donec id lacus porttitor, fringilla erat in, consectetur erat. Nam nec ligula quis elit lacinia suscipit a eget nisi. In non sem sed odio aliquam volutpat non at arcu. Fusce ac mattis lorem, ac aliquet risus.&#xa;&#xa;Nam et sapien non elit hendrerit facilisis ut id sem. Quisque congue orci eu nisi sagittis, id ultrices mi consequat. Phasellus vulputate faucibus nisi, a sagittis purus interdum et. Sed ornare sagittis accumsan. Proin tortor sem, rhoncus eget lobortis quis, placerat commodo ligula. Morbi sagittis scelerisque odio vitae suscipit. Donec suscipit eleifend augue eget dapibus. Quisque pulvinar mattis placerat. "/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="try {&#xa;&#x9;licenseTextPane.setPage(LicenseGui.class.getResource(&quot;/license.html&quot;));&#xa;} catch (IOException e) {}"/>
+          </AuxValues>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JButton" name="denyButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Accept"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="denyButtonActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="getRootPane().setDefaultButton(denyButton);"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="acceptButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Deny"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="acceptButtonActionPerformed"/>
+      </Events>
+    </Component>
+  </SubComponents>
+</Form>

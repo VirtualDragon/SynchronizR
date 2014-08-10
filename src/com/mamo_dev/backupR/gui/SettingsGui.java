@@ -1,7 +1,7 @@
 package com.mamo_dev.backupR.gui;
 
 import com.mamo_dev.backupR.Lang;
-import com.mamo_dev.backupR.Main;
+import com.mamo_dev.backupR.BackupR;
 import com.mamo_dev.backupR.PropertyEnum;
 import java.io.IOException;
 
@@ -13,11 +13,11 @@ public class SettingsGui extends javax.swing.JPanel {
 	}
 
 	private void prefUpdate() {
-		boolean automaticUpdateCheck = Main.getProperties().getBoolean(PropertyEnum.AUTOMATIC_UPDATE_CHECK.toString());
+		boolean automaticUpdateCheck = BackupR.getProperties().getBoolean(PropertyEnum.AUTOMATIC_UPDATE_CHECK.toString());
 		automaticUpdateCheckCheckBox.setSelected(automaticUpdateCheck);
 		automaticUpdateInstallationRadioButton.setEnabled(automaticUpdateCheck);
 		confirmUpdateInstallationRadioButton.setEnabled(automaticUpdateCheck);
-		if (Main.getProperties().getBoolean(PropertyEnum.AUTOMATIC_UPDATE_INSTALLATION.toString())) {
+		if (BackupR.getProperties().getBoolean(PropertyEnum.AUTOMATIC_UPDATE_INSTALLATION.toString())) {
 			automaticUpdateInstallationRadioButton.setSelected(true);
 		} else {
 			confirmUpdateInstallationRadioButton.setSelected(true);
@@ -90,7 +90,7 @@ public class SettingsGui extends javax.swing.JPanel {
 
     private void automaticUpdateCheckCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_automaticUpdateCheckCheckBoxActionPerformed
 		try {
-			Main.getProperties().set(PropertyEnum.AUTOMATIC_UPDATE_CHECK.toString(), automaticUpdateCheckCheckBox.isSelected());
+			BackupR.getProperties().set(PropertyEnum.AUTOMATIC_UPDATE_CHECK.toString(), automaticUpdateCheckCheckBox.isSelected());
 		} catch (IOException ex) {
 		}
 		prefUpdate();
@@ -98,7 +98,7 @@ public class SettingsGui extends javax.swing.JPanel {
 
     private void automaticUpdateInstallationRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_automaticUpdateInstallationRadioButtonActionPerformed
 		try {
-			Main.getProperties().set(PropertyEnum.AUTOMATIC_UPDATE_INSTALLATION.toString(), true);
+			BackupR.getProperties().set(PropertyEnum.AUTOMATIC_UPDATE_INSTALLATION.toString(), true);
 		} catch (IOException ex) {
 		}
 		prefUpdate();
@@ -106,7 +106,7 @@ public class SettingsGui extends javax.swing.JPanel {
 
     private void confirmUpdateInstallationRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmUpdateInstallationRadioButtonActionPerformed
 		try {
-			Main.getProperties().set(PropertyEnum.AUTOMATIC_UPDATE_INSTALLATION.toString(), false);
+			BackupR.getProperties().set(PropertyEnum.AUTOMATIC_UPDATE_INSTALLATION.toString(), false);
 		} catch (IOException ex) {
 		}
 		prefUpdate();
