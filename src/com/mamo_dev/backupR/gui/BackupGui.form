@@ -85,7 +85,7 @@
         <Property name="text" type="java.lang.String" value="Backup from"/>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="backupFromLabel.setText(Lang.get(&quot;backupFrom&quot;));"/>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="backupFromLabel.setText(BackupR.getLang().get(&quot;backupFrom&quot;));"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="backupFromTextField">
@@ -101,7 +101,7 @@
         <Property name="text" type="java.lang.String" value="Backup to"/>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="backupToLabel.setText(Lang.get(&quot;backupTo&quot;));"/>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="backupToLabel.setText(BackupR.getLang().get(&quot;backupTo&quot;));"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="backupToTextField">
@@ -120,7 +120,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="advancedCheckBoxActionPerformed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="advancedCheckBox.setText(Lang.get(&quot;advanced&quot;));"/>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="advancedCheckBox.setText(BackupR.getLang().get(&quot;advanced&quot;));"/>
       </AuxValues>
     </Component>
     <Container class="javax.swing.JPanel" name="advancedSectionPanel">
@@ -162,7 +162,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="copyOnlyNewerFilesCheckBoxActionPerformed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="copyOnlyNewerFilesCheckBox.setText(Lang.get(&quot;copyOnlyNewerFiles&quot;));"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="copyOnlyNewerFilesCheckBox.setText(BackupR.getLang().get(&quot;copyOnlyNewerFiles&quot;));"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JCheckBox" name="overrideCheckBox">
@@ -173,7 +173,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="overrideCheckBoxActionPerformed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="overrideCheckBox.setText(Lang.get(&quot;overrideIfNecessary&quot;));"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="overrideCheckBox.setText(BackupR.getLang().get(&quot;overrideIfNecessary&quot;));"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JCheckBox" name="mirrorCopyCheckBox">
@@ -184,7 +184,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mirrorCopyCheckBoxActionPerformed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="mirrorCopyCheckBox.setText(Lang.get(&quot;mirrorCopy&quot;));"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="mirrorCopyCheckBox.setText(BackupR.getLang().get(&quot;mirrorCopy&quot;));"/>
           </AuxValues>
         </Component>
       </SubComponents>
@@ -197,7 +197,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backItUpButtonActionPerformed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="backItUpButton.setText(Lang.get(&quot;backItUp&quot;));"/>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="backItUpButton.setText(BackupR.getLang().get(&quot;backItUp&quot;));"/>
       </AuxValues>
     </Component>
     <Container class="javax.swing.JScrollPane" name="statusScrollPaneContainer">

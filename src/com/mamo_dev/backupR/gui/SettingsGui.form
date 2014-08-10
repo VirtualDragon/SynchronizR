@@ -59,7 +59,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="automaticUpdateCheckCheckBoxActionPerformed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="automaticUpdateCheckCheckBox.setText(Lang.get(&quot;automaticallyCheckForUpdates&quot;));"/>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="automaticUpdateCheckCheckBox.setText(BackupR.getLang().get(&quot;automaticallyCheckForUpdates&quot;));"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JRadioButton" name="automaticUpdateInstallationRadioButton">
@@ -73,7 +73,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="automaticUpdateInstallationRadioButtonActionPerformed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="automaticUpdateInstallationRadioButton.setText(Lang.get(&quot;automaticallyInstallUpdates&quot;));"/>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="automaticUpdateInstallationRadioButton.setText(BackupR.getLang().get(&quot;automaticallyInstallUpdates&quot;));"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JRadioButton" name="confirmUpdateInstallationRadioButton">
@@ -87,7 +87,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="confirmUpdateInstallationRadioButtonActionPerformed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="confirmUpdateInstallationRadioButton.setText(Lang.get(&quot;askForConfirmBeforeInstallingUpdate&quot;));"/>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="confirmUpdateInstallationRadioButton.setText(BackupR.getLang().get(&quot;askForConfirmBeforeInstallingUpdate&quot;));"/>
       </AuxValues>
     </Component>
   </SubComponents>

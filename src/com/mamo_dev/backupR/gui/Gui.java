@@ -1,6 +1,6 @@
 package com.mamo_dev.backupR.gui;
 
-import com.mamo_dev.backupR.Lang;
+import com.mamo_dev.backupR.BackupR;
 import java.awt.Component;
 import java.awt.Container;
 import javax.swing.JProgressBar;
@@ -38,8 +38,8 @@ public class Gui extends javax.swing.JPanel {
 
         titleLabel.setText("<html><body><p style=\"font-size: 1.5em;\">BackupR</p></body></html>");
 
-        tabbedPanel.addTab(Lang.get("backup"), new BackupGui(this));
-        tabbedPanel.addTab(Lang.get("settings"), new SettingsGui());
+        tabbedPanel.addTab(BackupR.getLang().get("backup"), new BackupGui(this));
+        tabbedPanel.addTab(BackupR.getLang().get("settings"), new SettingsGui());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

@@ -81,16 +81,16 @@ public class TreeCopier {
 					if (!currentTo.exists() || options.contains(TreeCopyOption.OVERRIDE_IF_NECESSARY)) {
 						boolean log = !currentTo.exists() || !currentTo.isDirectory();
 						if (log) {
-							log(Lang.get("creatingDirectoryX", currentTo.getPath()), false);
+							log(BackupR.getLang().get("creatingDirectoryX", currentTo.getPath()), false);
 						}
 						try {
 							Files.copy(dir, currentTo.toPath(), COPY_OPTIONS);
 							if (log) {
-								log(Lang.get("ok"), true);
+								log(BackupR.getLang().get("ok"), true);
 							}
 						} catch (IOException ex) {
 							if (log) {
-								log(Lang.get("fail"), true);
+								log(BackupR.getLang().get("fail"), true);
 							}
 						}
 					}
@@ -104,11 +104,11 @@ public class TreeCopier {
 								}
 							}
 							if (!contains) {
-								log(Lang.get("deletingX", currentToChild.getPath()), false);
+								log(BackupR.getLang().get("deletingX", currentToChild.getPath()), false);
 								if (currentToChild.delete()) {
-									log(Lang.get("ok"), true);
+									log(BackupR.getLang().get("ok"), true);
 								} else {
-									log(Lang.get("fail"), true);
+									log(BackupR.getLang().get("fail"), true);
 								}
 							}
 						}
@@ -133,17 +133,17 @@ public class TreeCopier {
 					if (!options.contains(TreeCopyOption.COPY_ONLY_NEWER_FILES) || newer) {
 						if (!alreadyExists || options.contains(TreeCopyOption.OVERRIDE_IF_NECESSARY)) {
 							if (newer && alreadyExists) {
-								log(Lang.get("updatingX", file.toString()), false);
+								log(BackupR.getLang().get("updatingX", file.toString()), false);
 							} else if (alreadyExists) {
-								log(Lang.get("recopyingX", file.toString()), false);
+								log(BackupR.getLang().get("recopyingX", file.toString()), false);
 							} else {
-								log(Lang.get("copyingX", file.toString()), false);
+								log(BackupR.getLang().get("copyingX", file.toString()), false);
 							}
 							try {
 								Files.copy(file, currentTo.toPath(), COPY_OPTIONS);
-								log(Lang.get("ok"), true);
+								log(BackupR.getLang().get("ok"), true);
 							} catch (IOException ex) {
-								log(Lang.get("fail"), true);
+								log(BackupR.getLang().get("fail"), true);
 							}
 						}
 					}
@@ -166,7 +166,7 @@ public class TreeCopier {
 		} catch (IOException ex) {
 		}
 
-		log(Lang.get("done"), false);
+		log(BackupR.getLang().get("done"), false);
 	}
 
 	public long getFiles() {
@@ -199,7 +199,7 @@ public class TreeCopier {
 
 	public enum TreeCopyOption {
 
-		COMPRESS_FILES, COPY_ONLY_NEWER_FILES, OVERRIDE_IF_NECESSARY, MIRROR_PURGE;
+		COPY_ONLY_NEWER_FILES, OVERRIDE_IF_NECESSARY, MIRROR_PURGE;
 	}
 
 	public interface TreeCopyEventListener {

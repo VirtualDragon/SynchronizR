@@ -20,26 +20,27 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 public class BackupR {
 
-	public static final String VERSION = "1.4.7";
-	public static final long releaseDate = 201408101725L;
+	public static final String VERSION = "1.4.8";
+	public static final long releaseDate = 201408102051L;
 
 	private static Properties properties;
+	private static final Lang lang = new Lang("lang");
 
 	public static void main(String[] args) throws IOException, URISyntaxException {
 		for (String arg : args) {
 			if (arg.toLowerCase().startsWith("locale=")) {
-				Lang.changeLocale(new Locale(arg.substring("locale=".length())));
+				getLang().changeLocale(new Locale(arg.substring("locale=".length())));
 			}
 		}
 
-		properties = new Properties(new File(new File(BackupR.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile(), "settings.properties"));
+		properties = new Properties(new File(new File(BackupR.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile(), "settings.getProperties()"));
 
 		HashMap<String, Object> defaultValues = new HashMap<>();
 		for (PropertyEnum preference : PropertyEnum.values()) {
 			defaultValues.put(preference.toString(), preference.defaultValue());
 		}
-		properties.setDefaultValues(defaultValues);
-		properties.setAutoSaveEnabled(true);
+		getProperties().setDefaultValues(defaultValues);
+		getProperties().setAutoSaveEnabled(true);
 
 		EventQueue.invokeLater(new Runnable() {
 			@Override
@@ -57,14 +58,14 @@ public class BackupR {
 				window.setContentPane(gui);
 				window.pack();
 				window.setMinimumSize(window.getSize());
-				window.setSize(properties.getInt(PropertyEnum.WINDOW_WIDTH.toString()), properties.getInt(PropertyEnum.WINDOW_HEIGHT.toString()));
+				window.setSize(getProperties().getInt(PropertyEnum.WINDOW_WIDTH.toString()), getProperties().getInt(PropertyEnum.WINDOW_HEIGHT.toString()));
 				window.setVisible(true);
-				if (properties.getInt(PropertyEnum.WINDOW_X.toString()) == Integer.MIN_VALUE || properties.getInt(PropertyEnum.WINDOW_Y.toString()) == Integer.MIN_VALUE) {
+				if (getProperties().getInt(PropertyEnum.WINDOW_X.toString()) == Integer.MIN_VALUE || getProperties().getInt(PropertyEnum.WINDOW_Y.toString()) == Integer.MIN_VALUE) {
 					window.setLocationRelativeTo(null);
 				} else {
-					window.setLocation(properties.getInt(PropertyEnum.WINDOW_X.toString()), properties.getInt(PropertyEnum.WINDOW_Y.toString()));
+					window.setLocation(getProperties().getInt(PropertyEnum.WINDOW_X.toString()), getProperties().getInt(PropertyEnum.WINDOW_Y.toString()));
 				}
-				if (properties.getBoolean(PropertyEnum.WINDOW_MAXIMIZED.toString())) {
+				if (getProperties().getBoolean(PropertyEnum.WINDOW_MAXIMIZED.toString())) {
 					window.setExtendedState(Frame.MAXIMIZED_BOTH);
 				}
 
@@ -91,11 +92,11 @@ public class BackupR {
 					public void componentResized(ComponentEvent e) {
 						try {
 							if ((((JFrame) e.getComponent()).getExtendedState() & Frame.MAXIMIZED_BOTH) != Frame.MAXIMIZED_BOTH) {
-								properties.set(PropertyEnum.WINDOW_WIDTH.toString(), (int) e.getComponent().getSize().getWidth());
-								properties.set(PropertyEnum.WINDOW_HEIGHT.toString(), (int) e.getComponent().getSize().getHeight());
-								properties.set(PropertyEnum.WINDOW_MAXIMIZED.toString(), false);
+								getProperties().set(PropertyEnum.WINDOW_WIDTH.toString(), (int) e.getComponent().getSize().getWidth());
+								getProperties().set(PropertyEnum.WINDOW_HEIGHT.toString(), (int) e.getComponent().getSize().getHeight());
+								getProperties().set(PropertyEnum.WINDOW_MAXIMIZED.toString(), false);
 							} else {
-								properties.set(PropertyEnum.WINDOW_MAXIMIZED.toString(), true);
+								getProperties().set(PropertyEnum.WINDOW_MAXIMIZED.toString(), true);
 							}
 						} catch (IOException ex) {
 						}
@@ -105,11 +106,11 @@ public class BackupR {
 					public void componentMoved(ComponentEvent e) {
 						try {
 							if ((((JFrame) e.getComponent()).getExtendedState() & Frame.MAXIMIZED_BOTH) != Frame.MAXIMIZED_BOTH) {
-								properties.set(PropertyEnum.WINDOW_X.toString(), (int) e.getComponent().getLocation().getX());
-								properties.set(PropertyEnum.WINDOW_Y.toString(), (int) e.getComponent().getLocation().getY());
-								properties.set(PropertyEnum.WINDOW_MAXIMIZED.toString(), false);
+								getProperties().set(PropertyEnum.WINDOW_X.toString(), (int) e.getComponent().getLocation().getX());
+								getProperties().set(PropertyEnum.WINDOW_Y.toString(), (int) e.getComponent().getLocation().getY());
+								getProperties().set(PropertyEnum.WINDOW_MAXIMIZED.toString(), false);
 							} else {
-								properties.set(PropertyEnum.WINDOW_MAXIMIZED.toString(), true);
+								getProperties().set(PropertyEnum.WINDOW_MAXIMIZED.toString(), true);
 							}
 						} catch (IOException ex) {
 						}
@@ -132,7 +133,7 @@ public class BackupR {
 								Updater updater = new Updater(new URL("https://sites.google.com/site/mamoswebsite/backupr/versions.xml"), releaseDate);
 								updater.checkForUpdates();
 								gui.getProgressBar().setIndeterminate(false);
-								if (updater.areUpdatesAvaiable() && (getProperties().getBoolean(PropertyEnum.AUTOMATIC_UPDATE_INSTALLATION.toString()) || JOptionPane.showConfirmDialog(window, "An update has been found.\nWould you like to update?", "BackupR v. " + VERSION, JOptionPane.YES_NO_OPTION) == 0)) {
+								if (updater.areUpdatesAvaiable() && (getProperties().getBoolean(PropertyEnum.AUTOMATIC_UPDATE_INSTALLATION.toString()) || JOptionPane.showOptionDialog(window, getLang().get("updateFound"), "BackupR", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{getLang().get("yes"), getLang().get("no")}, null) == 0)) {
 									gui.getProgressBar().setIndeterminate(true);
 									updater.update();
 									gui.getProgressBar().setIndeterminate(false);
@@ -161,5 +162,9 @@ public class BackupR {
 
 	public static Properties getProperties() {
 		return properties;
+	}
+
+	public static Lang getLang() {
+		return lang;
 	}
 }

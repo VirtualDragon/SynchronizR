@@ -5,13 +5,17 @@ import java.util.ResourceBundle;
 
 public class Lang {
 
-	private static ResourceBundle lang = ResourceBundle.getBundle("lang");
+	private ResourceBundle lang;
 
-	public static String get(String arg, Object... args) {
+	public Lang(String resourceBundle) {
+		lang = ResourceBundle.getBundle(resourceBundle);
+	}
+
+	public String get(String arg, Object... args) {
 		return String.format(lang.getString(arg), args);
 	}
 
-	public static void changeLocale(Locale locale) {
+	public void changeLocale(Locale locale) {
 		lang = ResourceBundle.getBundle("lang", locale);
 	}
 }

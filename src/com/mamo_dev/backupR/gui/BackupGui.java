@@ -1,7 +1,6 @@
 package com.mamo_dev.backupR.gui;
 
 import com.mamo_dev.backupR.FileUtils;
-import com.mamo_dev.backupR.Lang;
 import com.mamo_dev.backupR.BackupR;
 import com.mamo_dev.backupR.PropertyEnum;
 import com.mamo_dev.backupR.TreeCopier;
@@ -119,9 +118,9 @@ public class BackupGui extends javax.swing.JPanel {
                 .addComponent(mirrorCopyCheckBox))
         );
 
-        copyOnlyNewerFilesCheckBox.setText(Lang.get("copyOnlyNewerFiles"));
-        overrideCheckBox.setText(Lang.get("overrideIfNecessary"));
-        mirrorCopyCheckBox.setText(Lang.get("mirrorCopy"));
+        copyOnlyNewerFilesCheckBox.setText(BackupR.getLang().get("copyOnlyNewerFiles"));
+        overrideCheckBox.setText(BackupR.getLang().get("overrideIfNecessary"));
+        mirrorCopyCheckBox.setText(BackupR.getLang().get("mirrorCopy"));
 
         advancedSectionPanel.setVisible(false);
 
@@ -190,10 +189,10 @@ public class BackupGui extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        backupFromLabel.setText(Lang.get("backupFrom"));
-        backupToLabel.setText(Lang.get("backupTo"));
-        advancedCheckBox.setText(Lang.get("advanced"));
-        backItUpButton.setText(Lang.get("backItUp"));
+        backupFromLabel.setText(BackupR.getLang().get("backupFrom"));
+        backupToLabel.setText(BackupR.getLang().get("backupTo"));
+        advancedCheckBox.setText(BackupR.getLang().get("advanced"));
+        backItUpButton.setText(BackupR.getLang().get("backItUp"));
     }// </editor-fold>//GEN-END:initComponents
 
     private void backupFromTextFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backupFromTextFieldMousePressed
@@ -230,60 +229,58 @@ public class BackupGui extends javax.swing.JPanel {
     }//GEN-LAST:event_backupToTextFieldMousePressed
 
     private void backItUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backItUpButtonActionPerformed
-		if (!backupFromTextField.getText().isEmpty() && !backupToTextField.getText().isEmpty()) {
-			final File from = new File(backupFromTextField.getText());
-			final File to = new File(backupToTextField.getText());
+		final File from = new File(backupFromTextField.getText());
+		final File to = new File(backupToTextField.getText());
 
-			if (!FileUtils.dirContainsFile(from, to) && !FileUtils.dirContainsFile(to, from)) {
-				new Thread(new Runnable() {
-					@Override
-					public void run() {
-						gui.setEverythingEnabled(false);
-						statusScrollPaneContainer.setEnabled(true);
-						statusTextArea.setEnabled(true);
-						BackupGui.this.statusTextArea.setText(null);
-						gui.getProgressBar().setIndeterminate(true);
-						ArrayList<TreeCopyOption> options = new ArrayList<>();
-						if (BackupGui.this.copyOnlyNewerFilesCheckBox.isSelected()) {
-							options.add(TreeCopyOption.COPY_ONLY_NEWER_FILES);
-						}
-						if (BackupGui.this.overrideCheckBox.isSelected()) {
-							options.add(TreeCopyOption.OVERRIDE_IF_NECESSARY);
-						}
-						if (BackupGui.this.mirrorCopyCheckBox.isSelected()) {
-							options.add(TreeCopyOption.MIRROR_PURGE);
-						}
-						TreeCopier treeCopier = new TreeCopier(from, to, from.toPath().getRoot().toFile(), options.toArray(new TreeCopyOption[options.size()]));
-						treeCopier.addTreeCopyEventListener(new TreeCopier.TreeCopyEventListener() {
-							@Override
-							public void onEvent(TreeCopyEvent event) {
-								if (event instanceof TreeCopier.TreeCopyLogEvent) {
-									TreeCopier.TreeCopyLogEvent event_ = (TreeCopier.TreeCopyLogEvent) event;
-									if (!event_.isLogAppended() && !BackupGui.this.statusTextArea.getText().isEmpty()) {
-										BackupGui.this.statusTextArea.append("\n");
-									}
-									BackupGui.this.statusTextArea.append(event_.getLog());
-								}
-								gui.getProgressBar().setValue((int) (100D * event.getFilesProcessed() / event.getFiles()));
-							}
-						});
-						gui.getProgressBar().setIndeterminate(false);
-						gui.getProgressBar().setValue(0);
-						gui.getProgressBar().setString(null);
-						treeCopier.copyTree();
-						gui.getProgressBar().setValue(100);
-						JOptionPane.showMessageDialog(BackupGui.this, Lang.get("done2"), null, JOptionPane.INFORMATION_MESSAGE);
-						gui.getProgressBar().setValue(0);
-						gui.getProgressBar().setString("");
-						gui.setEverythingEnabled(true);
+		if (!FileUtils.dirContainsFile(from, to) && !FileUtils.dirContainsFile(to, from)) {
+			new Thread(new Runnable() {
+				@Override
+				public void run() {
+					gui.setEverythingEnabled(false);
+					statusScrollPaneContainer.setEnabled(true);
+					statusTextArea.setEnabled(true);
+					BackupGui.this.statusTextArea.setText(null);
+					gui.getProgressBar().setIndeterminate(true);
+					ArrayList<TreeCopyOption> options = new ArrayList<>();
+					if (BackupGui.this.copyOnlyNewerFilesCheckBox.isSelected()) {
+						options.add(TreeCopyOption.COPY_ONLY_NEWER_FILES);
 					}
-				}).start();
-			} else {
-				if (!advancedCheckBox.isSelected()) {
-					JOptionPane.showMessageDialog(this, Lang.get("dirInceptionXErr", backupToTextField.getText()), "BackupR v. " + BackupR.VERSION, JOptionPane.WARNING_MESSAGE);
-				} else {
-					JOptionPane.showMessageDialog(this, Lang.get("dirInceptionXErr"), "BackupR v. " + BackupR.VERSION, JOptionPane.WARNING_MESSAGE);
+					if (BackupGui.this.overrideCheckBox.isSelected()) {
+						options.add(TreeCopyOption.OVERRIDE_IF_NECESSARY);
+					}
+					if (BackupGui.this.mirrorCopyCheckBox.isSelected()) {
+						options.add(TreeCopyOption.MIRROR_PURGE);
+					}
+					TreeCopier treeCopier = new TreeCopier(from, to, from.toPath().getRoot().toFile(), options.toArray(new TreeCopyOption[options.size()]));
+					treeCopier.addTreeCopyEventListener(new TreeCopier.TreeCopyEventListener() {
+						@Override
+						public void onEvent(TreeCopyEvent event) {
+							if (event instanceof TreeCopier.TreeCopyLogEvent) {
+								TreeCopier.TreeCopyLogEvent event_ = (TreeCopier.TreeCopyLogEvent) event;
+								if (!event_.isLogAppended() && !BackupGui.this.statusTextArea.getText().isEmpty()) {
+									BackupGui.this.statusTextArea.append("\n");
+								}
+								BackupGui.this.statusTextArea.append(event_.getLog());
+							}
+							gui.getProgressBar().setValue((int) (100D * event.getFilesProcessed() / event.getFiles()));
+						}
+					});
+					gui.getProgressBar().setIndeterminate(false);
+					gui.getProgressBar().setValue(0);
+					gui.getProgressBar().setString(null);
+					treeCopier.copyTree();
+					gui.getProgressBar().setValue(100);
+					JOptionPane.showOptionDialog(BackupGui.this, BackupR.getLang().get("done2"), "BackupR", JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[]{BackupR.getLang().get("ok2")}, null);
+					gui.getProgressBar().setValue(0);
+					gui.getProgressBar().setString("");
+					gui.setEverythingEnabled(true);
 				}
+			}).start();
+		} else {
+			if (!advancedCheckBox.isSelected()) {
+				JOptionPane.showMessageDialog(this, BackupR.getLang().get("dirInceptionXErr", backupToTextField.getText()), "BackupR", JOptionPane.WARNING_MESSAGE);
+			} else {
+				JOptionPane.showMessageDialog(this, BackupR.getLang().get("dirInceptionXErr"), "BackupR", JOptionPane.WARNING_MESSAGE);
 			}
 		}
     }//GEN-LAST:event_backItUpButtonActionPerformed

@@ -53,7 +53,7 @@
     </Component>
     <Container class="javax.swing.JTabbedPane" name="tabbedPanel">
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_LayoutCodePost" type="java.lang.String" value="tabbedPanel.addTab(Lang.get(&quot;backup&quot;), new BackupGui(this));&#xa;tabbedPanel.addTab(Lang.get(&quot;settings&quot;), new SettingsGui());"/>
+        <AuxValue name="JavaCodeGenerator_LayoutCodePost" type="java.lang.String" value="tabbedPanel.addTab(BackupR.getLang().get(&quot;backup&quot;), new BackupGui(this));&#xa;tabbedPanel.addTab(BackupR.getLang().get(&quot;settings&quot;), new SettingsGui());"/>
       </AuxValues>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
