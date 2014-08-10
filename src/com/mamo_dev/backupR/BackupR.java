@@ -21,8 +21,8 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 public class BackupR {
 
-	public static final String VERSION = "1.4";
-	public static final long releaseDate = 201408101343L;
+	public static final String VERSION = "1.4.1";
+	public static final long releaseDate = 201408101356L;
 
 	private static Properties properties;
 

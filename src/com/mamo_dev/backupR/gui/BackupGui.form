@@ -85,10 +85,11 @@
       </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="backupFromTextField">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
       <Events>
         <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="backupFromTextFieldMousePressed"/>
-        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="backupFromTextFieldKeyPressed"/>
-        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="backupFromTextFieldKeyTyped"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="backupToLabel">
@@ -100,10 +101,11 @@
       </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="backupToTextField">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
       <Events>
         <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="backupToTextFieldMousePressed"/>
-        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="backupToTextFieldKeyPressed"/>
-        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="backupToTextFieldKeyTyped"/>
       </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="advancedCheckBox">
@@ -205,10 +207,9 @@
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
         <Component class="javax.swing.JTextArea" name="statusTextArea">
-          <Events>
-            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="statusTextAreaKeyPressed"/>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="statusTextAreaKeyTyped"/>
-          </Events>
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="((DefaultCaret) statusTextArea.getCaret()).setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);"/>
           </AuxValues>

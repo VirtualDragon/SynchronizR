@@ -54,33 +54,19 @@ public class BackupGui extends javax.swing.JPanel {
 
         backupFromLabel.setText("Backup from");
 
+        backupFromTextField.setEditable(false);
         backupFromTextField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 backupFromTextFieldMousePressed(evt);
             }
         });
-        backupFromTextField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                backupFromTextFieldKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                backupFromTextFieldKeyTyped(evt);
-            }
-        });
 
         backupToLabel.setText("Backup to");
 
+        backupToTextField.setEditable(false);
         backupToTextField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 backupToTextFieldMousePressed(evt);
-            }
-        });
-        backupToTextField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                backupToTextFieldKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                backupToTextFieldKeyTyped(evt);
             }
         });
 
@@ -148,15 +134,8 @@ public class BackupGui extends javax.swing.JPanel {
 
         statusScrollPaneContainer.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
+        statusTextArea.setEditable(false);
         ((DefaultCaret) statusTextArea.getCaret()).setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
-        statusTextArea.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                statusTextAreaKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                statusTextAreaKeyTyped(evt);
-            }
-        });
         statusScrollPaneContainer.setViewportView(statusTextArea);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -227,14 +206,6 @@ public class BackupGui extends javax.swing.JPanel {
 		}
     }//GEN-LAST:event_backupFromTextFieldMousePressed
 
-    private void backupFromTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_backupFromTextFieldKeyPressed
-		evt.consume();
-    }//GEN-LAST:event_backupFromTextFieldKeyPressed
-
-    private void backupFromTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_backupFromTextFieldKeyTyped
-		evt.consume();
-    }//GEN-LAST:event_backupFromTextFieldKeyTyped
-
     private void advancedCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_advancedCheckBoxActionPerformed
 		advancedSectionPanel.setVisible(advancedCheckBox.isSelected());
 		try {
@@ -255,14 +226,6 @@ public class BackupGui extends javax.swing.JPanel {
 			prefUpdate();
 		}
     }//GEN-LAST:event_backupToTextFieldMousePressed
-
-    private void backupToTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_backupToTextFieldKeyPressed
-		evt.consume();
-    }//GEN-LAST:event_backupToTextFieldKeyPressed
-
-    private void backupToTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_backupToTextFieldKeyTyped
-		evt.consume();
-    }//GEN-LAST:event_backupToTextFieldKeyTyped
 
     private void backItUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backItUpButtonActionPerformed
 		if (!backupFromTextField.getText().isEmpty() && !backupToTextField.getText().isEmpty()) {
@@ -320,14 +283,6 @@ public class BackupGui extends javax.swing.JPanel {
 			}
 		}
     }//GEN-LAST:event_backItUpButtonActionPerformed
-
-    private void statusTextAreaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_statusTextAreaKeyPressed
-		evt.consume();
-    }//GEN-LAST:event_statusTextAreaKeyPressed
-
-    private void statusTextAreaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_statusTextAreaKeyTyped
-		evt.consume();
-    }//GEN-LAST:event_statusTextAreaKeyTyped
 
     private void copyOnlyNewerFilesCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyOnlyNewerFilesCheckBoxActionPerformed
 		try {
