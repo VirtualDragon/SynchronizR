@@ -166,7 +166,7 @@ public class TreeCopier {
 		} catch (IOException ex) {
 		}
 
-		log(Lang.get("DONE!"), false);
+		log(Lang.get("done"), false);
 	}
 
 	public long getFiles() {

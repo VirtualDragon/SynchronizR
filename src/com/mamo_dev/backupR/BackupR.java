@@ -20,8 +20,8 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 public class BackupR {
 
-	public static final String VERSION = "1.4.2";
-	public static final long releaseDate = 201408101643L;
+	public static final String VERSION = "1.4.3";
+	public static final long releaseDate = 201408101656L;
 
 	private static Properties properties;
 
@@ -66,8 +66,9 @@ public class BackupR {
 						properties.set(PropertyEnum.WINDOW_Y.toString(), (int) window.getLocationOnScreen().getY());
 					} catch (IOException ex) {
 					}
+				} else {
+					window.setLocation(properties.getInt(PropertyEnum.WINDOW_X.toString()), properties.getInt(PropertyEnum.WINDOW_Y.toString()));
 				}
-				window.setLocation(properties.getInt(PropertyEnum.WINDOW_X.toString()), properties.getInt(PropertyEnum.WINDOW_Y.toString()));
 				if (properties.getBoolean(PropertyEnum.WINDOW_MAXIMIZED.toString())) {
 					window.setExtendedState(Frame.MAXIMIZED_BOTH);
 				}
