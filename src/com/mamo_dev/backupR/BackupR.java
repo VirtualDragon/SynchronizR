@@ -20,8 +20,8 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 public class BackupR {
 
-	public static final String VERSION = "1.4.10";
-	public static final long releaseDate = 201408102209L;
+	public static final String VERSION = "1.4.11";
+	public static final long releaseDate = 201408102234L;
 
 	private static Settings settings;
 	private static final Lang lang = new Lang("lang");
@@ -72,6 +72,7 @@ public class BackupR {
 					gui.getProgressBar().setIndeterminate(false);
 					LicenseGui licenseGui = new LicenseGui(window, true);
 					licenseGui.setTitle("BackupR");
+					licenseGui.setMinimumSize(licenseGui.getMinimumSize());
 					licenseGui.setSize(640, 480);
 					licenseGui.setLocationRelativeTo(null);
 					licenseGui.setVisible(true);
