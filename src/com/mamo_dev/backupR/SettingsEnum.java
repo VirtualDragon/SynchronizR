@@ -4,7 +4,7 @@ import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.net.URISyntaxException;
 
-public enum PropertyEnum {
+public enum SettingsEnum {
 
 	ACCEPTED_LICENSE("acceptedLicense", false),
 	FROM("from", new File(System.getProperty("user.home")).getPath()),
@@ -23,7 +23,7 @@ public enum PropertyEnum {
 
 	private static File to() {
 		try {
-			return new File(new File(PropertyEnum.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile(), "Backup");
+			return new File(new File(SettingsEnum.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile(), "Backup");
 		} catch (URISyntaxException ex) {
 		}
 		return null;
@@ -32,7 +32,7 @@ public enum PropertyEnum {
 	private final String keyName;
 	private final Object defaultValue;
 
-	PropertyEnum(String keyName, Object defaultValue) {
+	SettingsEnum(String keyName, Object defaultValue) {
 		this.keyName = keyName;
 		this.defaultValue = defaultValue;
 	}

@@ -2,7 +2,7 @@ package com.mamo_dev.backupR.gui;
 
 import com.mamo_dev.backupR.FileUtils;
 import com.mamo_dev.backupR.BackupR;
-import com.mamo_dev.backupR.PropertyEnum;
+import com.mamo_dev.backupR.SettingsEnum;
 import com.mamo_dev.backupR.TreeCopier;
 import com.mamo_dev.backupR.TreeCopier.TreeCopyEvent;
 import com.mamo_dev.backupR.TreeCopier.TreeCopyOption;
@@ -25,13 +25,13 @@ public class BackupGui extends javax.swing.JPanel {
 	}
 
 	private void prefUpdate() {
-		backupFromTextField.setText(BackupR.getSettings().getString(PropertyEnum.FROM.toString()));
-		backupToTextField.setText(BackupR.getSettings().getString(PropertyEnum.TO.toString()));
-		advancedCheckBox.setSelected(BackupR.getSettings().getBoolean(PropertyEnum.ADVANCED_ENABLED.toString()));
+		backupFromTextField.setText(BackupR.getSettings().getString(SettingsEnum.FROM.toString()));
+		backupToTextField.setText(BackupR.getSettings().getString(SettingsEnum.TO.toString()));
+		advancedCheckBox.setSelected(BackupR.getSettings().getBoolean(SettingsEnum.ADVANCED_ENABLED.toString()));
 		advancedSectionPanel.setVisible(advancedCheckBox.isSelected());
-		copyOnlyNewerFilesCheckBox.setSelected(BackupR.getSettings().getBoolean(PropertyEnum.COPY_ONLY_NEWER_FILES.toString()));
-		overrideCheckBox.setSelected(BackupR.getSettings().getBoolean(PropertyEnum.OVERRIDE_IF_NECESSARY.toString()));
-		mirrorCopyCheckBox.setSelected(BackupR.getSettings().getBoolean(PropertyEnum.MIRROR_PURGE.toString()));
+		copyOnlyNewerFilesCheckBox.setSelected(BackupR.getSettings().getBoolean(SettingsEnum.COPY_ONLY_NEWER_FILES.toString()));
+		overrideCheckBox.setSelected(BackupR.getSettings().getBoolean(SettingsEnum.OVERRIDE_IF_NECESSARY.toString()));
+		mirrorCopyCheckBox.setSelected(BackupR.getSettings().getBoolean(SettingsEnum.MIRROR_PURGE.toString()));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -200,7 +200,7 @@ public class BackupGui extends javax.swing.JPanel {
 		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
 			try {
-				BackupR.getSettings().set(PropertyEnum.FROM.toString(), fileChooser.getSelectedFile().getPath());
+				BackupR.getSettings().set(SettingsEnum.FROM.toString(), fileChooser.getSelectedFile().getPath());
 			} catch (IOException ex) {
 			}
 			prefUpdate();
@@ -210,7 +210,7 @@ public class BackupGui extends javax.swing.JPanel {
     private void advancedCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_advancedCheckBoxActionPerformed
 		advancedSectionPanel.setVisible(advancedCheckBox.isSelected());
 		try {
-			BackupR.getSettings().set(PropertyEnum.ADVANCED_ENABLED.toString(), advancedCheckBox.isSelected());
+			BackupR.getSettings().set(SettingsEnum.ADVANCED_ENABLED.toString(), advancedCheckBox.isSelected());
 		} catch (IOException ex) {
 		}
 		prefUpdate();
@@ -221,7 +221,7 @@ public class BackupGui extends javax.swing.JPanel {
 		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
 			try {
-				BackupR.getSettings().set(PropertyEnum.TO.toString(), fileChooser.getSelectedFile().getPath());
+				BackupR.getSettings().set(SettingsEnum.TO.toString(), fileChooser.getSelectedFile().getPath());
 			} catch (IOException ex) {
 			}
 			prefUpdate();
@@ -283,21 +283,21 @@ public class BackupGui extends javax.swing.JPanel {
 
     private void copyOnlyNewerFilesCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyOnlyNewerFilesCheckBoxActionPerformed
 		try {
-			BackupR.getSettings().set(PropertyEnum.COPY_ONLY_NEWER_FILES.toString(), copyOnlyNewerFilesCheckBox.isSelected());
+			BackupR.getSettings().set(SettingsEnum.COPY_ONLY_NEWER_FILES.toString(), copyOnlyNewerFilesCheckBox.isSelected());
 		} catch (IOException ex) {
 		}
     }//GEN-LAST:event_copyOnlyNewerFilesCheckBoxActionPerformed
 
     private void overrideCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_overrideCheckBoxActionPerformed
 		try {
-			BackupR.getSettings().set(PropertyEnum.OVERRIDE_IF_NECESSARY.toString(), overrideCheckBox.isSelected());
+			BackupR.getSettings().set(SettingsEnum.OVERRIDE_IF_NECESSARY.toString(), overrideCheckBox.isSelected());
 		} catch (IOException ex) {
 		}
     }//GEN-LAST:event_overrideCheckBoxActionPerformed
 
     private void mirrorCopyCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mirrorCopyCheckBoxActionPerformed
 		try {
-			BackupR.getSettings().set(PropertyEnum.MIRROR_PURGE.toString(), mirrorCopyCheckBox.isSelected());
+			BackupR.getSettings().set(SettingsEnum.MIRROR_PURGE.toString(), mirrorCopyCheckBox.isSelected());
 		} catch (IOException ex) {
 		}
     }//GEN-LAST:event_mirrorCopyCheckBoxActionPerformed

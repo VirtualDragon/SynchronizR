@@ -6,7 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Map;
 
-public class Properties {
+public class Settings {
 
 	private final java.util.Properties properties = new java.util.Properties();
 	private final File propertiesFile;
@@ -15,13 +15,12 @@ public class Properties {
 
 	private Map<String, Object> defaultValues;
 
-	public Properties(File propertiesFile) throws IOException {
+	public Settings(File propertiesFile) throws IOException {
 		this.propertiesFile = propertiesFile;
-		if (!this.propertiesFile.exists()) {
-			this.propertiesFile.createNewFile();
-		}
-		try (FileInputStream in = new FileInputStream(propertiesFile)) {
-			properties.load(in);
+		if (propertiesFile.exists()) {
+			try (FileInputStream in = new FileInputStream(propertiesFile)) {
+				properties.load(in);
+			}
 		}
 	}
 
