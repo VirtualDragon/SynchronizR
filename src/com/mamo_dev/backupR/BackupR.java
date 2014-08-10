@@ -13,7 +13,6 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Locale;
-import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -21,8 +20,8 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 public class BackupR {
 
-	public static final String VERSION = "1.4.1";
-	public static final long releaseDate = 201408101356L;
+	public static final String VERSION = "1.4.2";
+	public static final long releaseDate = 201408101643L;
 
 	private static Properties properties;
 
@@ -51,10 +50,6 @@ public class BackupR {
 				}
 
 				final JFrame window = new JFrame("BackupR v. " + VERSION);
-				try {
-					window.setIconImage(ImageIO.read(BackupR.class.getResource("icon.png")));
-				} catch (IOException ex) {
-				}
 				window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				final Gui gui = new Gui();
 				gui.setEverythingEnabled(false);

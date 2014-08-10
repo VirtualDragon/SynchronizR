@@ -199,7 +199,7 @@ public class TreeCopier {
 
 	public enum TreeCopyOption {
 
-		COPY_ONLY_NEWER_FILES, OVERRIDE_IF_NECESSARY, MIRROR_PURGE;
+		COMPRESS_FILES, COPY_ONLY_NEWER_FILES, OVERRIDE_IF_NECESSARY, MIRROR_PURGE;
 	}
 
 	public interface TreeCopyEventListener {

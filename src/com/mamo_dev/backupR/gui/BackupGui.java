@@ -45,6 +45,7 @@ public class BackupGui extends javax.swing.JPanel {
         backupToTextField = new javax.swing.JTextField();
         advancedCheckBox = new javax.swing.JCheckBox();
         advancedSectionPanel = new javax.swing.JPanel();
+        compressBackupCheckBox = new javax.swing.JCheckBox();
         copyOnlyNewerFilesCheckBox = new javax.swing.JCheckBox();
         overrideCheckBox = new javax.swing.JCheckBox();
         mirrorCopyCheckBox = new javax.swing.JCheckBox();
@@ -77,6 +78,13 @@ public class BackupGui extends javax.swing.JPanel {
             }
         });
 
+        compressBackupCheckBox.setText("Compress backup");
+        compressBackupCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                compressBackupCheckBoxActionPerformed(evt);
+            }
+        });
+
         copyOnlyNewerFilesCheckBox.setText("Copy only newer files");
         copyOnlyNewerFilesCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,12 +114,15 @@ public class BackupGui extends javax.swing.JPanel {
                 .addGroup(advancedSectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(copyOnlyNewerFilesCheckBox)
                     .addComponent(overrideCheckBox)
-                    .addComponent(mirrorCopyCheckBox))
+                    .addComponent(mirrorCopyCheckBox)
+                    .addComponent(compressBackupCheckBox))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         advancedSectionPanelLayout.setVerticalGroup(
             advancedSectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(advancedSectionPanelLayout.createSequentialGroup()
+                .addComponent(compressBackupCheckBox)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(copyOnlyNewerFilesCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(overrideCheckBox)
@@ -143,28 +154,30 @@ public class BackupGui extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(statusScrollPaneContainer)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(backupFromLabel)
-                            .addComponent(backupToLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(backupToTextField)
-                            .addComponent(backupFromTextField)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(advancedSectionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(advancedCheckBox)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(backItUpButton)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(statusScrollPaneContainer)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(backupFromLabel)
+                                    .addComponent(backupToLabel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(backupToTextField)
+                                    .addComponent(backupFromTextField)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(advancedCheckBox)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(advancedSectionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -305,6 +318,10 @@ public class BackupGui extends javax.swing.JPanel {
 		}
     }//GEN-LAST:event_mirrorCopyCheckBoxActionPerformed
 
+    private void compressBackupCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_compressBackupCheckBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_compressBackupCheckBoxActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox advancedCheckBox;
     private javax.swing.JPanel advancedSectionPanel;
@@ -313,6 +330,7 @@ public class BackupGui extends javax.swing.JPanel {
     private javax.swing.JTextField backupFromTextField;
     private javax.swing.JLabel backupToLabel;
     private javax.swing.JTextField backupToTextField;
+    private javax.swing.JCheckBox compressBackupCheckBox;
     private javax.swing.JCheckBox copyOnlyNewerFilesCheckBox;
     private javax.swing.JCheckBox mirrorCopyCheckBox;
     private javax.swing.JCheckBox overrideCheckBox;
