@@ -239,6 +239,8 @@ public class BackupGui extends javax.swing.JPanel {
 					@Override
 					public void run() {
 						gui.setEverythingEnabled(false);
+						statusScrollPaneContainer.setEnabled(true);
+						statusTextArea.setEnabled(true);
 						BackupGui.this.statusTextArea.setText(null);
 						gui.getProgressBar().setIndeterminate(true);
 						ArrayList<TreeCopyOption> options = new ArrayList<>();
