@@ -33,9 +33,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="licenseScrollPane" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="acceptButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="denyButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="acceptButton" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="licenseLabel" min="-2" max="-2" attributes="0"/>
@@ -57,8 +57,8 @@
               <Component id="licenseScrollPane" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="acceptButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="denyButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="acceptButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -95,22 +95,22 @@
     </Container>
     <Component class="javax.swing.JButton" name="denyButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Accept"/>
+        <Property name="text" type="java.lang.String" value="Deny"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="denyButtonActionPerformed"/>
       </Events>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="getRootPane().setDefaultButton(denyButton);"/>
-      </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="acceptButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Deny"/>
+        <Property name="text" type="java.lang.String" value="Accept"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="acceptButtonActionPerformed"/>
       </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="getRootPane().setDefaultButton(acceptButton);"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

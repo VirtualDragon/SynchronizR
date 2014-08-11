@@ -23,6 +23,7 @@ public class TreeCopier {
 	private ArrayList<TreeCopyEventListener> listeners = new ArrayList<>();
 
 	private long files, directories, filesProcessed, directoriesProcessed;
+	private boolean isCancelled = false;
 
 	public TreeCopier(File from, File to, File relative, TreeCopyOption... options) {
 		this.from = from.toPath();
@@ -77,6 +78,9 @@ public class TreeCopier {
 			Files.walkFileTree(from, new FileVisitor<Path>() {
 				@Override
 				public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) {
+					if (isCancelled) {
+						return FileVisitResult.TERMINATE;
+					}
 					File currentTo = new File(to.toFile(), relative.relativize(dir).toString());
 					if (!currentTo.exists() || options.contains(TreeCopyOption.OVERRIDE_IF_NECESSARY)) {
 						boolean log = !currentTo.exists() || !currentTo.isDirectory();
@@ -120,6 +124,9 @@ public class TreeCopier {
 
 				@Override
 				public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
+					if (isCancelled) {
+						return FileVisitResult.TERMINATE;
+					}
 					File currentTo = new File(to.toFile(), relative.relativize(file).toString());
 					boolean alreadyExists = currentTo.exists();
 					if (!alreadyExists) {
@@ -166,7 +173,11 @@ public class TreeCopier {
 		} catch (IOException ex) {
 		}
 
-		log(BackupR.getLang().get("done"), false);
+		if (!isCancelled) {
+			log(BackupR.getLang().get("done"), false);
+		} else {
+			log(BackupR.getLang().get("backupCancelled"), false);
+		}
 	}
 
 	public long getFiles() {
@@ -195,6 +206,10 @@ public class TreeCopier {
 		for (TreeCopyEventListener listener : listeners) {
 			listener.onEvent(new TreeCopyLogEvent(this, string, append));
 		}
+	}
+
+	public void cancel() {
+		isCancelled = true;
 	}
 
 	public enum TreeCopyOption {

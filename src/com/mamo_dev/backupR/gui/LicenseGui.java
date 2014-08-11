@@ -61,14 +61,14 @@ public class LicenseGui extends javax.swing.JDialog {
             licenseTextPane.setPage(LicenseGui.class.getResource("/license.html"));
         } catch (IOException e) {}
 
-        denyButton.setText("Accept");
+        denyButton.setText("Deny");
         denyButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 denyButtonActionPerformed(evt);
             }
         });
 
-        acceptButton.setText("Deny");
+        acceptButton.setText("Accept");
         acceptButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 acceptButtonActionPerformed(evt);
@@ -88,9 +88,9 @@ public class LicenseGui extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(licenseScrollPane)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(acceptButton)
+                        .addComponent(denyButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(denyButton))
+                        .addComponent(acceptButton))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(licenseLabel)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -107,23 +107,23 @@ public class LicenseGui extends javax.swing.JDialog {
                 .addComponent(licenseScrollPane)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(acceptButton)
-                    .addComponent(denyButton))
+                    .addComponent(denyButton)
+                    .addComponent(acceptButton))
                 .addContainerGap())
         );
 
-        getRootPane().setDefaultButton(denyButton);
+        getRootPane().setDefaultButton(acceptButton);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void denyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_denyButtonActionPerformed
-		doClose(RET_OK);
-    }//GEN-LAST:event_denyButtonActionPerformed
-
     private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptButtonActionPerformed
-		doClose(RET_CANCEL);
+		doClose(RET_OK);
     }//GEN-LAST:event_acceptButtonActionPerformed
+
+    private void denyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_denyButtonActionPerformed
+		doClose(RET_CANCEL);
+    }//GEN-LAST:event_denyButtonActionPerformed
 
     private void closeDialog(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_closeDialog
 		doClose(RET_CANCEL);

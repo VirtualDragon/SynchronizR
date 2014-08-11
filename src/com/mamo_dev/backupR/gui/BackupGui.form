@@ -18,7 +18,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              <Component id="backItUpButton" min="-2" max="-2" attributes="0"/>
+              <Component id="backupButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
@@ -71,7 +71,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="advancedSectionPanel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="backItUpButton" min="-2" max="-2" attributes="0"/>
+              <Component id="backupButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="statusScrollPaneContainer" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -189,15 +189,15 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="backItUpButton">
+    <Component class="javax.swing.JButton" name="backupButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Back it up!"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backItUpButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backupButtonActionPerformed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="backItUpButton.setText(BackupR.getLang().get(&quot;backItUp&quot;));"/>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="backupButton.setText(BackupR.getLang().get(&quot;backItUp&quot;));"/>
       </AuxValues>
     </Component>
     <Container class="javax.swing.JScrollPane" name="statusScrollPaneContainer">
