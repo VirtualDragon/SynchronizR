@@ -122,8 +122,11 @@ public class BackupGui extends javax.swing.JPanel {
         );
 
         copyOnlyNewerFilesCheckBox.setText(BackupR.getLang().get("copyOnlyNewerFiles"));
+        copyOnlyNewerFilesCheckBox.setToolTipText(BackupR.getLang().get("copyOnlyNewerFilesTooltip"));
         overrideCheckBox.setText(BackupR.getLang().get("overrideIfNecessary"));
+        overrideCheckBox.setToolTipText(BackupR.getLang().get("overrideIfNecessaryTooltip"));
         mirrorCopyCheckBox.setText(BackupR.getLang().get("mirrorCopy"));
+        mirrorCopyCheckBox.setToolTipText(BackupR.getLang().get("mirrorCopyTooltip"));
 
         advancedSectionPanel.setVisible(false);
 
@@ -193,7 +196,11 @@ public class BackupGui extends javax.swing.JPanel {
         );
 
         backupFromLabel.setText(BackupR.getLang().get("backupFrom"));
+        backupFromLabel.setToolTipText(BackupR.getLang().get("backupFromTooltip"));
+        backupFromTextField.setToolTipText(BackupR.getLang().get("backupFromTooltip"));
         backupToLabel.setText(BackupR.getLang().get("backupTo"));
+        backupToLabel.setToolTipText(BackupR.getLang().get("backupToTooltip"));
+        backupToTextField.setToolTipText(BackupR.getLang().get("backupToTooltip"));
         advancedCheckBox.setText(BackupR.getLang().get("advanced"));
         backupButton.setText(BackupR.getLang().get("backItUp"));
     }// </editor-fold>//GEN-END:initComponents

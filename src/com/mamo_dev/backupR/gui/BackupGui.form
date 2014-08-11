@@ -85,7 +85,7 @@
         <Property name="text" type="java.lang.String" value="Backup from"/>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="backupFromLabel.setText(BackupR.getLang().get(&quot;backupFrom&quot;));"/>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="backupFromLabel.setText(BackupR.getLang().get(&quot;backupFrom&quot;));&#xa;backupFromLabel.setToolTipText(BackupR.getLang().get(&quot;backupFromTooltip&quot;));"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="backupFromTextField">
@@ -95,13 +95,16 @@
       <Events>
         <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="backupFromTextFieldMousePressed"/>
       </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="backupFromTextField.setToolTipText(BackupR.getLang().get(&quot;backupFromTooltip&quot;));"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="backupToLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Backup to"/>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="backupToLabel.setText(BackupR.getLang().get(&quot;backupTo&quot;));"/>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="backupToLabel.setText(BackupR.getLang().get(&quot;backupTo&quot;));&#xa;backupToLabel.setToolTipText(BackupR.getLang().get(&quot;backupToTooltip&quot;));"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="backupToTextField">
@@ -111,6 +114,9 @@
       <Events>
         <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="backupToTextFieldMousePressed"/>
       </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="backupToTextField.setToolTipText(BackupR.getLang().get(&quot;backupToTooltip&quot;));"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JCheckBox" name="advancedCheckBox">
       <Properties>
@@ -162,7 +168,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="copyOnlyNewerFilesCheckBoxActionPerformed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="copyOnlyNewerFilesCheckBox.setText(BackupR.getLang().get(&quot;copyOnlyNewerFiles&quot;));"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="copyOnlyNewerFilesCheckBox.setText(BackupR.getLang().get(&quot;copyOnlyNewerFiles&quot;));&#xa;copyOnlyNewerFilesCheckBox.setToolTipText(BackupR.getLang().get(&quot;copyOnlyNewerFilesTooltip&quot;));"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JCheckBox" name="overrideCheckBox">
@@ -173,7 +179,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="overrideCheckBoxActionPerformed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="overrideCheckBox.setText(BackupR.getLang().get(&quot;overrideIfNecessary&quot;));"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="overrideCheckBox.setText(BackupR.getLang().get(&quot;overrideIfNecessary&quot;));&#xa;overrideCheckBox.setToolTipText(BackupR.getLang().get(&quot;overrideIfNecessaryTooltip&quot;));"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JCheckBox" name="mirrorCopyCheckBox">
@@ -184,7 +190,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mirrorCopyCheckBoxActionPerformed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="mirrorCopyCheckBox.setText(BackupR.getLang().get(&quot;mirrorCopy&quot;));"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="mirrorCopyCheckBox.setText(BackupR.getLang().get(&quot;mirrorCopy&quot;));&#xa;mirrorCopyCheckBox.setToolTipText(BackupR.getLang().get(&quot;mirrorCopyTooltip&quot;));"/>
           </AuxValues>
         </Component>
       </SubComponents>
