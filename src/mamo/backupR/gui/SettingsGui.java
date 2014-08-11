@@ -1,7 +1,7 @@
-package com.mamo_dev.backupR.gui;
+package mamo.backupR.gui;
 
-import com.mamo_dev.backupR.BackupR;
-import com.mamo_dev.backupR.SettingsEnum;
+import mamo.backupR.BackupR;
+import mamo.backupR.SettingsEnum;
 import java.io.IOException;
 
 public class SettingsGui extends javax.swing.JPanel {

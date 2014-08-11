@@ -1,4 +1,4 @@
-package com.mamo_dev.backupR;
+package mamo.backupR;
 
 import java.awt.GraphicsEnvironment;
 import java.io.File;

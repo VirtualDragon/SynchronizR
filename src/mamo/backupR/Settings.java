@@ -1,4 +1,4 @@
-package com.mamo_dev.backupR;
+package mamo.backupR;
 
 import java.io.File;
 import java.io.FileInputStream;

@@ -1,4 +1,4 @@
-package com.mamo_dev.backupR.gui;
+package mamo.backupR.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;

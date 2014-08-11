@@ -1,11 +1,11 @@
-package com.mamo_dev.backupR.gui;
+package mamo.backupR.gui;
 
-import com.mamo_dev.backupR.FileUtils;
-import com.mamo_dev.backupR.BackupR;
-import com.mamo_dev.backupR.SettingsEnum;
-import com.mamo_dev.backupR.TreeCopier;
-import com.mamo_dev.backupR.TreeCopier.TreeCopyEvent;
-import com.mamo_dev.backupR.TreeCopier.TreeCopyOption;
+import mamo.backupR.FileUtils;
+import mamo.backupR.BackupR;
+import mamo.backupR.SettingsEnum;
+import mamo.backupR.TreeCopier;
+import mamo.backupR.TreeCopier.TreeCopyEvent;
+import mamo.backupR.TreeCopier.TreeCopyOption;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,6 +35,10 @@ public class BackupGui extends javax.swing.JPanel {
 		copyOnlyNewerFilesCheckBox.setSelected(BackupR.getSettings().getBoolean(SettingsEnum.COPY_ONLY_NEWER_FILES.toString()));
 		overrideCheckBox.setSelected(BackupR.getSettings().getBoolean(SettingsEnum.OVERRIDE_IF_NECESSARY.toString()));
 		mirrorCopyCheckBox.setSelected(BackupR.getSettings().getBoolean(SettingsEnum.MIRROR_PURGE.toString()));
+	}
+	
+	public boolean isBackingUp() {
+		return backingUp;
 	}
 
 	@SuppressWarnings("unchecked")

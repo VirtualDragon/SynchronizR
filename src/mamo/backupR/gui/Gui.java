@@ -1,12 +1,14 @@
-package com.mamo_dev.backupR.gui;
+package mamo.backupR.gui;
 
-import com.mamo_dev.backupR.BackupR;
+import mamo.backupR.BackupR;
 import java.awt.Component;
 import java.awt.Container;
 import javax.swing.JProgressBar;
 
 public class Gui extends javax.swing.JPanel {
-
+	private final BackupGui backupGui = new BackupGui(this);
+	private final SettingsGui settingsGui = new SettingsGui();
+	
 	public Gui() {
 		initComponents();
 	}
@@ -27,6 +29,14 @@ public class Gui extends javax.swing.JPanel {
 	public JProgressBar getProgressBar() {
 		return progressBar;
 	}
+	
+	public BackupGui getBackupGui() {
+		return backupGui;
+	}
+	
+	public SettingsGui getSettingsGui() {
+		return settingsGui;
+	}
 
 	@SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -38,8 +48,8 @@ public class Gui extends javax.swing.JPanel {
 
         titleLabel.setText("<html><body><p style=\"font-size: 1.5em;\">BackupR</p></body></html>");
 
-        tabbedPanel.addTab(BackupR.getLang().get("backup"), new BackupGui(this));
-        tabbedPanel.addTab(BackupR.getLang().get("settings"), new SettingsGui());
+        tabbedPanel.addTab(BackupR.getLang().get("backup"), backupGui);
+        tabbedPanel.addTab(BackupR.getLang().get("settings"), settingsGui);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

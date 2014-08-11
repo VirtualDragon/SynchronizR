@@ -1,11 +1,13 @@
-package com.mamo_dev.backupR;
+package mamo.backupR;
 
-import com.mamo_dev.backupR.gui.Gui;
-import com.mamo_dev.backupR.gui.LicenseGui;
+import mamo.backupR.gui.Gui;
+import mamo.backupR.gui.LicenseGui;
 import java.awt.EventQueue;
 import java.awt.Frame;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -20,13 +22,13 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 public class BackupR {
-
-	public static final String VERSION = "1.6";
-	public static final long releaseDate = 201408111904L;
-
+	
+	public static final String VERSION = "1.7";
+	public static final long releaseDate = 201408112021L;
+	
 	private static Settings settings;
 	private static final Lang lang = new Lang("lang");
-
+	
 	public static void main(String[] args) throws IOException, URISyntaxException {
 		for (String arg : args) {
 			if (arg.toLowerCase().startsWith("locale:")) {
@@ -35,13 +37,13 @@ public class BackupR {
 		}
 		
 		settings = new Settings(new File(new File(BackupR.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile(), "settings.properties"));
-
+		
 		HashMap<String, Object> defaultValues = new HashMap<>();
 		for (SettingsEnum preference : SettingsEnum.values()) {
 			defaultValues.put(preference.toString(), preference.defaultValue());
 		}
 		getSettings().setDefaultValues(defaultValues);
-
+		
 		EventQueue.invokeLater(new Runnable() {
 			@Override
 			public void run() {
@@ -50,9 +52,9 @@ public class BackupR {
 				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
 				}
 				ToolTipManager.sharedInstance().setDismissDelay(Integer.MAX_VALUE);
-
+				
 				final JFrame window = new JFrame("BackupR v. " + VERSION);
-				window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 				final Gui gui = new Gui();
 				gui.setEverythingEnabled(false);
 				gui.getProgressBar().setIndeterminate(true);
@@ -69,7 +71,7 @@ public class BackupR {
 				if (getSettings().getBoolean(SettingsEnum.WINDOW_MAXIMIZED.toString())) {
 					window.setExtendedState(Frame.MAXIMIZED_BOTH);
 				}
-
+				
 				if (!getSettings().getBoolean("acceptedLicense")) {
 					gui.getProgressBar().setIndeterminate(false);
 					LicenseGui licenseGui = new LicenseGui(window, true);
@@ -91,9 +93,10 @@ public class BackupR {
 				
 				try {
 					getSettings().save();
-				} catch (IOException ex) {}
+				} catch (IOException ex) {
+				}
 				getSettings().setAutoSaveEnabled(true);
-
+				
 				window.addComponentListener(new ComponentListener() {
 					@Override
 					public void componentResized(ComponentEvent e) {
@@ -108,7 +111,7 @@ public class BackupR {
 						} catch (IOException ex) {
 						}
 					}
-
+					
 					@Override
 					public void componentMoved(ComponentEvent e) {
 						try {
@@ -122,16 +125,52 @@ public class BackupR {
 						} catch (IOException ex) {
 						}
 					}
-
+					
 					@Override
 					public void componentShown(ComponentEvent e) {
 					}
-
+					
 					@Override
 					public void componentHidden(ComponentEvent e) {
 					}
 				});
-
+				
+				window.addWindowListener(new WindowListener() {
+					
+					@Override
+					public void windowOpened(WindowEvent e) {
+					}
+					
+					@Override
+					public void windowClosing(WindowEvent e) {
+						if (!gui.getBackupGui().isBackingUp()) {
+							window.dispose();
+						} else {
+							JOptionPane.showOptionDialog(window, getLang().get("cantCloseWhileBackingUp"), "BackupR", JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE, null, new String[] {getLang().get("ok2")}, null);
+						}
+					}
+					
+					@Override
+					public void windowClosed(WindowEvent e) {
+					}
+					
+					@Override
+					public void windowIconified(WindowEvent e) {
+					}
+					
+					@Override
+					public void windowDeiconified(WindowEvent e) {
+					}
+					
+					@Override
+					public void windowActivated(WindowEvent e) {
+					}
+					
+					@Override
+					public void windowDeactivated(WindowEvent e) {
+					}
+				});
+				
 				if (getSettings().getBoolean(SettingsEnum.AUTOMATIC_UPDATE_CHECK.toString())) {
 					new Thread(new Runnable() {
 						@Override
@@ -166,11 +205,11 @@ public class BackupR {
 			}
 		});
 	}
-
+	
 	public static Settings getSettings() {
 		return settings;
 	}
-
+	
 	public static Lang getLang() {
 		return lang;
 	}

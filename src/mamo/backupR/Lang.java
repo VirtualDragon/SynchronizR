@@ -1,4 +1,4 @@
-package com.mamo_dev.backupR;
+package mamo.backupR;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
