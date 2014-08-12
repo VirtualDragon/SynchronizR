@@ -210,6 +210,10 @@ public class BackupGui extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void backupFromTextFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backupFromTextFieldMousePressed
+		if (!backupFromTextField.isEnabled()) {
+			return;
+		}
+		
 		JFileChooser fileChooser = new JFileChooser(backupFromTextField.getText());
 		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
@@ -231,6 +235,10 @@ public class BackupGui extends javax.swing.JPanel {
     }//GEN-LAST:event_advancedCheckBoxActionPerformed
 
     private void backupToTextFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backupToTextFieldMousePressed
+		if (!backupToTextField.isEnabled()) {
+			return;
+		}
+		
 		JFileChooser fileChooser = new JFileChooser(backupToTextField.getText());
 		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
@@ -244,66 +252,85 @@ public class BackupGui extends javax.swing.JPanel {
 
     private void backupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backupButtonActionPerformed
 		if (!backingUp && !cancellingBackup) {
-			final File from = new File(backupFromTextField.getText());
-			final File to = new File(backupToTextField.getText());
-
-			if (!FileUtils.dirContainsFile(from, to) && !FileUtils.dirContainsFile(to, from)) {
-				new Thread(new Runnable() {
-					@Override
-					public void run() {
-						backingUp = true;
-						gui.setEverythingEnabled(false);
-						backupButton.setText(BackupR.getLang().get("cancel"));
-						backupButton.setEnabled(true);
-						statusScrollPaneContainer.setEnabled(true);
-						statusTextArea.setEnabled(true);
-						BackupGui.this.statusTextArea.setText(null);
-						gui.getProgressBar().setIndeterminate(true);
-						ArrayList<TreeCopyOption> options = new ArrayList<>();
-						if (BackupGui.this.copyOnlyNewerFilesCheckBox.isSelected()) {
-							options.add(TreeCopyOption.COPY_ONLY_NEWER_FILES);
-						}
-						if (BackupGui.this.overrideCheckBox.isSelected()) {
-							options.add(TreeCopyOption.OVERRIDE_IF_NECESSARY);
-						}
-						if (BackupGui.this.mirrorCopyCheckBox.isSelected()) {
-							options.add(TreeCopyOption.MIRROR_PURGE);
-						}
-						backup = new TreeCopier(from, to, from.toPath().getRoot().toFile(), options.toArray(new TreeCopyOption[options.size()]));
-						backup.addTreeCopyEventListener(new TreeCopier.TreeCopyEventListener() {
-							@Override
-							public void onEvent(TreeCopyEvent event) {
-								if (event instanceof TreeCopier.TreeCopyLogEvent) {
-									TreeCopier.TreeCopyLogEvent event_ = (TreeCopier.TreeCopyLogEvent) event;
-									if (!event_.isLogAppended() && !BackupGui.this.statusTextArea.getText().isEmpty()) {
-										BackupGui.this.statusTextArea.append("\n");
-									}
-									BackupGui.this.statusTextArea.append(event_.getLog());
-								}
-								gui.getProgressBar().setValue((int) (100D * event.getFilesProcessed() / event.getFiles()));
-							}
-						});
-						gui.getProgressBar().setIndeterminate(false);
-						gui.getProgressBar().setValue(0);
-						gui.getProgressBar().setString(null);
-						backup.copyTree();
-						gui.getProgressBar().setIndeterminate(false);
-						gui.getProgressBar().setString(null);
-						gui.getProgressBar().setValue(100);
-						if (!cancellingBackup) {
-							JOptionPane.showOptionDialog(BackupGui.this, BackupR.getLang().get("done2"), "BackupR", JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[]{BackupR.getLang().get("ok2")}, null);
-						}
-						gui.getProgressBar().setValue(0);
-						gui.getProgressBar().setString("");
-						backupButton.setText(BackupR.getLang().get("backItUp"));
-						gui.setEverythingEnabled(true);
-						backingUp = false;
-						cancellingBackup = false;
-					}
-				}).start();
-			} else {
-				JOptionPane.showOptionDialog(this, BackupR.getLang().get("dirInceptionErr"), "BackupR", JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE, null, new String[]{BackupR.getLang().get("ok2")}, null);
+			if (backupFromTextField.getText().isEmpty() || backupToTextField.getText().isEmpty()) {
+				JOptionPane.showOptionDialog(this, BackupR.getLang().get("fillOutAllTheFields"), "BackupR", JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE, null, new String[]{BackupR.getLang().get("ok2")}, null);
+				return;
 			}
+			
+			final File from = new File(backupFromTextField.getText());
+
+			if (!from.exists()) {
+				JOptionPane.showOptionDialog(this, BackupR.getLang().get("inputFolderDoesntExist"), "BackupR", JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[]{BackupR.getLang().get("ok2")}, null);
+				return;
+			} else if (!from.isDirectory()) {
+				JOptionPane.showOptionDialog(this, BackupR.getLang().get("inputFolderIsntDir"), "BackupR", JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[]{BackupR.getLang().get("ok2")}, null);
+				return;
+			}
+
+			final File to = new File(backupToTextField.getText());
+			
+			if (to.exists() && to.isFile()) {
+				JOptionPane.showOptionDialog(this, BackupR.getLang().get("outputFolderIsFile"), "BackupR", JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[]{BackupR.getLang().get("ok2")}, null);
+				return;
+			}
+			if (FileUtils.dirContainsFile(from, to) || FileUtils.dirContainsFile(to, from)) {
+				JOptionPane.showOptionDialog(this, BackupR.getLang().get("dirInceptionErr"), "BackupR", JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[]{BackupR.getLang().get("ok2")}, null);
+				return;
+			}
+
+			new Thread(new Runnable() {
+				@Override
+				public void run() {
+					backingUp = true;
+					gui.setEverythingEnabled(false);
+					backupButton.setText(BackupR.getLang().get("cancel"));
+					backupButton.setEnabled(true);
+					statusScrollPaneContainer.setEnabled(true);
+					statusTextArea.setEnabled(true);
+					BackupGui.this.statusTextArea.setText(null);
+					gui.getProgressBar().setIndeterminate(true);
+					ArrayList<TreeCopyOption> options = new ArrayList<>();
+					if (BackupGui.this.copyOnlyNewerFilesCheckBox.isSelected()) {
+						options.add(TreeCopyOption.COPY_ONLY_NEWER_FILES);
+					}
+					if (BackupGui.this.overrideCheckBox.isSelected()) {
+						options.add(TreeCopyOption.OVERRIDE_IF_NECESSARY);
+					}
+					if (BackupGui.this.mirrorCopyCheckBox.isSelected()) {
+						options.add(TreeCopyOption.MIRROR_PURGE);
+					}
+					backup = new TreeCopier(from, to, from.toPath().getRoot().toFile(), options.toArray(new TreeCopyOption[options.size()]));
+					backup.addTreeCopyEventListener(new TreeCopier.TreeCopyEventListener() {
+						@Override
+						public void onEvent(TreeCopyEvent event) {
+							if (event instanceof TreeCopier.TreeCopyLogEvent) {
+								TreeCopier.TreeCopyLogEvent event_ = (TreeCopier.TreeCopyLogEvent) event;
+								if (!event_.isLogAppended() && !BackupGui.this.statusTextArea.getText().isEmpty()) {
+									BackupGui.this.statusTextArea.append("\n");
+								}
+								BackupGui.this.statusTextArea.append(event_.getLog());
+							}
+							gui.getProgressBar().setValue((int) (100D * event.getFilesProcessed() / event.getFiles()));
+						}
+					});
+					gui.getProgressBar().setIndeterminate(false);
+					gui.getProgressBar().setValue(0);
+					gui.getProgressBar().setString(null);
+					backup.copyTree();
+					gui.getProgressBar().setIndeterminate(false);
+					gui.getProgressBar().setString(null);
+					gui.getProgressBar().setValue(100);
+					if (!cancellingBackup) {
+						JOptionPane.showOptionDialog(BackupGui.this, BackupR.getLang().get("done2"), "BackupR", JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[]{BackupR.getLang().get("ok2")}, null);
+					}
+					gui.getProgressBar().setValue(0);
+					gui.getProgressBar().setString("");
+					backupButton.setText(BackupR.getLang().get("backItUp"));
+					gui.setEverythingEnabled(true);
+					backingUp = false;
+					cancellingBackup = false;
+				}
+			}).start();
 		}
 
 		if (backingUp && !cancellingBackup) {
