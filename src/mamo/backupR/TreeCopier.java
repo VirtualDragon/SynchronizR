@@ -13,6 +13,8 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class TreeCopier {
 
@@ -100,6 +102,9 @@ public class TreeCopier {
 					}
 					if (options.contains(TreeCopyOption.MIRROR_PURGE)) {
 						for (File currentToChild : currentTo.listFiles()) {
+							if (isCancelled) {
+								return FileVisitResult.TERMINATE;
+							}
 							boolean contains = false;
 							for (File currentDirChild : dir.toFile().listFiles()) {
 								if (currentDirChild.getName().equals(currentToChild.getName())) {
@@ -108,11 +113,57 @@ public class TreeCopier {
 								}
 							}
 							if (!contains) {
-								log(BackupR.getLang().get("deletingX", currentToChild.getPath()), false);
-								if (currentToChild.delete()) {
-									log(BackupR.getLang().get("ok"), true);
+								if (!currentToChild.isDirectory()) {
+									log(BackupR.getLang().get("deletingX", currentToChild.getPath()), false);
+									if (currentToChild.delete()) {
+										log(BackupR.getLang().get("ok"), true);
+									} else {
+										log(BackupR.getLang().get("fail"), true);
+									}
 								} else {
-									log(BackupR.getLang().get("fail"), true);
+									try {
+										Files.walkFileTree(currentToChild.toPath(), new FileVisitor<Path>() {
+
+											@Override
+											public FileVisitResult preVisitDirectory(Path file, BasicFileAttributes attrs) throws IOException {
+												return FileVisitResult.CONTINUE;
+											}
+
+											@Override
+											public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+												if (isCancelled) {
+													return FileVisitResult.TERMINATE;
+												}
+												log(BackupR.getLang().get("deletingX", file), false);
+												if (file.toFile().delete()) {
+													log(BackupR.getLang().get("ok"), true);
+												} else {
+													log(BackupR.getLang().get("fail"), true);
+												}
+												return FileVisitResult.CONTINUE;
+											}
+
+											@Override
+											public FileVisitResult visitFileFailed(Path file, IOException e) throws IOException {
+												return FileVisitResult.CONTINUE;
+											}
+
+											@Override
+											public FileVisitResult postVisitDirectory(Path file, IOException e) throws IOException {
+												if (isCancelled) {
+													return FileVisitResult.TERMINATE;
+												}
+												log(BackupR.getLang().get("deletingX", file), false);
+												if (file.toFile().delete()) {
+													log(BackupR.getLang().get("ok"), true);
+												} else {
+													log(BackupR.getLang().get("fail"), true);
+												}
+												return FileVisitResult.CONTINUE;
+											}
+										});
+									} catch (IOException ex) {
+									}
 								}
 							}
 						}

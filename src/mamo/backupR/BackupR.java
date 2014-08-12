@@ -23,8 +23,8 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 public class BackupR {
 	
-	public static final String VERSION = "1.7.1";
-	public static final long releaseDate = 201408112043L;
+	public static final String VERSION = "1.7.2";
+	public static final long releaseDate = 201408121413L;
 	
 	private static Settings settings;
 	private static final Lang lang = new Lang("lang");
