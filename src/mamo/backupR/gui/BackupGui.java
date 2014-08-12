@@ -36,7 +36,7 @@ public class BackupGui extends javax.swing.JPanel {
 		overrideCheckBox.setSelected(BackupR.getSettings().getBoolean(SettingsEnum.OVERRIDE_IF_NECESSARY.toString()));
 		mirrorCopyCheckBox.setSelected(BackupR.getSettings().getBoolean(SettingsEnum.MIRROR_PURGE.toString()));
 	}
-	
+
 	public boolean isBackingUp() {
 		return backingUp;
 	}
@@ -305,7 +305,7 @@ public class BackupGui extends javax.swing.JPanel {
 				JOptionPane.showOptionDialog(this, BackupR.getLang().get("dirInceptionErr"), "BackupR", JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE, null, new String[]{BackupR.getLang().get("ok2")}, null);
 			}
 		}
-		
+
 		if (backingUp && !cancellingBackup) {
 			cancellingBackup = true;
 			backupButton.setEnabled(false);

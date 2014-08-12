@@ -22,28 +22,28 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 public class BackupR {
-	
-	public static final String VERSION = "1.7.2";
-	public static final long releaseDate = 201408121413L;
-	
+
+	public static final String VERSION = "1.7.3";
+	public static final long releaseDate = 201408121428L;
+
 	private static Settings settings;
 	private static final Lang lang = new Lang("lang");
-	
+
 	public static void main(String[] args) throws IOException, URISyntaxException {
 		for (String arg : args) {
 			if (arg.toLowerCase().startsWith("locale:")) {
 				getLang().changeLocale(new Locale(arg.substring("locale:".length())));
 			}
 		}
-		
+
 		settings = new Settings(new File(new File(BackupR.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile(), "settings.properties"));
-		
+
 		HashMap<String, Object> defaultValues = new HashMap<>();
 		for (SettingsEnum preference : SettingsEnum.values()) {
 			defaultValues.put(preference.toString(), preference.defaultValue());
 		}
 		getSettings().setDefaultValues(defaultValues);
-		
+
 		EventQueue.invokeLater(new Runnable() {
 			@Override
 			public void run() {
@@ -52,7 +52,7 @@ public class BackupR {
 				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
 				}
 				ToolTipManager.sharedInstance().setDismissDelay(Integer.MAX_VALUE);
-				
+
 				final JFrame window = new JFrame("BackupR v. " + VERSION);
 				window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 				final Gui gui = new Gui();
@@ -71,7 +71,7 @@ public class BackupR {
 				if (getSettings().getBoolean(SettingsEnum.WINDOW_MAXIMIZED.toString())) {
 					window.setExtendedState(Frame.MAXIMIZED_BOTH);
 				}
-				
+
 				if (!getSettings().getBoolean("acceptedLicense")) {
 					gui.getProgressBar().setIndeterminate(false);
 					LicenseGui licenseGui = new LicenseGui(window, true);
@@ -90,13 +90,13 @@ public class BackupR {
 					}
 					gui.getProgressBar().setIndeterminate(true);
 				}
-				
+
 				try {
 					getSettings().save();
 				} catch (IOException ex) {
 				}
 				getSettings().setAutoSaveEnabled(true);
-				
+
 				window.addComponentListener(new ComponentListener() {
 					@Override
 					public void componentResized(ComponentEvent e) {
@@ -111,7 +111,7 @@ public class BackupR {
 						} catch (IOException ex) {
 						}
 					}
-					
+
 					@Override
 					public void componentMoved(ComponentEvent e) {
 						try {
@@ -125,52 +125,52 @@ public class BackupR {
 						} catch (IOException ex) {
 						}
 					}
-					
+
 					@Override
 					public void componentShown(ComponentEvent e) {
 					}
-					
+
 					@Override
 					public void componentHidden(ComponentEvent e) {
 					}
 				});
-				
+
 				window.addWindowListener(new WindowListener() {
-					
+
 					@Override
 					public void windowOpened(WindowEvent e) {
 					}
-					
+
 					@Override
 					public void windowClosing(WindowEvent e) {
 						if (!gui.getBackupGui().isBackingUp()) {
 							window.dispose();
 						} else {
-							JOptionPane.showOptionDialog(window, getLang().get("cantCloseWhileBackingUp"), "BackupR", JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE, null, new String[] {getLang().get("ok2")}, null);
+							JOptionPane.showOptionDialog(window, getLang().get("cantCloseWhileBackingUp"), "BackupR", JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE, null, new String[]{getLang().get("ok2")}, null);
 						}
 					}
-					
+
 					@Override
 					public void windowClosed(WindowEvent e) {
 					}
-					
+
 					@Override
 					public void windowIconified(WindowEvent e) {
 					}
-					
+
 					@Override
 					public void windowDeiconified(WindowEvent e) {
 					}
-					
+
 					@Override
 					public void windowActivated(WindowEvent e) {
 					}
-					
+
 					@Override
 					public void windowDeactivated(WindowEvent e) {
 					}
 				});
-				
+
 				if (getSettings().getBoolean(SettingsEnum.AUTOMATIC_UPDATE_CHECK.toString())) {
 					new Thread(new Runnable() {
 						@Override
@@ -189,7 +189,10 @@ public class BackupR {
 									} else {
 										jrePath += "java";
 									}
-									Runtime.getRuntime().exec(new String[]{jrePath, "-jar", new File(BackupR.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getPath()});
+									try {
+										Runtime.getRuntime().exec(new String[]{jrePath, "-jar", new File(BackupR.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath()});
+									} catch (URISyntaxException ex) {
+									}
 									System.exit(0);
 								}
 								gui.setEverythingEnabled(true);
@@ -205,11 +208,11 @@ public class BackupR {
 			}
 		});
 	}
-	
+
 	public static Settings getSettings() {
 		return settings;
 	}
-	
+
 	public static Lang getLang() {
 		return lang;
 	}

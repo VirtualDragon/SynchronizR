@@ -1,6 +1,5 @@
 package mamo.backupR;
 
-import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.net.URISyntaxException;
 

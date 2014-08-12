@@ -6,9 +6,10 @@ import java.awt.Container;
 import javax.swing.JProgressBar;
 
 public class Gui extends javax.swing.JPanel {
+
 	private final BackupGui backupGui = new BackupGui(this);
 	private final SettingsGui settingsGui = new SettingsGui();
-	
+
 	public Gui() {
 		initComponents();
 	}
@@ -29,11 +30,11 @@ public class Gui extends javax.swing.JPanel {
 	public JProgressBar getProgressBar() {
 		return progressBar;
 	}
-	
+
 	public BackupGui getBackupGui() {
 		return backupGui;
 	}
-	
+
 	public SettingsGui getSettingsGui() {
 		return settingsGui;
 	}

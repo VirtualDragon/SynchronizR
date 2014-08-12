@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -40,7 +41,11 @@ public class Updater {
 	public boolean update() {
 		if (areUpdatesAvaiable()) {
 			try {
-				BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(new File(Updater.class.getProtectionDomain().getCodeSource().getLocation().getPath()), false));
+				BufferedOutputStream out = null;
+				try {
+					out = new BufferedOutputStream(new FileOutputStream(new File(Updater.class.getProtectionDomain().getCodeSource().getLocation().toURI()), false));
+				} catch (URISyntaxException ex) {
+				}
 				BufferedInputStream in = new BufferedInputStream(update.openStream());
 				int b;
 				while ((b = in.read()) != -1) {

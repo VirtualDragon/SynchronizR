@@ -13,8 +13,6 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class TreeCopier {
 
