@@ -260,21 +260,21 @@ public class BackupGui extends javax.swing.JPanel {
 			final File from = new File(backupFromTextField.getText());
 
 			if (!from.exists()) {
-				JOptionPane.showOptionDialog(this, BackupR.getLang().get("inputFolderDoesntExist"), "BackupR", JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[]{BackupR.getLang().get("ok2")}, null);
+				JOptionPane.showOptionDialog(this, BackupR.getLang().get("inputFolderDoesntExist"), "BackupR", JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE, null, new String[]{BackupR.getLang().get("ok2")}, null);
 				return;
 			} else if (!from.isDirectory()) {
-				JOptionPane.showOptionDialog(this, BackupR.getLang().get("inputFolderIsntDir"), "BackupR", JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[]{BackupR.getLang().get("ok2")}, null);
+				JOptionPane.showOptionDialog(this, BackupR.getLang().get("inputFolderIsntDir"), "BackupR", JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE, null, new String[]{BackupR.getLang().get("ok2")}, null);
 				return;
 			}
 
 			final File to = new File(backupToTextField.getText());
 			
 			if (to.exists() && to.isFile()) {
-				JOptionPane.showOptionDialog(this, BackupR.getLang().get("outputFolderIsFile"), "BackupR", JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[]{BackupR.getLang().get("ok2")}, null);
+				JOptionPane.showOptionDialog(this, BackupR.getLang().get("outputFolderIsFile"), "BackupR", JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE, null, new String[]{BackupR.getLang().get("ok2")}, null);
 				return;
 			}
 			if (FileUtils.dirContainsFile(from, to) || FileUtils.dirContainsFile(to, from)) {
-				JOptionPane.showOptionDialog(this, BackupR.getLang().get("dirInceptionErr"), "BackupR", JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[]{BackupR.getLang().get("ok2")}, null);
+				JOptionPane.showOptionDialog(this, BackupR.getLang().get("dirInceptionErr"), "BackupR", JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE, null, new String[]{BackupR.getLang().get("ok2")}, null);
 				return;
 			}
 
@@ -289,7 +289,7 @@ public class BackupGui extends javax.swing.JPanel {
 					statusTextArea.setEnabled(true);
 					BackupGui.this.statusTextArea.setText(null);
 					gui.getProgressBar().setIndeterminate(true);
-					ArrayList<TreeCopyOption> options = new ArrayList<>();
+					ArrayList<TreeCopyOption> options = new ArrayList<TreeCopyOption>();
 					if (BackupGui.this.copyOnlyNewerFilesCheckBox.isSelected()) {
 						options.add(TreeCopyOption.COPY_ONLY_NEWER_FILES);
 					}

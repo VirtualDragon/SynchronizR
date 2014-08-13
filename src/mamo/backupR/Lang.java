@@ -18,4 +18,8 @@ public class Lang {
 	public void changeLocale(Locale locale) {
 		lang = ResourceBundle.getBundle("lang", locale);
 	}
+	
+	public Locale getLocale() {
+		return lang.getLocale();
+	}
 }

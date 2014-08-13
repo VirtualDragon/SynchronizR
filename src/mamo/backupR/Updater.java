@@ -27,9 +27,9 @@ public class Updater {
 			URLConnection connection = url.openConnection();
 			connection.setConnectTimeout(3000);
 			connection.setReadTimeout(3000);
-			try (BufferedInputStream in = new BufferedInputStream(connection.getInputStream())) {
-				xml = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(in);
-			}
+			BufferedInputStream in = new BufferedInputStream(connection.getInputStream());
+			xml = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(in);
+			in.close();
 			xml.getDocumentElement().normalize();
 		} catch (ParserConfigurationException ex) {
 		} catch (SAXException ex) {

@@ -20,7 +20,7 @@ public class TreeCopier {
 
 	private Path from, to, relative;
 	private EnumSet<TreeCopyOption> options = EnumSet.noneOf(TreeCopyOption.class);
-	private ArrayList<TreeCopyEventListener> listeners = new ArrayList<>();
+	private ArrayList<TreeCopyEventListener> listeners = new ArrayList<TreeCopyEventListener>();
 
 	private long files, directories, filesProcessed, directoriesProcessed;
 	private boolean isCancelled = false;

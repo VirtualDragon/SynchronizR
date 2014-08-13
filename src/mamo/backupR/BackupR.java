@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Locale;
 import javax.swing.JFrame;
@@ -23,22 +25,31 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 public class BackupR {
 
-	public static final String VERSION = "1.7.4";
-	public static final long releaseDate = 201408122023L;
+	public static final String VERSION = "1.7.5";
+	public static final long releaseDate = 201408131729L;
 
 	private static Settings settings;
 	private static final Lang lang = new Lang("lang");
+	private static boolean showUpdateMessage;
 
-	public static void main(String[] args) throws IOException, URISyntaxException {
+	public static void main(final String[] args) throws IOException, URISyntaxException {
 		for (String arg : args) {
 			if (arg.toLowerCase().startsWith("locale:")) {
 				getLang().changeLocale(new Locale(arg.substring("locale:".length())));
 			}
+			if (arg.equalsIgnoreCase("showUpdateMessage")) {
+				showUpdateMessage = true;
+			}
+		}
+		
+		if (Integer.parseInt(System.getProperty("java.version").split("\\.")[1]) < 7) {
+			JOptionPane.showOptionDialog(null, getLang().get("wrongJavaVersion", getLang().getLocale().getLanguage()), "BackupR", JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE, null, new String[]{getLang().get("ok2")}, null);
+			return;
 		}
 
 		settings = new Settings(new File(new File(BackupR.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile(), "settings.properties"));
 
-		HashMap<String, Object> defaultValues = new HashMap<>();
+		HashMap<String, Object> defaultValues = new HashMap<String, Object>();
 		for (SettingsEnum preference : SettingsEnum.values()) {
 			defaultValues.put(preference.toString(), preference.defaultValue());
 		}
@@ -49,7 +60,10 @@ public class BackupR {
 			public void run() {
 				try {
 					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+				} catch (ClassNotFoundException ex) {
+				} catch (InstantiationException ex) {
+				} catch (IllegalAccessException ex) {
+				} catch (UnsupportedLookAndFeelException ex) {
 				}
 				ToolTipManager.sharedInstance().setDismissDelay(Integer.MAX_VALUE);
 
@@ -74,6 +88,7 @@ public class BackupR {
 
 				if (!getSettings().getBoolean("acceptedLicense")) {
 					gui.getProgressBar().setIndeterminate(false);
+					gui.setEverythingEnabled(true);
 					LicenseGui licenseGui = new LicenseGui(window, true);
 					licenseGui.setTitle("BackupR");
 					licenseGui.setMinimumSize(licenseGui.getMinimumSize());
@@ -89,6 +104,7 @@ public class BackupR {
 						System.exit(0);
 					}
 					gui.getProgressBar().setIndeterminate(true);
+					gui.setEverythingEnabled(false);
 				}
 
 				try {
@@ -171,6 +187,14 @@ public class BackupR {
 					}
 				});
 
+				if (BackupR.showUpdateMessage) {
+					gui.getProgressBar().setIndeterminate(false);
+					gui.setEverythingEnabled(true);
+					JOptionPane.showOptionDialog(window, BackupR.getLang().get("updated"), "BackupR", JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[]{BackupR.getLang().get("ok2")}, null);
+					gui.setEverythingEnabled(false);
+					gui.getProgressBar().setIndeterminate(true);
+				}
+
 				if (getSettings().getBoolean(SettingsEnum.AUTOMATIC_UPDATE_CHECK.toString())) {
 					new Thread(new Runnable() {
 						@Override
@@ -179,23 +203,30 @@ public class BackupR {
 								Updater updater = new Updater(new URL("https://sites.google.com/site/mamoswebsite/backupr/versions.xml"), releaseDate);
 								updater.checkForUpdates();
 								gui.getProgressBar().setIndeterminate(false);
+								gui.setEverythingEnabled(true);
 								if (updater.areUpdatesAvaiable() && (getSettings().getBoolean(SettingsEnum.AUTOMATIC_UPDATE_INSTALLATION.toString()) || JOptionPane.showOptionDialog(window, getLang().get("updateFound"), "BackupR", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{getLang().get("yes"), getLang().get("no")}, null) == 0)) {
 									gui.getProgressBar().setIndeterminate(true);
+									gui.setEverythingEnabled(false);
 									updater.update();
-									gui.getProgressBar().setIndeterminate(false);
 									String jrePath = System.getProperty("java.home") + File.separator + "bin" + File.separator;
-									if (System.getProperty("os.name").toLowerCase().contains("windows")) {
+									if (System.getProperty("os.name").toLowerCase().contains("win")) {
 										jrePath += "java.exe";
 									} else {
 										jrePath += "java";
 									}
 									try {
-										Runtime.getRuntime().exec(new String[]{jrePath, "-jar", new File(BackupR.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath()});
+										ArrayList<String> args_ = new ArrayList<String>();
+										args_.add(jrePath);
+										args_.add("-jar");
+										args_.add(new File(BackupR.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath());
+										args_.addAll(Arrays.asList(args));
+										args_.remove("showUpdateMessage");
+										args_.add("showUpdateMessage");
+										Runtime.getRuntime().exec(args_.toArray(new String[args_.size()]));
 									} catch (URISyntaxException ex) {
 									}
 									System.exit(0);
 								}
-								gui.setEverythingEnabled(true);
 							} catch (MalformedURLException ex) {
 							} catch (IOException ex) {
 							}

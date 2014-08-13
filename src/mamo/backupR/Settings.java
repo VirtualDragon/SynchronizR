@@ -18,16 +18,18 @@ public class Settings {
 	public Settings(File propertiesFile) throws IOException {
 		this.propertiesFile = propertiesFile;
 		if (propertiesFile.exists()) {
-			try (FileInputStream in = new FileInputStream(propertiesFile)) {
-				properties.load(in);
-			}
+			FileInputStream in = new FileInputStream(propertiesFile);
+			properties.load(in);
+			in.close();
 		}
 	}
 
 	public Byte getByte(String property) {
 		try {
 			return Byte.parseByte(getString(property));
-		} catch (NumberFormatException | NullPointerException e) {
+		} catch (NumberFormatException e) {
+			return null;
+		} catch (NullPointerException e) {
 			return null;
 		}
 	}
@@ -35,7 +37,9 @@ public class Settings {
 	public Short getShort(String property) {
 		try {
 			return Short.parseShort(getString(property));
-		} catch (NumberFormatException | NullPointerException e) {
+		} catch (NumberFormatException e) {
+			return null;
+		} catch (NullPointerException e) {
 			return null;
 		}
 	}
@@ -43,7 +47,9 @@ public class Settings {
 	public Integer getInt(String property) {
 		try {
 			return Integer.parseInt(getString(property));
-		} catch (NumberFormatException | NullPointerException e) {
+		} catch (NumberFormatException e) {
+			return null;
+		} catch (NullPointerException e) {
 			return null;
 		}
 	}
@@ -51,7 +57,9 @@ public class Settings {
 	public Long getLong(String property) {
 		try {
 			return Long.parseLong(getString(property));
-		} catch (NumberFormatException | NullPointerException e) {
+		} catch (NumberFormatException e) {
+			return null;
+		} catch (NullPointerException e) {
 			return null;
 		}
 	}
@@ -59,7 +67,9 @@ public class Settings {
 	public Float getFloat(String property) {
 		try {
 			return Float.parseFloat(getString(property));
-		} catch (NumberFormatException | NullPointerException e) {
+		} catch (NumberFormatException e) {
+			return null;
+		} catch (NullPointerException e) {
 			return null;
 		}
 	}
@@ -67,7 +77,9 @@ public class Settings {
 	public Double getDouble(String property) {
 		try {
 			return Double.parseDouble(getString(property));
-		} catch (NumberFormatException | NullPointerException e) {
+		} catch (NumberFormatException e) {
+			return null;
+		} catch (NullPointerException e) {
 			return null;
 		}
 	}
@@ -92,10 +104,9 @@ public class Settings {
 	}
 
 	public void save() throws IOException {
-		try (FileOutputStream out = new FileOutputStream(propertiesFile)) {
-			properties.store(out, null);
-			out.flush();
-		}
+		FileOutputStream out = new FileOutputStream(propertiesFile);
+		properties.store(out, null);
+		out.flush();
 	}
 
 	public Map<String, Object> getDefaultValues() {
