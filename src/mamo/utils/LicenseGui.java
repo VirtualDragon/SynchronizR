@@ -1,8 +1,9 @@
-package mamo.backupR.gui;
+package mamo.utils;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.net.URL;
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
 import javax.swing.InputMap;
@@ -14,9 +15,10 @@ public class LicenseGui extends javax.swing.JDialog {
 	public static final int RET_CANCEL = 0;
 	public static final int RET_OK = 1;
 
-	public LicenseGui(java.awt.Frame parent, boolean modal) {
+	public LicenseGui(java.awt.Frame parent, boolean modal, URL license) throws IOException {
 		super(parent, modal);
 		initComponents();
+		licenseTextPane.setPage(license);
 
 		String cancelName = "cancel";
 		InputMap inputMap = getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
@@ -38,7 +40,6 @@ public class LicenseGui extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        titleLabel = new javax.swing.JLabel();
         licenseLabel = new javax.swing.JLabel();
         licenseScrollPane = new javax.swing.JScrollPane();
         licenseTextPane = new javax.swing.JTextPane();
@@ -51,15 +52,10 @@ public class LicenseGui extends javax.swing.JDialog {
             }
         });
 
-        titleLabel.setText("<html><body><p style=\"font-size: 1.5em;\">BackupR</p></body></html>");
-
         licenseLabel.setText("To use this program, you have to accept the following license.");
 
         licenseTextPane.setEditable(false);
         licenseScrollPane.setViewportView(licenseTextPane);
-        try {
-            licenseTextPane.setPage(LicenseGui.class.getResource("/license.html"));
-        } catch (IOException e) {}
 
         denyButton.setText("Deny");
         denyButton.addActionListener(new java.awt.event.ActionListener() {
@@ -80,30 +76,24 @@ public class LicenseGui extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(licenseScrollPane)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(licenseLabel)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(denyButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(acceptButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(licenseLabel)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(acceptButton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(licenseLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(licenseScrollPane)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -141,7 +131,6 @@ public class LicenseGui extends javax.swing.JDialog {
     private javax.swing.JLabel licenseLabel;
     private javax.swing.JScrollPane licenseScrollPane;
     private javax.swing.JTextPane licenseTextPane;
-    private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 
 	private int returnStatus = RET_CANCEL;

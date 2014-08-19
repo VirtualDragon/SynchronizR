@@ -52,6 +52,9 @@ public class Gui extends javax.swing.JPanel {
         tabbedPanel.addTab(BackupR.getLang().get("backup"), backupGui);
         tabbedPanel.addTab(BackupR.getLang().get("settings"), settingsGui);
 
+        progressBar.setString("");
+        progressBar.setStringPainted(true);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(

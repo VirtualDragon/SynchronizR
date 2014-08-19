@@ -1,6 +1,6 @@
 package mamo.backupR.gui;
 
-import mamo.backupR.FileUtils;
+import mamo.utils.FileUtils;
 import mamo.backupR.BackupR;
 import mamo.backupR.SettingsEnum;
 import mamo.backupR.TreeCopier;
@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.text.DefaultCaret;
+import mamo.utils.StringUtils;
 
 public class BackupGui extends javax.swing.JPanel {
 
@@ -126,11 +127,11 @@ public class BackupGui extends javax.swing.JPanel {
         );
 
         copyOnlyNewerFilesCheckBox.setText(BackupR.getLang().get("copyOnlyNewerFiles"));
-        copyOnlyNewerFilesCheckBox.setToolTipText(BackupR.getLang().get("copyOnlyNewerFilesTooltip"));
+        copyOnlyNewerFilesCheckBox.setToolTipText("<html><body><p>" + StringUtils.autoReturn(BackupR.getLang().get("copyOnlyNewerFilesTooltip"), 100).replaceAll("\n", "<br />") + "</p></body></html>");
         overrideCheckBox.setText(BackupR.getLang().get("overrideIfNecessary"));
-        overrideCheckBox.setToolTipText(BackupR.getLang().get("overrideIfNecessaryTooltip"));
+        overrideCheckBox.setToolTipText("<html><body><p>" + StringUtils.autoReturn(BackupR.getLang().get("overrideIfNecessaryTooltip"), 100).replaceAll("\n", "<br />") + "</p></body></html>");
         mirrorCopyCheckBox.setText(BackupR.getLang().get("mirrorCopy"));
-        mirrorCopyCheckBox.setToolTipText(BackupR.getLang().get("mirrorCopyTooltip"));
+        mirrorCopyCheckBox.setToolTipText("<html><body><p>" + StringUtils.autoReturn(BackupR.getLang().get("mirrorCopyTooltip"), 100).replaceAll("\n", "<br />") + "</p></body></html>");
 
         advancedSectionPanel.setVisible(false);
 
@@ -200,11 +201,11 @@ public class BackupGui extends javax.swing.JPanel {
         );
 
         backupFromLabel.setText(BackupR.getLang().get("backupFrom"));
-        backupFromLabel.setToolTipText(BackupR.getLang().get("backupFromTooltip"));
-        backupFromTextField.setToolTipText(BackupR.getLang().get("backupFromTooltip"));
+        backupFromLabel.setToolTipText("<html><body><p>" + StringUtils.autoReturn(BackupR.getLang().get("backupFromTooltip"), 100).replaceAll("\n", "<br />") + "</p></body></html>");
+        backupFromTextField.setToolTipText("<html><body><p>" + StringUtils.autoReturn(BackupR.getLang().get("backupFromTooltip"), 100).replaceAll("\n", "<br />") + "</p></body></html>");
         backupToLabel.setText(BackupR.getLang().get("backupTo"));
-        backupToLabel.setToolTipText(BackupR.getLang().get("backupToTooltip"));
-        backupToTextField.setToolTipText(BackupR.getLang().get("backupToTooltip"));
+        backupToLabel.setToolTipText("<html><body><p>" + StringUtils.autoReturn(BackupR.getLang().get("backupToTooltip"), 100).replaceAll("\n", "<br />") + "</p></body></html>");
+        backupToTextField.setToolTipText("<html><body><p>" + StringUtils.autoReturn(BackupR.getLang().get("backupToTooltip"), 100).replaceAll("\n", "<br />") + "</p></body></html>");
         advancedCheckBox.setText(BackupR.getLang().get("advanced"));
         backupButton.setText(BackupR.getLang().get("backItUp"));
     }// </editor-fold>//GEN-END:initComponents
@@ -213,7 +214,7 @@ public class BackupGui extends javax.swing.JPanel {
 		if (!backupFromTextField.isEnabled()) {
 			return;
 		}
-		
+
 		JFileChooser fileChooser = new JFileChooser(backupFromTextField.getText());
 		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
@@ -238,7 +239,7 @@ public class BackupGui extends javax.swing.JPanel {
 		if (!backupToTextField.isEnabled()) {
 			return;
 		}
-		
+
 		JFileChooser fileChooser = new JFileChooser(backupToTextField.getText());
 		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
@@ -256,7 +257,7 @@ public class BackupGui extends javax.swing.JPanel {
 				JOptionPane.showOptionDialog(this, BackupR.getLang().get("fillOutAllTheFields"), "BackupR", JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE, null, new String[]{BackupR.getLang().get("ok2")}, null);
 				return;
 			}
-			
+
 			final File from = new File(backupFromTextField.getText());
 
 			if (!from.exists()) {
@@ -268,7 +269,7 @@ public class BackupGui extends javax.swing.JPanel {
 			}
 
 			final File to = new File(backupToTextField.getText());
-			
+
 			if (to.exists() && to.isFile()) {
 				JOptionPane.showOptionDialog(this, BackupR.getLang().get("outputFolderIsFile"), "BackupR", JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE, null, new String[]{BackupR.getLang().get("ok2")}, null);
 				return;

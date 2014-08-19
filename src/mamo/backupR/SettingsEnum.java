@@ -6,8 +6,8 @@ import java.net.URISyntaxException;
 public enum SettingsEnum {
 
 	ACCEPTED_LICENSE("acceptedLicense", false),
-	FROM("from", new File(System.getProperty("user.home")).getPath()),
-	TO("to", to().getPath()),
+	FROM("from", new File(System.getProperty("user.home")).getAbsolutePath()),
+	TO("to", to().getAbsolutePath()),
 	ADVANCED_ENABLED("advancedEnabled", false),
 	COPY_ONLY_NEWER_FILES("copyOnlyNewerFiles", true),
 	OVERRIDE_IF_NECESSARY("overrideIfNecessary", true),

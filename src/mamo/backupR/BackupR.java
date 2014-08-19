@@ -1,7 +1,10 @@
 package mamo.backupR;
 
+import mamo.utils.Updater;
+import mamo.utils.Lang;
+import mamo.utils.Settings;
 import mamo.backupR.gui.Gui;
-import mamo.backupR.gui.LicenseGui;
+import mamo.utils.LicenseGui;
 import java.awt.EventQueue;
 import java.awt.Frame;
 import java.awt.event.ComponentEvent;
@@ -25,8 +28,8 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 public class BackupR {
 
-	public static final String VERSION = "1.7.6";
-	public static final long releaseDate = 201408132222L;
+	public static final String VERSION = "1.8";
+	public static final long releaseDate = 201408191953L;
 
 	private static Settings settings;
 	private static final Lang lang = new Lang("lang");
@@ -35,13 +38,13 @@ public class BackupR {
 	public static void main(final String[] args) throws IOException, URISyntaxException {
 		for (String arg : args) {
 			if (arg.toLowerCase().startsWith("locale:")) {
-				getLang().changeLocale(new Locale(arg.substring("locale:".length())));
+				getLang().setLocale(new Locale(arg.substring("locale:".length())));
 			}
 			if (arg.equalsIgnoreCase("showUpdateMessage")) {
 				showUpdateMessage = true;
 			}
 		}
-		
+
 		if (Integer.parseInt(System.getProperty("java.version").split("\\.")[1]) < 7) {
 			JOptionPane.showOptionDialog(null, getLang().get("wrongJavaVersion", getLang().getLocale().getLanguage()), "BackupR", JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE, null, new String[]{getLang().get("ok2")}, null);
 			return;
@@ -88,8 +91,11 @@ public class BackupR {
 
 				if (!getSettings().getBoolean("acceptedLicense")) {
 					gui.getProgressBar().setIndeterminate(false);
-					gui.setEverythingEnabled(true);
-					LicenseGui licenseGui = new LicenseGui(window, true);
+					LicenseGui licenseGui = null;
+					try {
+						licenseGui = new LicenseGui(window, true, BackupR.class.getResource("/license.html"));
+					} catch (IOException ex) {
+					}
 					licenseGui.setTitle("BackupR");
 					licenseGui.setMinimumSize(licenseGui.getMinimumSize());
 					licenseGui.setSize(640, 480);
@@ -104,7 +110,6 @@ public class BackupR {
 						System.exit(0);
 					}
 					gui.getProgressBar().setIndeterminate(true);
-					gui.setEverythingEnabled(false);
 				}
 
 				try {
@@ -189,10 +194,8 @@ public class BackupR {
 
 				if (BackupR.showUpdateMessage) {
 					gui.getProgressBar().setIndeterminate(false);
-					gui.setEverythingEnabled(true);
 					JOptionPane.showOptionDialog(window, BackupR.getLang().get("updated"), "BackupR", JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[]{BackupR.getLang().get("ok2")}, null);
 					gui.setEverythingEnabled(false);
-					gui.getProgressBar().setIndeterminate(true);
 				}
 
 				if (getSettings().getBoolean(SettingsEnum.AUTOMATIC_UPDATE_CHECK.toString())) {
@@ -203,10 +206,8 @@ public class BackupR {
 								Updater updater = new Updater(new URL("https://sites.google.com/site/mamoswebsite/backupr/versions.xml"), releaseDate);
 								updater.checkForUpdates();
 								gui.getProgressBar().setIndeterminate(false);
-								gui.setEverythingEnabled(true);
 								if (updater.areUpdatesAvaiable() && (getSettings().getBoolean(SettingsEnum.AUTOMATIC_UPDATE_INSTALLATION.toString()) || JOptionPane.showOptionDialog(window, getLang().get("updateFound"), "BackupR", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{getLang().get("yes"), getLang().get("no")}, null) == 0)) {
 									gui.getProgressBar().setIndeterminate(true);
-									gui.setEverythingEnabled(false);
 									updater.update();
 									String jrePath = System.getProperty("java.home") + File.separator + "bin" + File.separator;
 									if (System.getProperty("os.name").toLowerCase().contains("win")) {
@@ -218,7 +219,7 @@ public class BackupR {
 										ArrayList<String> args_ = new ArrayList<String>();
 										args_.add(jrePath);
 										args_.add("-jar");
-										args_.add(new File(BackupR.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath());
+										args_.add(new File(BackupR.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getAbsolutePath());
 										args_.addAll(Arrays.asList(args));
 										args_.remove("showUpdateMessage");
 										args_.add("showUpdateMessage");
@@ -226,6 +227,8 @@ public class BackupR {
 									} catch (URISyntaxException ex) {
 									}
 									System.exit(0);
+								} else {
+									gui.setEverythingEnabled(true);
 								}
 							} catch (MalformedURLException ex) {
 							} catch (IOException ex) {
