@@ -1,4 +1,4 @@
-package mamo.utils;
+package com.mamoslab.utils;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

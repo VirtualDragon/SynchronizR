@@ -1,4 +1,4 @@
-package mamo.utils;
+package com.mamoslab.utils;
 
 import java.util.Locale;
 import java.util.ResourceBundle;

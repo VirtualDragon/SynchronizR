@@ -1,18 +1,18 @@
-package mamo.backupR.gui;
+package com.mamoslab.backupR.gui;
 
-import mamo.utils.FileUtils;
-import mamo.backupR.BackupR;
-import mamo.backupR.SettingsEnum;
-import mamo.backupR.TreeCopier;
-import mamo.backupR.TreeCopier.TreeCopyEvent;
-import mamo.backupR.TreeCopier.TreeCopyOption;
+import com.mamoslab.utils.FileUtils;
+import com.mamoslab.backupR.BackupR;
+import com.mamoslab.backupR.SettingsEnum;
+import com.mamoslab.backupR.TreeCopier;
+import com.mamoslab.backupR.TreeCopier.TreeCopyEvent;
+import com.mamoslab.backupR.TreeCopier.TreeCopyOption;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.text.DefaultCaret;
-import mamo.utils.StringUtils;
+import com.mamoslab.utils.StringUtils;
 
 public class BackupGui extends javax.swing.JPanel {
 

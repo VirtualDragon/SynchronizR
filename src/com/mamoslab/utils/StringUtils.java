@@ -1,4 +1,4 @@
-package mamo.utils;
+package com.mamoslab.utils;
 
 public class StringUtils {
 

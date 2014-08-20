@@ -1,4 +1,4 @@
-package mamo.backupR;
+package com.mamoslab.backupR;
 
 import java.io.File;
 import java.net.URISyntaxException;

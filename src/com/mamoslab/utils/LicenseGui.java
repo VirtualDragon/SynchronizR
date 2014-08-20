@@ -1,4 +1,4 @@
-package mamo.utils;
+package com.mamoslab.utils;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;

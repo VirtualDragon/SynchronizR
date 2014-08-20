@@ -1,6 +1,6 @@
-package mamo.backupR.gui;
+package com.mamoslab.backupR.gui;
 
-import mamo.backupR.BackupR;
+import com.mamoslab.backupR.BackupR;
 import java.awt.Component;
 import java.awt.Container;
 import javax.swing.JProgressBar;

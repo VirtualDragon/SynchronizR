@@ -1,10 +1,10 @@
-package mamo.backupR;
+package com.mamoslab.backupR;
 
-import mamo.utils.Updater;
-import mamo.utils.Lang;
-import mamo.utils.Settings;
-import mamo.backupR.gui.Gui;
-import mamo.utils.LicenseGui;
+import com.mamoslab.utils.Updater;
+import com.mamoslab.utils.Lang;
+import com.mamoslab.utils.Settings;
+import com.mamoslab.backupR.gui.Gui;
+import com.mamoslab.utils.LicenseGui;
 import java.awt.EventQueue;
 import java.awt.Frame;
 import java.awt.event.ComponentEvent;
@@ -28,8 +28,8 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 public class BackupR {
 
-	public static final String VERSION = "1.8";
-	public static final long releaseDate = 201408191953L;
+	public static final String VERSION = "1.8.1";
+	public static final long releaseDate = 201408201326L;
 
 	private static Settings settings;
 	private static final Lang lang = new Lang("lang");
