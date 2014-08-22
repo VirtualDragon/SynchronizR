@@ -29,8 +29,8 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 public class BackupR {
 
-	public static final String VERSION = "1.8.3";
-	public static final long releaseDate = 201408221529L;
+	public static final String VERSION = "1.8.4";
+	public static final long releaseDate = 201408221600L;
 
 	private static Settings settings;
 	private static final Lang lang = new Lang("lang");
@@ -222,7 +222,9 @@ public class BackupR {
 										args_.add(new File(BackupR.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getAbsolutePath());
 										args_.addAll(Arrays.asList(args));
 										args_.remove("showUpdateMessage");
-										args_.add("showUpdateMessage");
+										if (!getSettings().getBoolean(SettingsEnum.AUTOMATIC_UPDATE_INSTALLATION.toString())) {
+											args_.add("showUpdateMessage");
+										}
 										Runtime.getRuntime().exec(args_.toArray(new String[args_.size()]));
 									} catch (URISyntaxException ex) {
 									}

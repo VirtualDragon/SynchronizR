@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.awt.Container;
 
 public class GuiUtils {
+
 	public static void setEverythingEnabled(Component component, boolean enabled) {
 		component.setEnabled(enabled);
 		if (component instanceof Container) {

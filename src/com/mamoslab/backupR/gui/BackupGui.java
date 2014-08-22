@@ -308,7 +308,8 @@ public class BackupGui extends javax.swing.JPanel {
 					File to_ = to;
 					try {
 						to_ = new File(to_, InetAddress.getLocalHost().getHostName());
-					} catch (UnknownHostException ex) {}
+					} catch (UnknownHostException ex) {
+					}
 					if (System.getProperty("os.name").toLowerCase().contains("win")) {
 						to_ = new File(to_, from.toPath().getRoot().toString().replace(":", ""));
 					}
