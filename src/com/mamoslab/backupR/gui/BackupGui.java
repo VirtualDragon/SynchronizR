@@ -1,18 +1,23 @@
 package com.mamoslab.backupR.gui;
 
-import com.mamoslab.utils.FileUtils;
 import com.mamoslab.backupR.BackupR;
 import com.mamoslab.backupR.SettingsEnum;
 import com.mamoslab.backupR.TreeCopier;
 import com.mamoslab.backupR.TreeCopier.TreeCopyEvent;
 import com.mamoslab.backupR.TreeCopier.TreeCopyOption;
+import com.mamoslab.utils.FileUtils;
+import com.mamoslab.utils.GuiUtils;
+import com.mamoslab.utils.StringUtils;
 import java.io.File;
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.text.DefaultCaret;
-import com.mamoslab.utils.StringUtils;
 
 public class BackupGui extends javax.swing.JPanel {
 
@@ -283,11 +288,11 @@ public class BackupGui extends javax.swing.JPanel {
 				@Override
 				public void run() {
 					backingUp = true;
-					gui.setEverythingEnabled(false);
+					GuiUtils.setEverythingEnabled(gui, false);
 					backupButton.setText(BackupR.getLang().get("cancel"));
-					backupButton.setEnabled(true);
-					statusScrollPaneContainer.setEnabled(true);
-					statusTextArea.setEnabled(true);
+					GuiUtils.setEverythingEnabled(backupButton, true);
+					GuiUtils.setEverythingEnabled(statusScrollPaneContainer, true);
+					GuiUtils.setEverythingEnabled(gui.getProgressBar(), true);
 					BackupGui.this.statusTextArea.setText(null);
 					gui.getProgressBar().setIndeterminate(true);
 					ArrayList<TreeCopyOption> options = new ArrayList<TreeCopyOption>();
@@ -300,7 +305,14 @@ public class BackupGui extends javax.swing.JPanel {
 					if (BackupGui.this.mirrorCopyCheckBox.isSelected()) {
 						options.add(TreeCopyOption.MIRROR_PURGE);
 					}
-					backup = new TreeCopier(from, to, from.toPath().getRoot().toFile(), options.toArray(new TreeCopyOption[options.size()]));
+					File to_ = to;
+					try {
+						to_ = new File(to_, InetAddress.getLocalHost().getHostName());
+					} catch (UnknownHostException ex) {}
+					if (System.getProperty("os.name").toLowerCase().contains("win")) {
+						to_ = new File(to_, from.toPath().getRoot().toString().replace(":", ""));
+					}
+					backup = new TreeCopier(from, to_, from.toPath().getRoot().toFile(), options.toArray(new TreeCopyOption[options.size()]));
 					backup.addTreeCopyEventListener(new TreeCopier.TreeCopyEventListener() {
 						@Override
 						public void onEvent(TreeCopyEvent event) {
@@ -327,7 +339,7 @@ public class BackupGui extends javax.swing.JPanel {
 					gui.getProgressBar().setValue(0);
 					gui.getProgressBar().setString("");
 					backupButton.setText(BackupR.getLang().get("backItUp"));
-					gui.setEverythingEnabled(true);
+					GuiUtils.setEverythingEnabled(gui, true);
 					backingUp = false;
 					cancellingBackup = false;
 				}
@@ -336,7 +348,7 @@ public class BackupGui extends javax.swing.JPanel {
 
 		if (backingUp && !cancellingBackup) {
 			cancellingBackup = true;
-			backupButton.setEnabled(false);
+			GuiUtils.setEverythingEnabled(backupButton, false);
 			gui.getProgressBar().setString("");
 			gui.getProgressBar().setIndeterminate(true);
 			backup.cancel();

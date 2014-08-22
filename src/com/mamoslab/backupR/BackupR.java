@@ -4,6 +4,7 @@ import com.mamoslab.utils.Updater;
 import com.mamoslab.utils.Lang;
 import com.mamoslab.utils.Settings;
 import com.mamoslab.backupR.gui.Gui;
+import com.mamoslab.utils.GuiUtils;
 import com.mamoslab.utils.LicenseGui;
 import java.awt.EventQueue;
 import java.awt.Frame;
@@ -28,8 +29,8 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 public class BackupR {
 
-	public static final String VERSION = "1.8.1";
-	public static final long releaseDate = 201408201326L;
+	public static final String VERSION = "1.8.3";
+	public static final long releaseDate = 201408221529L;
 
 	private static Settings settings;
 	private static final Lang lang = new Lang("lang");
@@ -73,7 +74,7 @@ public class BackupR {
 				final JFrame window = new JFrame("BackupR v. " + VERSION);
 				window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 				final Gui gui = new Gui();
-				gui.setEverythingEnabled(false);
+				GuiUtils.setEverythingEnabled(gui, false);
 				gui.getProgressBar().setIndeterminate(true);
 				window.setContentPane(gui);
 				window.pack();
@@ -195,7 +196,6 @@ public class BackupR {
 				if (BackupR.showUpdateMessage) {
 					gui.getProgressBar().setIndeterminate(false);
 					JOptionPane.showOptionDialog(window, BackupR.getLang().get("updated"), "BackupR", JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[]{BackupR.getLang().get("ok2")}, null);
-					gui.setEverythingEnabled(false);
 				}
 
 				if (getSettings().getBoolean(SettingsEnum.AUTOMATIC_UPDATE_CHECK.toString())) {
@@ -228,7 +228,7 @@ public class BackupR {
 									}
 									System.exit(0);
 								} else {
-									gui.setEverythingEnabled(true);
+									GuiUtils.setEverythingEnabled(gui, true);
 								}
 							} catch (MalformedURLException ex) {
 							} catch (IOException ex) {
@@ -236,7 +236,7 @@ public class BackupR {
 						}
 					}).start();
 				} else {
-					gui.setEverythingEnabled(true);
+					GuiUtils.setEverythingEnabled(gui, true);
 					gui.getProgressBar().setIndeterminate(false);
 				}
 			}

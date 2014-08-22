@@ -2,8 +2,6 @@ package com.mamoslab.backupR;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.nio.file.CopyOption;
 import java.nio.file.FileVisitResult;
 import java.nio.file.FileVisitor;
@@ -15,8 +13,6 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class TreeCopier {
 
@@ -25,8 +21,7 @@ public class TreeCopier {
 	private Path from, to, relative;
 	private EnumSet<TreeCopyOption> options = EnumSet.noneOf(TreeCopyOption.class);
 	private ArrayList<TreeCopyEventListener> listeners = new ArrayList<TreeCopyEventListener>();
-	private File root;
-	
+
 	private long files, directories, filesProcessed, directoriesProcessed;
 	private boolean isCancelled = false;
 
@@ -77,15 +72,8 @@ public class TreeCopier {
 	}
 
 	public void copyTree() {
-		root = null;
-		try {
-			String computerName = InetAddress.getLocalHost().getHostName();
-			root = new File(computerName, from.getRoot().toString().replace(":", ""));
-		} catch (UnknownHostException ex) {
-			root = new File(from.getRoot().toString().replace(":", ""));
-		}
-		new File(to.toFile(), new File(root, relative.relativize(from).toString()).toString()).mkdirs();
-		
+		new File(to.toFile(), relative.relativize(from).toString()).mkdirs();
+
 		try {
 			Files.walkFileTree(from, new FileVisitor<Path>() {
 				@Override
@@ -93,11 +81,11 @@ public class TreeCopier {
 					if (isCancelled) {
 						return FileVisitResult.TERMINATE;
 					}
-					File currentTo = new File(to.toFile(), new File(root, relative.relativize(dir).toString()).toString());
+					File currentTo = new File(to.toFile(), relative.relativize(dir).toString());
 					if (!currentTo.exists() || options.contains(TreeCopyOption.OVERRIDE_IF_NECESSARY)) {
 						boolean log = !currentTo.exists() || !currentTo.isDirectory();
 						if (log) {
-							log(BackupR.getLang().get("creatingDirectoryX", currentTo.getAbsolutePath()), false);
+							log(BackupR.getLang().get("creatingDirectoryX", currentTo.getPath()), false);
 						}
 						try {
 							Files.copy(dir, currentTo.toPath(), COPY_OPTIONS);
@@ -124,7 +112,7 @@ public class TreeCopier {
 							}
 							if (!contains) {
 								if (!currentToChild.isDirectory()) {
-									log(BackupR.getLang().get("deletingX", currentToChild.getAbsolutePath()), false);
+									log(BackupR.getLang().get("deletingX", currentToChild.getPath()), false);
 									if (currentToChild.delete()) {
 										log(BackupR.getLang().get("ok"), true);
 									} else {
@@ -188,7 +176,7 @@ public class TreeCopier {
 					if (isCancelled) {
 						return FileVisitResult.TERMINATE;
 					}
-					File currentTo = new File(to.toFile(), new File(root, relative.relativize(file).toString()).toString());
+					File currentTo = new File(to.toFile(), relative.relativize(file).toString());
 					boolean alreadyExists = currentTo.exists();
 					if (!alreadyExists) {
 						try {
@@ -227,7 +215,7 @@ public class TreeCopier {
 
 				@Override
 				public FileVisitResult postVisitDirectory(Path dir, IOException exc) {
-					new File(to.toFile(), new File(root, relative.relativize(dir).toString()).toString()).setLastModified(dir.toFile().lastModified());
+					new File(to.toFile(), relative.relativize(dir).toString()).setLastModified(dir.toFile().lastModified());
 					return FileVisitResult.CONTINUE;
 				}
 			});

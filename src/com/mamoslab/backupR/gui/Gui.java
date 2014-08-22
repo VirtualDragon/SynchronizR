@@ -1,8 +1,6 @@
 package com.mamoslab.backupR.gui;
 
 import com.mamoslab.backupR.BackupR;
-import java.awt.Component;
-import java.awt.Container;
 import javax.swing.JProgressBar;
 
 public class Gui extends javax.swing.JPanel {
@@ -12,19 +10,6 @@ public class Gui extends javax.swing.JPanel {
 
 	public Gui() {
 		initComponents();
-	}
-
-	public void setEverythingEnabled(boolean enabled) {
-		setEverythingEnabled(this, enabled);
-	}
-
-	private void setEverythingEnabled(Component component, boolean enabled) {
-		if (component instanceof Container) {
-			for (Component component_ : ((Container) component).getComponents()) {
-				setEverythingEnabled(component_, enabled);
-			}
-		}
-		component.setEnabled(enabled);
 	}
 
 	public JProgressBar getProgressBar() {
