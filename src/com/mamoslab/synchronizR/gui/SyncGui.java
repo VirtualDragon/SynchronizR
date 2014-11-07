@@ -1,10 +1,25 @@
-package com.mamoslab.backupR.gui;
 
-import com.mamoslab.backupR.BackupR;
-import com.mamoslab.backupR.SettingsEnum;
-import com.mamoslab.backupR.TreeCopier;
-import com.mamoslab.backupR.TreeCopier.TreeCopyEvent;
-import com.mamoslab.backupR.TreeCopier.TreeCopyOption;
+/*
+ BackupR
+ Copyright (C) 2014 Matteo Morena
+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ */
+package com.mamoslab.synchronizR.gui;
+
+import com.mamoslab.synchronizR.SynchronizR;
+import com.mamoslab.synchronizR.SettingsEnum;
+import com.mamoslab.synchronizR.TreeCopier;
+import com.mamoslab.synchronizR.TreeCopier.TreeCopyEvent;
+import com.mamoslab.synchronizR.TreeCopier.TreeCopyOption;
 import com.mamoslab.utils.FileUtils;
 import com.mamoslab.utils.GuiUtils;
 import com.mamoslab.utils.StringUtils;
@@ -13,20 +28,18 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.text.DefaultCaret;
 
-public class BackupGui extends javax.swing.JPanel {
+public class SyncGui extends javax.swing.JPanel {
 
 	private final Gui gui;
 
 	private boolean backingUp, cancellingBackup;
 	private TreeCopier backup;
 
-	public BackupGui(Gui gui) {
+	public SyncGui(Gui gui) {
 		this.gui = gui;
 
 		initComponents();
@@ -34,13 +47,13 @@ public class BackupGui extends javax.swing.JPanel {
 	}
 
 	private void prefUpdate() {
-		backupFromTextField.setText(BackupR.getSettings().getString(SettingsEnum.FROM.toString()));
-		backupToTextField.setText(BackupR.getSettings().getString(SettingsEnum.TO.toString()));
-		advancedCheckBox.setSelected(BackupR.getSettings().getBoolean(SettingsEnum.ADVANCED_ENABLED.toString()));
+		backupFromTextField.setText(SynchronizR.getSettings().getString(SettingsEnum.FROM.toString()));
+		backupToTextField.setText(SynchronizR.getSettings().getString(SettingsEnum.TO.toString()));
+		advancedCheckBox.setSelected(SynchronizR.getSettings().getBoolean(SettingsEnum.ADVANCED_ENABLED.toString()));
 		advancedSectionPanel.setVisible(advancedCheckBox.isSelected());
-		copyOnlyNewerFilesCheckBox.setSelected(BackupR.getSettings().getBoolean(SettingsEnum.COPY_ONLY_NEWER_FILES.toString()));
-		overrideCheckBox.setSelected(BackupR.getSettings().getBoolean(SettingsEnum.OVERRIDE_IF_NECESSARY.toString()));
-		mirrorCopyCheckBox.setSelected(BackupR.getSettings().getBoolean(SettingsEnum.MIRROR_PURGE.toString()));
+		copyOnlyNewerFilesCheckBox.setSelected(SynchronizR.getSettings().getBoolean(SettingsEnum.COPY_ONLY_NEWER_FILES.toString()));
+		overrideCheckBox.setSelected(SynchronizR.getSettings().getBoolean(SettingsEnum.OVERRIDE_IF_NECESSARY.toString()));
+		mirrorCopyCheckBox.setSelected(SynchronizR.getSettings().getBoolean(SettingsEnum.MIRROR_PURGE.toString()));
 	}
 
 	public boolean isBackingUp() {
@@ -64,7 +77,7 @@ public class BackupGui extends javax.swing.JPanel {
         statusScrollPaneContainer = new javax.swing.JScrollPane();
         statusTextArea = new javax.swing.JTextArea();
 
-        backupFromLabel.setText("Backup from");
+        backupFromLabel.setText("Sync from");
 
         backupFromTextField.setEditable(false);
         backupFromTextField.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -73,7 +86,7 @@ public class BackupGui extends javax.swing.JPanel {
             }
         });
 
-        backupToLabel.setText("Backup to");
+        backupToLabel.setText("Sync to");
 
         backupToTextField.setEditable(false);
         backupToTextField.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -131,16 +144,16 @@ public class BackupGui extends javax.swing.JPanel {
                 .addComponent(mirrorCopyCheckBox))
         );
 
-        copyOnlyNewerFilesCheckBox.setText(BackupR.getLang().get("copyOnlyNewerFiles"));
-        copyOnlyNewerFilesCheckBox.setToolTipText("<html><body><p>" + StringUtils.autoReturn(BackupR.getLang().get("copyOnlyNewerFilesTooltip"), 100).replaceAll("\n", "<br />") + "</p></body></html>");
-        overrideCheckBox.setText(BackupR.getLang().get("overrideIfNecessary"));
-        overrideCheckBox.setToolTipText("<html><body><p>" + StringUtils.autoReturn(BackupR.getLang().get("overrideIfNecessaryTooltip"), 100).replaceAll("\n", "<br />") + "</p></body></html>");
-        mirrorCopyCheckBox.setText(BackupR.getLang().get("mirrorCopy"));
-        mirrorCopyCheckBox.setToolTipText("<html><body><p>" + StringUtils.autoReturn(BackupR.getLang().get("mirrorCopyTooltip"), 100).replaceAll("\n", "<br />") + "</p></body></html>");
+        copyOnlyNewerFilesCheckBox.setText(com.mamoslab.synchronizR.SynchronizR.getLang().get("copyOnlyNewerFiles"));
+        copyOnlyNewerFilesCheckBox.setToolTipText("<html><body><p>" + StringUtils.autoReturn(com.mamoslab.synchronizR.SynchronizR.getLang().get("copyOnlyNewerFilesTooltip"), 100).replaceAll("\n", "<br />") + "</p></body></html>");
+        overrideCheckBox.setText(com.mamoslab.synchronizR.SynchronizR.getLang().get("overrideIfNecessary"));
+        overrideCheckBox.setToolTipText("<html><body><p>" + StringUtils.autoReturn(com.mamoslab.synchronizR.SynchronizR.getLang().get("overrideIfNecessaryTooltip"), 100).replaceAll("\n", "<br />") + "</p></body></html>");
+        mirrorCopyCheckBox.setText(com.mamoslab.synchronizR.SynchronizR.getLang().get("mirrorCopy"));
+        mirrorCopyCheckBox.setToolTipText("<html><body><p>" + StringUtils.autoReturn(com.mamoslab.synchronizR.SynchronizR.getLang().get("mirrorCopyTooltip"), 100).replaceAll("\n", "<br />") + "</p></body></html>");
 
         advancedSectionPanel.setVisible(false);
 
-        backupButton.setText("Back it up!");
+        backupButton.setText("Synchronize!");
         backupButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backupButtonActionPerformed(evt);
@@ -161,12 +174,17 @@ public class BackupGui extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(backupButton)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
+                        .addComponent(statusScrollPaneContainer))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(statusScrollPaneContainer)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(advancedCheckBox)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(backupFromLabel)
@@ -174,11 +192,8 @@ public class BackupGui extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(backupToTextField)
-                                    .addComponent(backupFromTextField)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(advancedCheckBox)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
+                                    .addComponent(backupFromTextField)))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addComponent(advancedSectionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -192,8 +207,8 @@ public class BackupGui extends javax.swing.JPanel {
                     .addComponent(backupFromTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(backupToLabel)
-                    .addComponent(backupToTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(backupToTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(backupToLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(advancedCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -205,14 +220,14 @@ public class BackupGui extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        backupFromLabel.setText(BackupR.getLang().get("backupFrom"));
-        backupFromLabel.setToolTipText("<html><body><p>" + StringUtils.autoReturn(BackupR.getLang().get("backupFromTooltip"), 100).replaceAll("\n", "<br />") + "</p></body></html>");
-        backupFromTextField.setToolTipText("<html><body><p>" + StringUtils.autoReturn(BackupR.getLang().get("backupFromTooltip"), 100).replaceAll("\n", "<br />") + "</p></body></html>");
-        backupToLabel.setText(BackupR.getLang().get("backupTo"));
-        backupToLabel.setToolTipText("<html><body><p>" + StringUtils.autoReturn(BackupR.getLang().get("backupToTooltip"), 100).replaceAll("\n", "<br />") + "</p></body></html>");
-        backupToTextField.setToolTipText("<html><body><p>" + StringUtils.autoReturn(BackupR.getLang().get("backupToTooltip"), 100).replaceAll("\n", "<br />") + "</p></body></html>");
-        advancedCheckBox.setText(BackupR.getLang().get("advanced"));
-        backupButton.setText(BackupR.getLang().get("backItUp"));
+        backupFromLabel.setText(com.mamoslab.synchronizR.SynchronizR.getLang().get("syncFrom"));
+        backupFromLabel.setToolTipText("<html><body><p>" + StringUtils.autoReturn(com.mamoslab.synchronizR.SynchronizR.getLang().get("syncFromTooltip"), 100).replaceAll("\n", "<br />") + "</p></body></html>");
+        backupFromTextField.setToolTipText("<html><body><p>" + StringUtils.autoReturn(com.mamoslab.synchronizR.SynchronizR.getLang().get("syncFromTooltip"), 100).replaceAll("\n", "<br />") + "</p></body></html>");
+        backupToLabel.setText(com.mamoslab.synchronizR.SynchronizR.getLang().get("syncTo"));
+        backupToLabel.setToolTipText("<html><body><p>" + StringUtils.autoReturn(com.mamoslab.synchronizR.SynchronizR.getLang().get("syncToTooltip"), 100).replaceAll("\n", "<br />") + "</p></body></html>");
+        backupToTextField.setToolTipText("<html><body><p>" + StringUtils.autoReturn(com.mamoslab.synchronizR.SynchronizR.getLang().get("syncToTooltip"), 100).replaceAll("\n", "<br />") + "</p></body></html>");
+        advancedCheckBox.setText(com.mamoslab.synchronizR.SynchronizR.getLang().get("advanced"));
+        backupButton.setText(com.mamoslab.synchronizR.SynchronizR.getLang().get("synchronize2"));
     }// </editor-fold>//GEN-END:initComponents
 
     private void backupFromTextFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backupFromTextFieldMousePressed
@@ -224,7 +239,7 @@ public class BackupGui extends javax.swing.JPanel {
 		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
 			try {
-				BackupR.getSettings().set(SettingsEnum.FROM.toString(), fileChooser.getSelectedFile().getPath());
+				SynchronizR.getSettings().set(SettingsEnum.FROM.toString(), fileChooser.getSelectedFile().getPath());
 			} catch (IOException ex) {
 			}
 			prefUpdate();
@@ -234,7 +249,7 @@ public class BackupGui extends javax.swing.JPanel {
     private void advancedCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_advancedCheckBoxActionPerformed
 		advancedSectionPanel.setVisible(advancedCheckBox.isSelected());
 		try {
-			BackupR.getSettings().set(SettingsEnum.ADVANCED_ENABLED.toString(), advancedCheckBox.isSelected());
+			SynchronizR.getSettings().set(SettingsEnum.ADVANCED_ENABLED.toString(), advancedCheckBox.isSelected());
 		} catch (IOException ex) {
 		}
 		prefUpdate();
@@ -249,7 +264,7 @@ public class BackupGui extends javax.swing.JPanel {
 		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
 			try {
-				BackupR.getSettings().set(SettingsEnum.TO.toString(), fileChooser.getSelectedFile().getPath());
+				SynchronizR.getSettings().set(SettingsEnum.TO.toString(), fileChooser.getSelectedFile().getPath());
 			} catch (IOException ex) {
 			}
 			prefUpdate();
@@ -259,28 +274,28 @@ public class BackupGui extends javax.swing.JPanel {
     private void backupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backupButtonActionPerformed
 		if (!backingUp && !cancellingBackup) {
 			if (backupFromTextField.getText().isEmpty() || backupToTextField.getText().isEmpty()) {
-				JOptionPane.showOptionDialog(this, BackupR.getLang().get("fillOutAllTheFields"), "BackupR", JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE, null, new String[]{BackupR.getLang().get("ok2")}, null);
+				JOptionPane.showOptionDialog(this, SynchronizR.getLang().get("fillOutAllTheFields"), "SynchronizR", JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE, null, new String[]{SynchronizR.getLang().get("ok2")}, null);
 				return;
 			}
 
 			final File from = new File(backupFromTextField.getText());
 
 			if (!from.exists()) {
-				JOptionPane.showOptionDialog(this, BackupR.getLang().get("inputFolderDoesntExist"), "BackupR", JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE, null, new String[]{BackupR.getLang().get("ok2")}, null);
+				JOptionPane.showOptionDialog(this, SynchronizR.getLang().get("syncFromFolderDoesntExist"), "SynchronizR", JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE, null, new String[]{SynchronizR.getLang().get("ok2")}, null);
 				return;
 			} else if (!from.isDirectory()) {
-				JOptionPane.showOptionDialog(this, BackupR.getLang().get("inputFolderIsntDir"), "BackupR", JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE, null, new String[]{BackupR.getLang().get("ok2")}, null);
+				JOptionPane.showOptionDialog(this, SynchronizR.getLang().get("syncFromIsntDir"), "SynchronizR", JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE, null, new String[]{SynchronizR.getLang().get("ok2")}, null);
 				return;
 			}
 
 			final File to = new File(backupToTextField.getText());
 
 			if (to.exists() && to.isFile()) {
-				JOptionPane.showOptionDialog(this, BackupR.getLang().get("outputFolderIsFile"), "BackupR", JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE, null, new String[]{BackupR.getLang().get("ok2")}, null);
+				JOptionPane.showOptionDialog(this, SynchronizR.getLang().get("syncToIsFile"), "SynchronizR", JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE, null, new String[]{SynchronizR.getLang().get("ok2")}, null);
 				return;
 			}
 			if (FileUtils.dirContainsFile(from, to) || FileUtils.dirContainsFile(to, from)) {
-				JOptionPane.showOptionDialog(this, BackupR.getLang().get("dirInceptionErr"), "BackupR", JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE, null, new String[]{BackupR.getLang().get("ok2")}, null);
+				JOptionPane.showOptionDialog(this, SynchronizR.getLang().get("dirInceptionErr"), "SynchronizR", JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE, null, new String[]{SynchronizR.getLang().get("ok2")}, null);
 				return;
 			}
 
@@ -289,20 +304,20 @@ public class BackupGui extends javax.swing.JPanel {
 				public void run() {
 					backingUp = true;
 					GuiUtils.setEverythingEnabled(gui, false);
-					backupButton.setText(BackupR.getLang().get("cancel"));
+					backupButton.setText(SynchronizR.getLang().get("cancel"));
 					GuiUtils.setEverythingEnabled(backupButton, true);
 					GuiUtils.setEverythingEnabled(statusScrollPaneContainer, true);
 					GuiUtils.setEverythingEnabled(gui.getProgressBar(), true);
-					BackupGui.this.statusTextArea.setText(null);
+					SyncGui.this.statusTextArea.setText(null);
 					gui.getProgressBar().setIndeterminate(true);
 					ArrayList<TreeCopyOption> options = new ArrayList<TreeCopyOption>();
-					if (BackupGui.this.copyOnlyNewerFilesCheckBox.isSelected()) {
+					if (SyncGui.this.copyOnlyNewerFilesCheckBox.isSelected()) {
 						options.add(TreeCopyOption.COPY_ONLY_NEWER_FILES);
 					}
-					if (BackupGui.this.overrideCheckBox.isSelected()) {
+					if (SyncGui.this.overrideCheckBox.isSelected()) {
 						options.add(TreeCopyOption.OVERRIDE_IF_NECESSARY);
 					}
-					if (BackupGui.this.mirrorCopyCheckBox.isSelected()) {
+					if (SyncGui.this.mirrorCopyCheckBox.isSelected()) {
 						options.add(TreeCopyOption.MIRROR_PURGE);
 					}
 					File to_ = to;
@@ -313,16 +328,16 @@ public class BackupGui extends javax.swing.JPanel {
 					if (System.getProperty("os.name").toLowerCase().contains("win")) {
 						to_ = new File(to_, from.toPath().getRoot().toString().replace(":", ""));
 					}
-					backup = new TreeCopier(from, to_, from.toPath().getRoot().toFile(), options.toArray(new TreeCopyOption[options.size()]));
+					backup = new TreeCopier(SynchronizR.getLang(), from, to_, from.toPath().getRoot().toFile(), options.toArray(new TreeCopyOption[options.size()]));
 					backup.addTreeCopyEventListener(new TreeCopier.TreeCopyEventListener() {
 						@Override
 						public void onEvent(TreeCopyEvent event) {
 							if (event instanceof TreeCopier.TreeCopyLogEvent) {
 								TreeCopier.TreeCopyLogEvent event_ = (TreeCopier.TreeCopyLogEvent) event;
-								if (!event_.isLogAppended() && !BackupGui.this.statusTextArea.getText().isEmpty()) {
-									BackupGui.this.statusTextArea.append("\n");
+								if (!event_.isLogAppended() && !SyncGui.this.statusTextArea.getText().isEmpty()) {
+									SyncGui.this.statusTextArea.append("\n");
 								}
-								BackupGui.this.statusTextArea.append(event_.getLog());
+								SyncGui.this.statusTextArea.append(event_.getLog());
 							}
 							gui.getProgressBar().setValue((int) (100D * event.getFilesProcessed() / event.getFiles()));
 						}
@@ -335,11 +350,11 @@ public class BackupGui extends javax.swing.JPanel {
 					gui.getProgressBar().setString(null);
 					gui.getProgressBar().setValue(100);
 					if (!cancellingBackup) {
-						JOptionPane.showOptionDialog(BackupGui.this, BackupR.getLang().get("done2"), "BackupR", JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[]{BackupR.getLang().get("ok2")}, null);
+						JOptionPane.showOptionDialog(SyncGui.this, SynchronizR.getLang().get("done2"), "SynchronizR", JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[]{SynchronizR.getLang().get("ok2")}, null);
 					}
 					gui.getProgressBar().setValue(0);
 					gui.getProgressBar().setString("");
-					backupButton.setText(BackupR.getLang().get("backItUp"));
+					backupButton.setText(SynchronizR.getLang().get("synchronize2"));
 					GuiUtils.setEverythingEnabled(gui, true);
 					backingUp = false;
 					cancellingBackup = false;
@@ -358,21 +373,21 @@ public class BackupGui extends javax.swing.JPanel {
 
     private void copyOnlyNewerFilesCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyOnlyNewerFilesCheckBoxActionPerformed
 		try {
-			BackupR.getSettings().set(SettingsEnum.COPY_ONLY_NEWER_FILES.toString(), copyOnlyNewerFilesCheckBox.isSelected());
+			SynchronizR.getSettings().set(SettingsEnum.COPY_ONLY_NEWER_FILES.toString(), copyOnlyNewerFilesCheckBox.isSelected());
 		} catch (IOException ex) {
 		}
     }//GEN-LAST:event_copyOnlyNewerFilesCheckBoxActionPerformed
 
     private void overrideCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_overrideCheckBoxActionPerformed
 		try {
-			BackupR.getSettings().set(SettingsEnum.OVERRIDE_IF_NECESSARY.toString(), overrideCheckBox.isSelected());
+			SynchronizR.getSettings().set(SettingsEnum.OVERRIDE_IF_NECESSARY.toString(), overrideCheckBox.isSelected());
 		} catch (IOException ex) {
 		}
     }//GEN-LAST:event_overrideCheckBoxActionPerformed
 
     private void mirrorCopyCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mirrorCopyCheckBoxActionPerformed
 		try {
-			BackupR.getSettings().set(SettingsEnum.MIRROR_PURGE.toString(), mirrorCopyCheckBox.isSelected());
+			SynchronizR.getSettings().set(SettingsEnum.MIRROR_PURGE.toString(), mirrorCopyCheckBox.isSelected());
 		} catch (IOException ex) {
 		}
     }//GEN-LAST:event_mirrorCopyCheckBoxActionPerformed

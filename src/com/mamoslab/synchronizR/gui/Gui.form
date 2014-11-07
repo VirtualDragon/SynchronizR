@@ -48,12 +48,12 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="titleLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;body&gt;&lt;p style=&quot;font-size: 1.5em;&quot;&gt;BackupR&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;"/>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;body&gt;&lt;p style=&quot;font-size: 1.5em;&quot;&gt;SynchronizR&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JTabbedPane" name="tabbedPanel">
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_LayoutCodePost" type="java.lang.String" value="tabbedPanel.addTab(BackupR.getLang().get(&quot;backup&quot;), backupGui);&#xa;tabbedPanel.addTab(BackupR.getLang().get(&quot;settings&quot;), settingsGui);"/>
+        <AuxValue name="JavaCodeGenerator_LayoutCodePost" type="java.lang.String" value="tabbedPanel.addTab(com.mamoslab.synchronizR.SynchronizR.getLang().get(&quot;synchronize&quot;), syncGui);&#xa;tabbedPanel.addTab(com.mamoslab.synchronizR.SynchronizR.getLang().get(&quot;settings&quot;), settingsGui);"/>
       </AuxValues>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>

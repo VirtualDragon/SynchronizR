@@ -1,7 +1,21 @@
-package com.mamoslab.backupR.gui;
+/*
+ BackupR
+ Copyright (C) 2014 Matteo Morena
 
-import com.mamoslab.backupR.BackupR;
-import com.mamoslab.backupR.SettingsEnum;
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ */
+package com.mamoslab.synchronizR.gui;
+
+import com.mamoslab.synchronizR.SynchronizR;
+import com.mamoslab.synchronizR.SettingsEnum;
 import java.io.IOException;
 
 public class SettingsGui extends javax.swing.JPanel {
@@ -12,11 +26,11 @@ public class SettingsGui extends javax.swing.JPanel {
 	}
 
 	private void prefUpdate() {
-		boolean automaticUpdateCheck = BackupR.getSettings().getBoolean(SettingsEnum.AUTOMATIC_UPDATE_CHECK.toString());
+		boolean automaticUpdateCheck = SynchronizR.getSettings().getBoolean(SettingsEnum.AUTOMATIC_UPDATE_CHECK.toString());
 		automaticUpdateCheckCheckBox.setSelected(automaticUpdateCheck);
 		automaticUpdateInstallationRadioButton.setEnabled(automaticUpdateCheck);
 		confirmUpdateInstallationRadioButton.setEnabled(automaticUpdateCheck);
-		if (BackupR.getSettings().getBoolean(SettingsEnum.AUTOMATIC_UPDATE_INSTALLATION.toString())) {
+		if (SynchronizR.getSettings().getBoolean(SettingsEnum.AUTOMATIC_UPDATE_INSTALLATION.toString())) {
 			automaticUpdateInstallationRadioButton.setSelected(true);
 		} else {
 			confirmUpdateInstallationRadioButton.setSelected(true);
@@ -82,14 +96,14 @@ public class SettingsGui extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        automaticUpdateCheckCheckBox.setText(BackupR.getLang().get("automaticallyCheckForUpdates"));
-        automaticUpdateInstallationRadioButton.setText(BackupR.getLang().get("automaticallyInstallUpdates"));
-        confirmUpdateInstallationRadioButton.setText(BackupR.getLang().get("askForConfirmBeforeInstallingUpdate"));
+        automaticUpdateCheckCheckBox.setText(SynchronizR.getLang().get("automaticallyCheckForUpdates"));
+        automaticUpdateInstallationRadioButton.setText(SynchronizR.getLang().get("automaticallyInstallUpdates"));
+        confirmUpdateInstallationRadioButton.setText(SynchronizR.getLang().get("askForConfirmBeforeInstallingUpdate"));
     }// </editor-fold>//GEN-END:initComponents
 
     private void automaticUpdateCheckCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_automaticUpdateCheckCheckBoxActionPerformed
 		try {
-			BackupR.getSettings().set(SettingsEnum.AUTOMATIC_UPDATE_CHECK.toString(), automaticUpdateCheckCheckBox.isSelected());
+			SynchronizR.getSettings().set(SettingsEnum.AUTOMATIC_UPDATE_CHECK.toString(), automaticUpdateCheckCheckBox.isSelected());
 		} catch (IOException ex) {
 		}
 		prefUpdate();
@@ -97,7 +111,7 @@ public class SettingsGui extends javax.swing.JPanel {
 
     private void automaticUpdateInstallationRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_automaticUpdateInstallationRadioButtonActionPerformed
 		try {
-			BackupR.getSettings().set(SettingsEnum.AUTOMATIC_UPDATE_INSTALLATION.toString(), true);
+			SynchronizR.getSettings().set(SettingsEnum.AUTOMATIC_UPDATE_INSTALLATION.toString(), true);
 		} catch (IOException ex) {
 		}
 		prefUpdate();
@@ -105,7 +119,7 @@ public class SettingsGui extends javax.swing.JPanel {
 
     private void confirmUpdateInstallationRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmUpdateInstallationRadioButtonActionPerformed
 		try {
-			BackupR.getSettings().set(SettingsEnum.AUTOMATIC_UPDATE_INSTALLATION.toString(), false);
+			SynchronizR.getSettings().set(SettingsEnum.AUTOMATIC_UPDATE_INSTALLATION.toString(), false);
 		} catch (IOException ex) {
 		}
 		prefUpdate();
