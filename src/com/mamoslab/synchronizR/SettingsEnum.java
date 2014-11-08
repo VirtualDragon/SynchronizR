@@ -20,6 +20,7 @@ public enum SettingsEnum {
 	FROM("from", ""),
 	TO("to", ""),
 	ADVANCED_ENABLED("advancedEnabled", false),
+	COPY_WHOLE_DIRECTORY_TREE("copyWholeDirectoryTree", false),
 	COPY_ONLY_NEWER_FILES("copyOnlyNewerFiles", true),
 	OVERRIDE_IF_NECESSARY("overrideIfNecessary", true),
 	MIRROR_PURGE("mirrorPurge", true),

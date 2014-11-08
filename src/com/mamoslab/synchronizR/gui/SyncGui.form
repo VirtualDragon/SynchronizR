@@ -16,11 +16,6 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              <Component id="backupButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
           <Group type="102" alignment="1" attributes="0">
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
@@ -30,20 +25,22 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <Component id="advancedCheckBox" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="backupFromLabel" min="-2" max="-2" attributes="0"/>
-                                  <Component id="backupToLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="syncFromLabel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="syncToLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="backupToTextField" max="32767" attributes="0"/>
-                                  <Component id="backupFromTextField" max="32767" attributes="0"/>
+                                  <Component id="syncFromTextField" max="32767" attributes="0"/>
+                                  <Component id="syncToTextField" max="32767" attributes="0"/>
                               </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="swapFromToButton" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -54,27 +51,37 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <Component id="syncButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="backupFromLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="backupFromTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="backupToTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="backupToLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="syncFromLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="syncFromTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="syncToTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="syncToLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Component id="swapFromToButton" alignment="1" min="-2" pref="49" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="advancedCheckBox" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="advancedSectionPanel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="backupButton" min="-2" max="-2" attributes="0"/>
+              <Component id="syncButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="statusScrollPaneContainer" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -83,42 +90,53 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="backupFromLabel">
+    <Component class="javax.swing.JLabel" name="syncFromLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Sync from"/>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="backupFromLabel.setText(com.mamoslab.synchronizR.SynchronizR.getLang().get(&quot;syncFrom&quot;));&#xa;backupFromLabel.setToolTipText(&quot;&lt;html&gt;&lt;body&gt;&lt;p&gt;&quot; + StringUtils.autoReturn(com.mamoslab.synchronizR.SynchronizR.getLang().get(&quot;syncFromTooltip&quot;), 100).replaceAll(&quot;\n&quot;, &quot;&lt;br /&gt;&quot;) + &quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;&quot;);"/>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="syncFromLabel.setText(SynchronizR.getLang().get(&quot;syncFrom&quot;));&#xa;syncFromLabel.setToolTipText(&quot;&lt;html&gt;&lt;body&gt;&lt;p&gt;&quot; + StringUtils.autoReturn(SynchronizR.getLang().get(&quot;syncFromTooltip&quot;), 100).replaceAll(&quot;\n&quot;, &quot;&lt;br /&gt;&quot;) + &quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;&quot;);"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JTextField" name="backupFromTextField">
+    <Component class="javax.swing.JTextField" name="syncFromTextField">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
       </Properties>
       <Events>
-        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="backupFromTextFieldMousePressed"/>
+        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="syncFromTextFieldMousePressed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="backupFromTextField.setToolTipText(&quot;&lt;html&gt;&lt;body&gt;&lt;p&gt;&quot; + StringUtils.autoReturn(com.mamoslab.synchronizR.SynchronizR.getLang().get(&quot;syncFromTooltip&quot;), 100).replaceAll(&quot;\n&quot;, &quot;&lt;br /&gt;&quot;) + &quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;&quot;);"/>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="syncFromTextField.setToolTipText(&quot;&lt;html&gt;&lt;body&gt;&lt;p&gt;&quot; + StringUtils.autoReturn(SynchronizR.getLang().get(&quot;syncFromTooltip&quot;), 100).replaceAll(&quot;\n&quot;, &quot;&lt;br /&gt;&quot;) + &quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;&quot;);"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JLabel" name="backupToLabel">
+    <Component class="javax.swing.JLabel" name="syncToLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Sync to"/>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="backupToLabel.setText(com.mamoslab.synchronizR.SynchronizR.getLang().get(&quot;syncTo&quot;));&#xa;backupToLabel.setToolTipText(&quot;&lt;html&gt;&lt;body&gt;&lt;p&gt;&quot; + StringUtils.autoReturn(com.mamoslab.synchronizR.SynchronizR.getLang().get(&quot;syncToTooltip&quot;), 100).replaceAll(&quot;\n&quot;, &quot;&lt;br /&gt;&quot;) + &quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;&quot;);"/>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="syncToLabel.setText(SynchronizR.getLang().get(&quot;syncTo&quot;));&#xa;syncToLabel.setToolTipText(&quot;&lt;html&gt;&lt;body&gt;&lt;p&gt;&quot; + StringUtils.autoReturn(SynchronizR.getLang().get(&quot;syncToTooltip&quot;), 100).replaceAll(&quot;\n&quot;, &quot;&lt;br /&gt;&quot;) + &quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;&quot;);"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JTextField" name="backupToTextField">
+    <Component class="javax.swing.JTextField" name="syncToTextField">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
       </Properties>
       <Events>
-        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="backupToTextFieldMousePressed"/>
+        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="syncToTextFieldMousePressed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="backupToTextField.setToolTipText(&quot;&lt;html&gt;&lt;body&gt;&lt;p&gt;&quot; + StringUtils.autoReturn(com.mamoslab.synchronizR.SynchronizR.getLang().get(&quot;syncToTooltip&quot;), 100).replaceAll(&quot;\n&quot;, &quot;&lt;br /&gt;&quot;) + &quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;&quot;);"/>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="syncToTextField.setToolTipText(&quot;&lt;html&gt;&lt;body&gt;&lt;p&gt;&quot; + StringUtils.autoReturn(SynchronizR.getLang().get(&quot;syncToTooltip&quot;), 100).replaceAll(&quot;\n&quot;, &quot;&lt;br /&gt;&quot;) + &quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;&quot;);"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="swapFromToButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#x2195; Swap"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="swapFromToButtonActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="swapFromToButton.setText(SynchronizR.getLang().get(&quot;swap&quot;));&#xa;swapFromToButton.setToolTipText(&quot;&lt;html&gt;&lt;body&gt;&lt;p&gt;&quot; + StringUtils.autoReturn(SynchronizR.getLang().get(&quot;swapTooltip&quot;), 100).replaceAll(&quot;\n&quot;, &quot;&lt;br /&gt;&quot;) + &quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;&quot;);"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JCheckBox" name="advancedCheckBox">
@@ -129,7 +147,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="advancedCheckBoxActionPerformed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="advancedCheckBox.setText(com.mamoslab.synchronizR.SynchronizR.getLang().get(&quot;advanced&quot;));"/>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="advancedCheckBox.setText(SynchronizR.getLang().get(&quot;advanced&quot;));"/>
       </AuxValues>
     </Component>
     <Container class="javax.swing.JPanel" name="advancedSectionPanel">
@@ -140,19 +158,22 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="copyOnlyNewerFilesCheckBox" min="-2" max="-2" attributes="0"/>
-                      <Component id="overrideCheckBox" min="-2" max="-2" attributes="0"/>
+                      <Component id="copyWholeDirectoryTreeCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="copyOnlyNewerFilesCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="overrideCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="mirrorCopyCheckBox" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
+                  <Component id="copyWholeDirectoryTreeCheckBox" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="copyOnlyNewerFilesCheckBox" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="overrideCheckBox" min="-2" max="-2" attributes="0"/>
@@ -163,6 +184,14 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
+        <Component class="javax.swing.JCheckBox" name="copyWholeDirectoryTreeCheckBox">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Copy whole directory tree"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="copyWholeDirectoryTreeCheckBox.setText(SynchronizR.getLang().get(&quot;copyWholeDirectoryTree&quot;));&#xa;copyWholeDirectoryTreeCheckBox.setToolTipText(&quot;&lt;html&gt;&lt;body&gt;&lt;p&gt;&quot; + StringUtils.autoReturn(SynchronizR.getLang().get(&quot;copyWholeDirectoryTreeTooltip&quot;), 100).replaceAll(&quot;\n&quot;, &quot;&lt;br /&gt;&quot;) + &quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;&quot;);"/>
+          </AuxValues>
+        </Component>
         <Component class="javax.swing.JCheckBox" name="copyOnlyNewerFilesCheckBox">
           <Properties>
             <Property name="text" type="java.lang.String" value="Copy only newer files"/>
@@ -171,7 +200,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="copyOnlyNewerFilesCheckBoxActionPerformed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="copyOnlyNewerFilesCheckBox.setText(com.mamoslab.synchronizR.SynchronizR.getLang().get(&quot;copyOnlyNewerFiles&quot;));&#xa;copyOnlyNewerFilesCheckBox.setToolTipText(&quot;&lt;html&gt;&lt;body&gt;&lt;p&gt;&quot; + StringUtils.autoReturn(com.mamoslab.synchronizR.SynchronizR.getLang().get(&quot;copyOnlyNewerFilesTooltip&quot;), 100).replaceAll(&quot;\n&quot;, &quot;&lt;br /&gt;&quot;) + &quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;&quot;);"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="copyOnlyNewerFilesCheckBox.setText(SynchronizR.getLang().get(&quot;copyOnlyNewerFiles&quot;));&#xa;copyOnlyNewerFilesCheckBox.setToolTipText(&quot;&lt;html&gt;&lt;body&gt;&lt;p&gt;&quot; + StringUtils.autoReturn(SynchronizR.getLang().get(&quot;copyOnlyNewerFilesTooltip&quot;), 100).replaceAll(&quot;\n&quot;, &quot;&lt;br /&gt;&quot;) + &quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;&quot;);"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JCheckBox" name="overrideCheckBox">
@@ -182,7 +211,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="overrideCheckBoxActionPerformed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="overrideCheckBox.setText(com.mamoslab.synchronizR.SynchronizR.getLang().get(&quot;overrideIfNecessary&quot;));&#xa;overrideCheckBox.setToolTipText(&quot;&lt;html&gt;&lt;body&gt;&lt;p&gt;&quot; + StringUtils.autoReturn(com.mamoslab.synchronizR.SynchronizR.getLang().get(&quot;overrideIfNecessaryTooltip&quot;), 100).replaceAll(&quot;\n&quot;, &quot;&lt;br /&gt;&quot;) + &quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;&quot;);"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="overrideCheckBox.setText(SynchronizR.getLang().get(&quot;overrideIfNecessary&quot;));&#xa;overrideCheckBox.setToolTipText(&quot;&lt;html&gt;&lt;body&gt;&lt;p&gt;&quot; + StringUtils.autoReturn(SynchronizR.getLang().get(&quot;overrideIfNecessaryTooltip&quot;), 100).replaceAll(&quot;\n&quot;, &quot;&lt;br /&gt;&quot;) + &quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;&quot;);"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JCheckBox" name="mirrorCopyCheckBox">
@@ -193,20 +222,20 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mirrorCopyCheckBoxActionPerformed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="mirrorCopyCheckBox.setText(com.mamoslab.synchronizR.SynchronizR.getLang().get(&quot;mirrorCopy&quot;));&#xa;mirrorCopyCheckBox.setToolTipText(&quot;&lt;html&gt;&lt;body&gt;&lt;p&gt;&quot; + StringUtils.autoReturn(com.mamoslab.synchronizR.SynchronizR.getLang().get(&quot;mirrorCopyTooltip&quot;), 100).replaceAll(&quot;\n&quot;, &quot;&lt;br /&gt;&quot;) + &quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;&quot;);"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="mirrorCopyCheckBox.setText(SynchronizR.getLang().get(&quot;mirrorCopy&quot;));&#xa;mirrorCopyCheckBox.setToolTipText(&quot;&lt;html&gt;&lt;body&gt;&lt;p&gt;&quot; + StringUtils.autoReturn(SynchronizR.getLang().get(&quot;mirrorCopyTooltip&quot;), 100).replaceAll(&quot;\n&quot;, &quot;&lt;br /&gt;&quot;) + &quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;&quot;);"/>
           </AuxValues>
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="backupButton">
+    <Component class="javax.swing.JButton" name="syncButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Synchronize!"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backupButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="syncButtonActionPerformed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="backupButton.setText(com.mamoslab.synchronizR.SynchronizR.getLang().get(&quot;synchronize2&quot;));"/>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="syncButton.setText(SynchronizR.getLang().get(&quot;synchronize2&quot;));"/>
       </AuxValues>
     </Component>
     <Container class="javax.swing.JScrollPane" name="statusScrollPaneContainer">
