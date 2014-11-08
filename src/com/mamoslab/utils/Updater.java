@@ -85,8 +85,8 @@ public class Updater {
 		NodeList versions = xml.getElementsByTagName("version");
 		long lastestTime = 0L;
 		Element lastest = null;
-		for (int j = 0; j < versions.getLength(); j++) {
-			Element version = (Element) versions.item(j);
+		for (int i = 0; i < versions.getLength(); i++) {
+			Element version = (Element) versions.item(i);
 			long time = 0L;
 			try {
 				time = Long.parseLong(version.getElementsByTagName("release-time").item(0).getTextContent());

@@ -43,8 +43,8 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 public class SynchronizR {
 
-	public static final String VERSION = "1.9";
-	public static final long releaseDate = 201411081115L;
+	public static final String VERSION = "1.9.1";
+	public static final long releaseDate = 201411081222L;
 
 	private static Settings settings;
 	private static final Lang lang = new Lang("lang");
@@ -217,7 +217,7 @@ public class SynchronizR {
 						@Override
 						public void run() {
 							try {
-								Updater updater = new Updater(new URL("https://github.com/MamosLab/SynchronizR/blob/master/versions.xml"), releaseDate);
+								Updater updater = new Updater(new URL("https://raw.githubusercontent.com/MamosLab/SynchronizR/master/versions.xml"), releaseDate);
 								updater.checkForUpdates();
 								gui.getProgressBar().setIndeterminate(false);
 								if (updater.areUpdatesAvaiable() && (getSettings().getBoolean(SettingsEnum.AUTOMATIC_UPDATE_INSTALLATION.toString()) || JOptionPane.showOptionDialog(window, getLang().get("updateFound"), "SynchronizR", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{getLang().get("yes"), getLang().get("no")}, null) == 0)) {

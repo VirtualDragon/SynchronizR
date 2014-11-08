@@ -48,6 +48,7 @@ public class SyncGui extends javax.swing.JPanel {
 		syncToTextField.setText(SynchronizR.getSettings().getString(SettingsEnum.TO.toString()));
 		advancedCheckBox.setSelected(SynchronizR.getSettings().getBoolean(SettingsEnum.ADVANCED_ENABLED.toString()));
 		advancedSectionPanel.setVisible(advancedCheckBox.isSelected());
+		copyWholeDirectoryTreeCheckBox.setSelected(SynchronizR.getSettings().getBoolean(SettingsEnum.COPY_WHOLE_DIRECTORY_TREE.toString()));
 		copyOnlyNewerFilesCheckBox.setSelected(SynchronizR.getSettings().getBoolean(SettingsEnum.COPY_ONLY_NEWER_FILES.toString()));
 		overrideCheckBox.setSelected(SynchronizR.getSettings().getBoolean(SettingsEnum.OVERRIDE_IF_NECESSARY.toString()));
 		mirrorCopyCheckBox.setSelected(SynchronizR.getSettings().getBoolean(SettingsEnum.MIRROR_PURGE.toString()));
