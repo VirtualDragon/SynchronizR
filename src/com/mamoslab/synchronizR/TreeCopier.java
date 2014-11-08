@@ -38,7 +38,7 @@ public class TreeCopier {
 	private EnumSet<TreeCopyOption> options = EnumSet.noneOf(TreeCopyOption.class);
 	private ArrayList<TreeCopyEventListener> listeners = new ArrayList<TreeCopyEventListener>();
 
-	private long files, directories, filesProcessed, directoriesProcessed;
+	private long bytes, bytesProcessed;
 	private boolean isCancelled = false;
 
 	public TreeCopier(Lang lang, File from, File to, File relative, TreeCopyOption... options) {
@@ -52,13 +52,12 @@ public class TreeCopier {
 			Files.walkFileTree(this.from, new FileVisitor<Path>() {
 				@Override
 				public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) {
-					directories++;
 					return FileVisitResult.CONTINUE;
 				}
 
 				@Override
 				public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
-					files++;
+					bytes += file.toFile().length();
 					return FileVisitResult.CONTINUE;
 				}
 
@@ -183,7 +182,6 @@ public class TreeCopier {
 							}
 						}
 					}
-					directoriesProcessed++;
 					log();
 					return FileVisitResult.CONTINUE;
 				}
@@ -220,7 +218,7 @@ public class TreeCopier {
 							}
 						}
 					}
-					filesProcessed++;
+					bytesProcessed += file.toFile().length();
 					log();
 					return FileVisitResult.CONTINUE;
 				}
@@ -246,20 +244,12 @@ public class TreeCopier {
 		}
 	}
 
-	public long getFiles() {
-		return files;
+	public long getBytes() {
+		return bytes;
 	}
 
-	public long getDirectories() {
-		return directories;
-	}
-
-	public long getFilesProcessed() {
-		return filesProcessed;
-	}
-
-	public long getDirectoriesProcessed() {
-		return directoriesProcessed;
+	public long getBytesProcessed() {
+		return bytesProcessed;
 	}
 
 	private void log() {
@@ -290,21 +280,15 @@ public class TreeCopier {
 
 	public class TreeCopyEvent {
 
-		private long files, directories, filesProcessed, directoriesProcessed;
+		private long bytes, filesProcessed, directoriesProcessed;
 
 		TreeCopyEvent(TreeCopier copier) {
-			files = copier.files;
-			directories = copier.directories;
-			filesProcessed = copier.filesProcessed;
-			directoriesProcessed = copier.directoriesProcessed;
+			bytes = copier.bytes;
+			filesProcessed = copier.bytesProcessed;
 		}
 
 		public long getFiles() {
-			return files;
-		}
-
-		public long getDirectories() {
-			return directories;
+			return bytes;
 		}
 
 		public long getFilesProcessed() {
