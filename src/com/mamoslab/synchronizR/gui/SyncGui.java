@@ -25,6 +25,8 @@ import com.mamoslab.utils.StringUtils;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.text.DefaultCaret;
@@ -47,6 +49,7 @@ public class SyncGui extends javax.swing.JPanel {
 		syncFromTextField.setText(SynchronizR.getSettings().getString(SettingsEnum.FROM.toString()));
 		syncToTextField.setText(SynchronizR.getSettings().getString(SettingsEnum.TO.toString()));
 		advancedCheckBox.setSelected(SynchronizR.getSettings().getBoolean(SettingsEnum.ADVANCED_ENABLED.toString()));
+		copyWholeDirectoryTreeCheckBox.setSelected(SynchronizR.getSettings().getBoolean(SettingsEnum.COPY_WHOLE_DIRECTORY_TREE.toString()));
 		advancedSectionPanel.setVisible(advancedCheckBox.isSelected());
 		copyWholeDirectoryTreeCheckBox.setSelected(SynchronizR.getSettings().getBoolean(SettingsEnum.COPY_WHOLE_DIRECTORY_TREE.toString()));
 		copyOnlyNewerFilesCheckBox.setSelected(SynchronizR.getSettings().getBoolean(SettingsEnum.COPY_ONLY_NEWER_FILES.toString()));
@@ -110,6 +113,11 @@ public class SyncGui extends javax.swing.JPanel {
         });
 
         copyWholeDirectoryTreeCheckBox.setText("Copy whole directory tree");
+        copyWholeDirectoryTreeCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                copyWholeDirectoryTreeCheckBoxActionPerformed(evt);
+            }
+        });
 
         copyOnlyNewerFilesCheckBox.setText("Copy only newer files");
         copyOnlyNewerFilesCheckBox.addActionListener(new java.awt.event.ActionListener() {
@@ -418,7 +426,7 @@ public class SyncGui extends javax.swing.JPanel {
 			JOptionPane.showOptionDialog(this, SynchronizR.getLang().get("fillOutAllTheFields"), "SynchronizR", JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE, null, new String[]{SynchronizR.getLang().get("ok2")}, null);
 			return;
 		}
-		
+
 		String temp = syncFromTextField.getText();
 		try {
 			SynchronizR.getSettings().set(SettingsEnum.FROM.toString(), syncToTextField.getText());
@@ -427,6 +435,14 @@ public class SyncGui extends javax.swing.JPanel {
 		}
 		prefUpdate();
     }//GEN-LAST:event_swapFromToButtonActionPerformed
+
+    private void copyWholeDirectoryTreeCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyWholeDirectoryTreeCheckBoxActionPerformed
+		try {
+			SynchronizR.getSettings().set(SettingsEnum.COPY_WHOLE_DIRECTORY_TREE.toString(), copyWholeDirectoryTreeCheckBox.isEnabled());
+		} catch (IOException ex) {
+		}
+		prefUpdate();
+    }//GEN-LAST:event_copyWholeDirectoryTreeCheckBoxActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox advancedCheckBox;

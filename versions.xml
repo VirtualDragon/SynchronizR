@@ -23,4 +23,8 @@
 		<release-time>201411081115</release-time>
 		<download-link>https://github.com/MamosLab/SynchronizR/releases/download/v1.9/SynchronizR.jar</download-link>
 	</version>
+	<version>
+		<release-time>201411081222</release-time>
+		<download-link>https://github.com/MamosLab/SynchronizR/releases/download/v1.9.1/SynchronizR.jar</download-link>
+	</version>
 </versions>

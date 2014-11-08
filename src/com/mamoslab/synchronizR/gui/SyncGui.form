@@ -188,6 +188,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Copy whole directory tree"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="copyWholeDirectoryTreeCheckBoxActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="copyWholeDirectoryTreeCheckBox.setText(SynchronizR.getLang().get(&quot;copyWholeDirectoryTree&quot;));&#xa;copyWholeDirectoryTreeCheckBox.setToolTipText(&quot;&lt;html&gt;&lt;body&gt;&lt;p&gt;&quot; + StringUtils.autoReturn(SynchronizR.getLang().get(&quot;copyWholeDirectoryTreeTooltip&quot;), 100).replaceAll(&quot;\n&quot;, &quot;&lt;br /&gt;&quot;) + &quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;&quot;);"/>
           </AuxValues>
