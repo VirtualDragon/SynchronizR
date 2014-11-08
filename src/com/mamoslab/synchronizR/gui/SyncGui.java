@@ -25,8 +25,6 @@ import com.mamoslab.utils.StringUtils;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.text.DefaultCaret;
@@ -50,7 +48,7 @@ public class SyncGui extends javax.swing.JPanel {
 		syncToTextField.setText(SynchronizR.getSettings().getString(SettingsEnum.TO.toString()));
 		advancedCheckBox.setSelected(SynchronizR.getSettings().getBoolean(SettingsEnum.ADVANCED_ENABLED.toString()));
 		copyWholeDirectoryTreeCheckBox.setSelected(SynchronizR.getSettings().getBoolean(SettingsEnum.COPY_WHOLE_DIRECTORY_TREE.toString()));
-		advancedSectionPanel.setVisible(advancedCheckBox.isSelected());
+		advancedSectionPanel.setVisible(SynchronizR.getSettings().getBoolean(SettingsEnum.ADVANCED_ENABLED.toString()));
 		copyWholeDirectoryTreeCheckBox.setSelected(SynchronizR.getSettings().getBoolean(SettingsEnum.COPY_WHOLE_DIRECTORY_TREE.toString()));
 		copyOnlyNewerFilesCheckBox.setSelected(SynchronizR.getSettings().getBoolean(SettingsEnum.COPY_ONLY_NEWER_FILES.toString()));
 		overrideCheckBox.setSelected(SynchronizR.getSettings().getBoolean(SettingsEnum.OVERRIDE_IF_NECESSARY.toString()));
@@ -412,6 +410,7 @@ public class SyncGui extends javax.swing.JPanel {
 			SynchronizR.getSettings().set(SettingsEnum.OVERRIDE_IF_NECESSARY.toString(), overrideCheckBox.isSelected());
 		} catch (IOException ex) {
 		}
+		prefUpdate();
     }//GEN-LAST:event_overrideCheckBoxActionPerformed
 
     private void mirrorCopyCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mirrorCopyCheckBoxActionPerformed
@@ -419,6 +418,7 @@ public class SyncGui extends javax.swing.JPanel {
 			SynchronizR.getSettings().set(SettingsEnum.MIRROR_PURGE.toString(), mirrorCopyCheckBox.isSelected());
 		} catch (IOException ex) {
 		}
+		prefUpdate();
     }//GEN-LAST:event_mirrorCopyCheckBoxActionPerformed
 
     private void swapFromToButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_swapFromToButtonActionPerformed
@@ -438,7 +438,7 @@ public class SyncGui extends javax.swing.JPanel {
 
     private void copyWholeDirectoryTreeCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyWholeDirectoryTreeCheckBoxActionPerformed
 		try {
-			SynchronizR.getSettings().set(SettingsEnum.COPY_WHOLE_DIRECTORY_TREE.toString(), copyWholeDirectoryTreeCheckBox.isEnabled());
+			SynchronizR.getSettings().set(SettingsEnum.COPY_WHOLE_DIRECTORY_TREE.toString(), copyWholeDirectoryTreeCheckBox.isSelected());
 		} catch (IOException ex) {
 		}
 		prefUpdate();
