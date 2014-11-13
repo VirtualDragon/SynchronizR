@@ -204,7 +204,7 @@ public class TreeCopier {
 					if (!options.contains(TreeCopyOption.COPY_ONLY_NEWER_FILES) || newer) {
 						if (!alreadyExists || options.contains(TreeCopyOption.OVERRIDE_IF_NECESSARY)) {
 							if (newer && alreadyExists) {
-								log(lang.get("updatingX", file.toString()), false);
+								log(lang.get("updatingX", currentTo.toPath()), false);
 							} else if (alreadyExists) {
 								log(lang.get("recopyingX", file.toString()), false);
 							} else {
